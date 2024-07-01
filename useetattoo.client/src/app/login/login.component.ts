@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges, SimpleChanges } from '@angular/core';
 import { AuthService } from '../share/services/auth.service';
 import { Router } from '@angular/router';
 import { WeatherForecast } from '../intern/intern-home/intern-home.component';
@@ -11,12 +11,20 @@ import { ApiService } from '../share/services/api.service';
 })
 export class LoginComponent {
   public forecasts: WeatherForecast[] = [];
+  protected _dark: boolean = false;
 
   constructor(
     private _authService: AuthService,
     private _router: Router,
     private _apiService: ApiService
   ) {}
+
+  protected _change(changes: any): void {
+    console.debug('_dark', this._dark);
+
+      document.documentElement.setAttribute('data-bs-theme', this._dark === true ? 'dark' : 'light');
+
+  }
 
   protected _onClickLogin(e: any): void {
     console.log('Login clicked');
