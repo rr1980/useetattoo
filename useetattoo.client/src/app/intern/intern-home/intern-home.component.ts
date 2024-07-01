@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '../../share/services/auth.service';
 import { ApiService } from '../../share/services/api.service';
 
@@ -14,15 +14,13 @@ export interface WeatherForecast {
   templateUrl: './intern-home.component.html',
   styleUrls: ['./intern-home.component.scss'],
 })
-export class InternHomeComponent implements OnInit {
+export class InternHomeComponent {
   public forecasts: WeatherForecast[] = [];
 
   constructor(
     private _authService: AuthService,
     private _apiService: ApiService
   ) {}
-
-  ngOnInit() {}
 
   protected _onClickLogout(e: any): void {
     this._authService.logout();
@@ -32,15 +30,15 @@ export class InternHomeComponent implements OnInit {
     this._getForecasts();
   }
 
-  private _getForecasts() {
-    this._apiService.get<WeatherForecast[]>('/weatherforecast').subscribe(
-      (result: any) => {
+  private _getForecasts(): void {
+    this._apiService.get<WeatherForecast[]>('/weatherforecast').subscribe({
+      next: (result: any) => {
         console.log(result);
         this.forecasts = result;
       },
-      (error: any) => {
+      error: (error: any) => {
         console.error(error);
-      }
-    );
+      },
+    });
   }
 }

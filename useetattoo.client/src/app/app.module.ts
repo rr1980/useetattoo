@@ -1,4 +1,8 @@
-import { HttpClientModule } from '@angular/common/http';
+import {
+  HttpClientModule,
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -13,8 +17,16 @@ import { authInterceptorProvider } from './share/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule],
-  providers: [{ provide: LOCALE_ID, useValue: 'de' }, AuthGuard, StorageService, authInterceptorProvider, ApiService, AuthService],
+  imports: [BrowserModule, AppRoutingModule],
+  providers: [
+    provideHttpClient(withInterceptorsFromDi()),
+    { provide: LOCALE_ID, useValue: 'de' },
+    AuthGuard,
+    StorageService,
+    authInterceptorProvider,
+    ApiService,
+    AuthService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

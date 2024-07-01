@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '../share/services/auth.service';
 import { Router } from '@angular/router';
 import { WeatherForecast } from '../intern/intern-home/intern-home.component';
@@ -9,12 +9,14 @@ import { ApiService } from '../share/services/api.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   public forecasts: WeatherForecast[] = [];
 
-  constructor(private _authService: AuthService, private _router: Router, private _apiService: ApiService) {}
-
-  ngOnInit() {}
+  constructor(
+    private _authService: AuthService,
+    private _router: Router,
+    private _apiService: ApiService
+  ) {}
 
   protected _onClickLogin(e: any): void {
     console.log('Login clicked');
@@ -36,15 +38,15 @@ export class LoginComponent implements OnInit {
     this._getForecasts();
   }
 
-  private _getForecasts() {
-    this._apiService.get<WeatherForecast[]>('/weatherforecast').subscribe(
-      (result: any) => {
+  private _getForecasts(): void {
+    this._apiService.get<WeatherForecast[]>('/weatherforecast').subscribe({
+      next: (result: any) => {
         console.debug(result);
         this.forecasts = result;
       },
-      (error: any) => {
+      error: (error: any) => {
         console.error(error);
-      }
-    );
+      },
+    });
   }
 }

@@ -12,10 +12,10 @@ import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
 @Injectable()
-export class AuthGuard implements CanActivate, CanLoad {
+export class AuthGuard implements CanActivate {
   constructor(private _router: Router, private _authService: AuthService) {}
 
-  canActivate(
+  public canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean | Observable<boolean> | Promise<boolean> {
@@ -23,22 +23,22 @@ export class AuthGuard implements CanActivate, CanLoad {
     return this.can(returnUrl);
   }
 
-  canLoad(
-    route: Route,
-    segments: UrlSegment[]
-  ):
-    | boolean
-    | UrlTree
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree> {
-    let returnUrl = this._router
-      .getCurrentNavigation()!
-      .extractedUrl.toString()
-      .split('?')[0];
-    return this.can(returnUrl);
-  }
+  // public canLoad(
+  //   route: Route,
+  //   segments: UrlSegment[]
+  // ):
+  //   | boolean
+  //   | UrlTree
+  //   | Observable<boolean | UrlTree>
+  //   | Promise<boolean | UrlTree> {
+  //   const returnUrl = this._router
+  //     .getCurrentNavigation()!
+  //     .extractedUrl.toString()
+  //     .split('?')[0];
+  //   return this.can(returnUrl);
+  // }
 
-  can(returnUrl: string) {
+  public can(returnUrl: string): boolean {
     if (this._authService.isLoggedIn()) {
       return true;
     }

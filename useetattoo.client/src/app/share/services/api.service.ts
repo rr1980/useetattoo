@@ -12,26 +12,24 @@ import { DOCUMENT } from '@angular/common';
 @Injectable()
 export class ApiService {
   constructor(
-    @Inject(DOCUMENT) private document: Document,
-    private http: HttpClient,
-    private storageService: StorageService
+    @Inject(DOCUMENT) private _document: Document,
+    private _http: HttpClient,
+    private _storageService: StorageService
   ) {}
 
-  post<T>(endPoint: string, data: any = null): Observable<T> {
-    return this.http.post<any>(endPoint, data);
+  public post<T>(endPoint: string, data: any = null): Observable<T> {
+    return this._http.post<any>(endPoint, data);
   }
 
-  get<T>(endPoint: string, data: any = null): Observable<T> {
-    return this.http.get<any>(endPoint);
+  public get<T>(endPoint: string, data: any = null): Observable<T> {
+    return this._http.get<any>(endPoint);
   }
 
   public getRequestHeaders(
     responseType: any = null
   ): { headers: HttpHeaders; responseType: any } | { headers: HttpHeaders } {
-    var headers;
-
-    const token = this.storageService.getFromSession<string>('token');
-    headers = new HttpHeaders({
+    const token = this._storageService.getFromSession<string>('token');
+    const headers = new HttpHeaders({
       Authorization: 'Bearer ' + token,
       'Cache-Control': 'no-cache',
       Pragma: 'no-cache',
@@ -55,14 +53,14 @@ export class ApiService {
     fileName: string,
     data: any,
     cb: (err: any) => void = (err: any) => {}
-  ) {
-    var err = false;
-    var xhr = new XMLHttpRequest();
+  ): void {
+    let err = false;
+    const xhr = new XMLHttpRequest();
     xhr.open('POST', path, true);
     xhr.responseType = 'blob';
     xhr.withCredentials = true;
 
-    const token = this.storageService.getFromSession<string>('token');
+    const token = this._storageService.getFromSession<string>('token');
     xhr.setRequestHeader('Authorization', 'Bearer ' + token);
     xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
 
@@ -78,24 +76,20 @@ export class ApiService {
           return;
         }
 
-        var _fileName = this.getFilename(xhr) || fileName;
+        const _fileName = this._getFilename(xhr) || fileName;
 
-        if (navigator.appVersion.toString().indexOf('.NET') > 0) {
-          // window.navigator.msSaveBlob(xhr.response, _fileName);
-        } else {
-          var _url = window.URL || window.webkitURL;
-          var src = _url.createObjectURL(xhr.response);
+        const _url = window.URL || window.webkitURL;
+        const src = _url.createObjectURL(xhr.response);
 
-          var link = document.createElement('a');
-          link.href = src;
-          link.download = _fileName;
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          setTimeout(() => {
-            window.URL.revokeObjectURL(src);
-          }, 800);
-        }
+        const link = document.createElement('a');
+        link.href = src;
+        link.download = _fileName;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setTimeout(() => {
+          window.URL.revokeObjectURL(src);
+        }, 800);
       } else {
         err = true;
         xhr.response.text().then((x: any) => {
@@ -107,14 +101,14 @@ export class ApiService {
     xhr.send(JSON.stringify(data));
   }
 
-  getFilename(xhr: any) {
-    var disposition = xhr.getResponseHeader('Content-Disposition');
-    var dispositionSplits = disposition.split(';');
+  private _getFilename(xhr: any): string | null {
+    const disposition = xhr.getResponseHeader('Content-Disposition');
+    const dispositionSplits = disposition.split(';');
     if (dispositionSplits && dispositionSplits.length === 3) {
       if (dispositionSplits[0] === 'attachment') {
-        var fn = dispositionSplits[2].split("filename*=UTF-8''");
+        const fn = dispositionSplits[2].split("filename*=UTF-8''");
         if (fn && fn.length === 2) {
-          var dfn = decodeURI(fn[1]);
+          const dfn = decodeURI(fn[1]);
           return dfn;
         }
       }
@@ -128,29 +122,29 @@ export class ApiService {
     input: FormData,
     cb: (data: T) => void,
     errCb: (err: any) => void = (err: any) => {}
-  ) {
-    var _headers = this.getRequestHeaders();
-    var uploadReq = new HttpRequest('POST', url, input, {
+  ): void {
+    const _headers = this.getRequestHeaders();
+    const uploadReq = new HttpRequest('POST', url, input, {
       reportProgress: false,
       headers: _headers.headers,
     });
 
-    this.http.request(uploadReq).subscribe(
-      (event) => {
+    this._http.request(uploadReq).subscribe({
+      next: (event) => {
         if (event.type === HttpEventType.Response) {
-          var response = event.body as T;
+          const response = event.body as T;
           if (cb) {
             cb(response);
           }
         }
       },
-      (err) => {
+      error: (err) => {
         if (errCb) {
           errCb(err);
         } else {
           throw new Error(err.error.msg);
         }
-      }
-    );
+      },
+    });
   }
 }
