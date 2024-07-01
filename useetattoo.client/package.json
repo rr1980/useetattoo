@@ -8,9 +8,11 @@
     "watch": "ng build --watch --configuration development",
     "prestart": "node aspnetcore-https",
     "start:windows": "ng serve --ssl --ssl-cert \"%APPDATA%\\ASP.NET\\https\\%npm_package_name%.pem\" --ssl-key \"%APPDATA%\\ASP.NET\\https\\%npm_package_name%.key\" --host=127.0.0.1",
-    "start:default": "ng serve --ssl --ssl-cert \"$HOME/.aspnet/https/${npm_package_name}.pem\" --ssl-key \"$HOME/.aspnet/https/${npm_package_name}.key\" --host=127.0.0.1"
+    "start:default": "ng serve --ssl --ssl-cert \"$HOME/.aspnet/https/${npm_package_name}.pem\" --ssl-key \"$HOME/.aspnet/https/${npm_package_name}.key\" --host=127.0.0.1",
+    "lint": "ng lint"
   },
   "private": true,
+  "type": "module",
   "dependencies": {
     "@angular/animations": "^18.0.5",
     "@angular/common": "^18.0.5",
@@ -20,19 +22,33 @@
     "@angular/platform-browser": "^18.0.5",
     "@angular/platform-browser-dynamic": "^18.0.5",
     "@angular/router": "^18.0.5",
+    "jest-editor-support": "*",
+    "run-script-os": "*",
     "rxjs": "~7.8.1",
     "tslib": "^2.6.3",
-    "zone.js": "~0.14.7",
-    "jest-editor-support": "*",
-    "run-script-os": "*"
+    "zone.js": "~0.14.7"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.0.6",
+    "@angular-eslint/builder": "^18.1.0",
+    "@angular-eslint/eslint-plugin": "^18.1.0",
+    "@angular-eslint/eslint-plugin-template": "^18.1.0",
+    "@angular-eslint/schematics": "^18.1.0",
+    "@angular-eslint/template-parser": "^18.1.0",
     "@angular/cli": "^18.0.6",
     "@angular/compiler-cli": "^18.0.5",
+    "@eslint/compat": "^1.1.0",
+    "@eslint/js": "^9.6.0",
+    "@schematics/angular": "^18.0.6",
     "@types/node": "^20.14.9",
+    "@typescript-eslint/eslint-plugin": "^7.14.1",
+    "@typescript-eslint/parser": "^7.14.1",
+    "eslint": "^9.6.0",
+    "eslint-plugin-deprecation": "^3.0.0",
+    "globals": "^15.7.0",
     "ts-node": "^10.9.2",
     "tslib": "^2.6.3",
-    "typescript": ">=5.4.0 and <5.5.0"
+    "typescript": ">=5.4.0 and <5.5.0",
+    "typescript-eslint": "^7.14.1"
   }
 }

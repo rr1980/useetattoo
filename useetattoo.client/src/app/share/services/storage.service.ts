@@ -2,26 +2,26 @@ import { Injectable, isDevMode } from '@angular/core';
 
 @Injectable()
 export class StorageService {
-  useCrypt: boolean = false;
+  private _useCrypt: boolean = false;
 
   constructor() {
     if (isDevMode()) {
-      this.useCrypt = false;
+      this._useCrypt = false;
     } else {
-      this.useCrypt = true;
+      this._useCrypt = true;
     }
   }
 
-  clearSession() {
+  public clearSession(): void {
     sessionStorage.clear();
   }
 
-  clearFromSession(key: string) {
+  public clearFromSession(key: string): void {
     if (!key || !key.length) {
       throw new Error('invalid key: ' + key);
     }
 
-    sessionStorage.removeItem(this.encrypt(key));
+    sessionStorage.removeItem(this._encrypt(key));
   }
 
   // clearPartFromSession(key: string, part: string) {
@@ -37,12 +37,12 @@ export class StorageService {
   //   }
   // }
 
-  clearFromLocale(key: string) {
+  public clearFromLocale(key: string): void {
     if (!key || !key.length) {
       throw new Error('invalid key: ' + key);
     }
 
-    localStorage.removeItem(this.encrypt(key));
+    localStorage.removeItem(this._encrypt(key));
   }
 
   // clearPartFromLocale(key: string, part: string) {
@@ -58,33 +58,33 @@ export class StorageService {
   //   }
   // }
 
-  getFromSession<T>(key: string): T | null {
+  public getFromSession<T>(key: string): T | null {
     if (!key || !key.length) {
       throw new Error('invalid key: ' + key);
     }
 
-    const item = sessionStorage.getItem(this.encrypt(key));
+    const item = sessionStorage.getItem(this._encrypt(key));
     if (item) {
-      return this.decrypt<T>(item);
+      return this._decrypt<T>(item);
     } else {
       return null;
     }
   }
 
-  getFromLocale<T>(key: string): T | null {
+  public getFromLocale<T>(key: string): T | null {
     if (!key || !key.length) {
       throw new Error('invalid key: ' + key);
     }
 
-    const item = localStorage.getItem(this.encrypt(key));
+    const item = localStorage.getItem(this._encrypt(key));
     if (item) {
-      return this.decrypt<T>(item);
+      return this._decrypt<T>(item);
     } else {
       return null;
     }
   }
 
-  saveToSession(key: string, data: any) {
+  public saveToSession(key: string, data: any): void {
     if (!key || !key.length) {
       throw new Error('invalid key: ' + key);
     }
@@ -93,10 +93,10 @@ export class StorageService {
       throw new Error('invalid data: ' + data);
     }
 
-    sessionStorage.setItem(this.encrypt(key), this.encrypt(data));
+    sessionStorage.setItem(this._encrypt(key), this._encrypt(data));
   }
 
-  saveToLocale(key: string, data: any) {
+  public saveToLocale(key: string, data: any): void {
     if (!key || !key.length) {
       throw new Error('invalid key: ' + key);
     }
@@ -104,23 +104,23 @@ export class StorageService {
     if (data === null || data === undefined) {
       throw new Error('invalid data: ' + data);
     }
-    localStorage.setItem(this.encrypt(key), this.encrypt(data));
+    localStorage.setItem(this._encrypt(key), this._encrypt(data));
   }
 
-  private encrypt(data: any): string {
-    if (this.useCrypt) {
+  private _encrypt(data: any): string {
+    if (this._useCrypt) {
       return btoa(encodeURIComponent(JSON.stringify(data)));
     } else {
       return JSON.stringify(data);
     }
   }
 
-  private decrypt<T>(data: string): T {
+  private _decrypt<T>(data: string): T {
     if (!data) {
       throw new Error('invalid data: ' + data);
     }
 
-    if (this.useCrypt) {
+    if (this._useCrypt) {
       return JSON.parse(decodeURIComponent(atob(data)));
     } else {
       return JSON.parse(data) as T;
