@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Useetattoo.Db;
 
@@ -11,9 +12,11 @@ using Useetattoo.Db;
 namespace Useetattoo.Db.Migrations
 {
     [DbContext(typeof(DatenbankContext))]
-    partial class DatenbankContextModelSnapshot : ModelSnapshot
+    [Migration("20240702181035_Person1")]
+    partial class Person1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

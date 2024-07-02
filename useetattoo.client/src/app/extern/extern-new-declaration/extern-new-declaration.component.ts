@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
+import { ApiService } from '../../share/services/api.service';
+import { RouteKeys } from '../../share/helper/route-keys.helper';
 
 @Component({
   selector: 'app-extern-new-declaration',
@@ -15,29 +17,41 @@ export class ExternNewDeclarationComponent {
   protected _submitted: boolean = false;
 
   protected _form: FormGroup = new FormGroup({
-    name: new FormControl(null, Validators.required),
-    vorname: new FormControl(null, Validators.required),
-    anrede: new FormControl(null, Validators.required),
+    id: new FormControl(null),
+    name: new FormControl('Riesner', Validators.required),
+    vorname: new FormControl('Rene', Validators.required),
+    anrede: new FormControl('Herr', Validators.required),
     geburtsdatum: new FormControl(
-      // { day: 1, month: 7, year: 1980 },
-      null,
+      { day: 1, month: 7, year: 1980 },
+      // null,
       Validators.required
     ),
-    geborenIn: new FormControl(null, Validators.required),
-    strasse: new FormControl(null, Validators.required),
-    hausnummer: new FormControl(null, Validators.required),
-    plz: new FormControl(null, Validators.required),
-    ort: new FormControl(null, Validators.required),
+    geborenIn: new FormControl('Altdöbern', Validators.required),
+    strasse: new FormControl('Am Annatal', Validators.required),
+    hausnummer: new FormControl('11a', Validators.required),
+    plz: new FormControl('15344', Validators.required),
+    ort: new FormControl('Strausberg', Validators.required),
   });
 
-  constructor() {}
+  constructor(private _apiService: ApiService) {}
 
   protected _onClickSubmit(e: any): void {
     this._submitted = true;
-    console.debug('Submit value', this._form.value);
 
     if (this._form.valid) {
-      console.debug('Submit valid');
+      console.debug('Submit value', this._form.value);
+      this._apiService
+        .post<any>(RouteKeys.Intern.Person.add, this._form.value)
+        .subscribe({
+          next: (response: any) => {
+            console.debug('Response', response);
+          },
+          error: (err: any) => {
+            throw err;
+          },
+        });
     }
   }
+
+
 }

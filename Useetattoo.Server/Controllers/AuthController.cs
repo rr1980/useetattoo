@@ -32,11 +32,11 @@ namespace Useetattoo.Server.Controllers
         public async Task<IActionResult> GetToken([FromBody, Required] LoginRequestVM vm)
         {
             IActionResult response = Unauthorized();
-            
+
             var hash = PasswortHasher.HashPasswort(vm.Password, _configuration["Salt"]);
             var benutzer = await _datenbankContext.Benutzer.SingleOrDefaultAsync(x => x.Benutzername.ToLower() == vm.Username.ToLower() && x.Passwort == hash);
 
-            if(benutzer == null)
+            if (benutzer == null)
             {
                 return response;
             }
@@ -73,4 +73,6 @@ namespace Useetattoo.Server.Controllers
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
-}
+    }
+
+

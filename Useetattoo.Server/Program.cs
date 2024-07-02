@@ -59,7 +59,7 @@ namespace Useetattoo.Server
             });
 
             var app = builder.Build();
-
+            app.UseMiddleware<RequestLoggingMiddleware>();
             app.UseDefaultFiles();
             app.UseStaticFiles();
             //if (!env.IsDevelopment())
@@ -108,8 +108,5 @@ namespace Useetattoo.Server
                 }
             }
         }
-
-
-
     }
 }

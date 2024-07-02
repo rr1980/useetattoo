@@ -22,6 +22,7 @@ namespace Useetattoo.Db
         //-----
 
         public virtual DbSet<Benutzer> Benutzer { get; set; }
+        public virtual DbSet<Person> Personen { get; set; }
 
 
         public DatenbankContext(DbContextOptions options, IHttpContextAccessor httpContextAccessor, IConfiguration configuration)
@@ -40,6 +41,19 @@ namespace Useetattoo.Db
                 table.Property(e => e.Benutzername).HasMaxLength(100);
                 table.Property(e => e.Passwort).HasMaxLength(300);
 
+            });
+
+            modelBuilder.Entity<Person>(table =>
+            {
+                table.HasKey(e => e.Id);
+                table.Property(e => e.Name).HasMaxLength(100);
+                table.Property(e => e.Vorname).HasMaxLength(100);
+                table.Property(e => e.Anrede).HasMaxLength(20);
+                table.Property(e => e.Geburtsdatum);
+                table.Property(e => e.GeborenIn).HasMaxLength(100);
+                table.Property(e => e.Strasse).HasMaxLength(100);
+                table.Property(e => e.Plz).HasMaxLength(10);
+                table.Property(e => e.Ort).HasMaxLength(100);
             });
         }
 
