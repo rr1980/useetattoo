@@ -1,4 +1,5 @@
-﻿using Useetattoo.Common;
+﻿using Microsoft.EntityFrameworkCore;
+using Useetattoo.Common;
 using Useetattoo.Db;
 using Useetattoo.Entities;
 
@@ -8,7 +9,8 @@ namespace Useetattoo.Server
     {
         public static void Initialize(DatenbankContext context, string salt)
         {
-            context.Database.EnsureCreated();
+            //context.Database.EnsureCreated();
+            context.Database.Migrate();
 
             // Look for any students.
             if (context.Benutzer.Any())

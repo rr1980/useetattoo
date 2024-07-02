@@ -4,9 +4,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.VisualBasic;
 using System.Text;
 using Useetattoo.Db;
 
+// "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=Useetattoo;Trusted_Connection=True;MultipleActiveResultSets=true"
+// "DefaultConnection": "data source=.;AttachDbFileName=Useetattoo.mdf ;Database=Useetattoo;Trusted_Connection=True;MultipleActiveResultSets=true"
+//  @"data source=.;AttachDbFileName=d:\data\yourDBname.mdf ;initial catalog=yourDBname;persist security info=True;user id=sa;password=1234;MultipleActiveResultSets=True;App=EntityFramework");
 namespace Useetattoo.Server
 {
     public class Program
@@ -16,7 +20,12 @@ namespace Useetattoo.Server
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddDbContext<DatenbankContext>(options =>
             {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), builder =>
+                var connstr = builder.Configuration.GetConnectionString("DefaultConnection");
+                if (connstr.Contains("%CONTENTROOTPATH%"))
+                {
+                    connstr = connstr.Replace("%CONTENTROOTPATH%", builder.Environment.ContentRootPath);
+                }
+                options.UseSqlServer(connstr, builder =>
                 {
                     builder.MigrationsAssembly(typeof(DatenbankContext).Assembly.FullName);
                     builder.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
