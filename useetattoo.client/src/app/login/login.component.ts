@@ -11,7 +11,6 @@ import { ApiService } from '../share/services/api.service';
 })
 export class LoginComponent {
   public forecasts: WeatherForecast[] = [];
-  protected _dark: boolean = false;
 
   constructor(
     private _authService: AuthService,
@@ -19,12 +18,7 @@ export class LoginComponent {
     private _apiService: ApiService
   ) {}
 
-  protected _change(changes: any): void {
-    console.debug('_dark', this._dark);
 
-      document.documentElement.setAttribute('data-bs-theme', this._dark === true ? 'dark' : 'light');
-
-  }
 
   protected _onClickLogin(e: any): void {
     console.log('Login clicked');

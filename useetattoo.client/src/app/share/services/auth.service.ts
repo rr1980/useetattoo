@@ -40,7 +40,7 @@ export class AuthService {
 
   public logout(): void {
     this._storageService.clearSession();
-    this._router.navigate(['/extern']);
+    // this._router.navigate(['/extern']);
   }
 
   public isLoggedIn(): boolean {

@@ -7,11 +7,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./extern-home.component.scss'],
 })
 export class ExternHomeComponent {
-  constructor(private _router: Router) {}
+  constructor() {}
 
-  protected _onClickLogin(e: any): void {
-    console.log('Login clicked');
+  protected _onClickSave(e: any): void {
 
-    this._router.navigate(['/login']);
   }
 }

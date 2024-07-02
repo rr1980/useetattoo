@@ -16,9 +16,10 @@ import { AuthGuard } from './share/guards/auth.guard';
 import { authInterceptorProvider } from './share/interceptors/auth.interceptor';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HeaderComponent } from './share/components/header/header.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent],
+  declarations: [AppComponent, HeaderComponent, LoginComponent],
   imports: [BrowserModule, CommonModule, FormsModule, AppRoutingModule],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),

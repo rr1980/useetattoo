@@ -1,26 +1,29 @@
-<p>
-  intern-home works!
-</p>
-<button type="button" class="btn btn-primary"(click)="_onClickLogout($event)">LOGOUT</button>
-<button type="button" class="btn btn-primary"(click)="_onClickTest($event)">Test</button>
-
-<p *ngIf="!forecasts"><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationangular">https://aka.ms/jspsintegrationangular</a> for more details.</em></p>
-
-<table *ngIf="forecasts">
-    <thead>
+<div class="d-flex flex-column align-items-center w-100 h-100 align-self-stretch p-4">
+  <div class="d-flex flex-row gap-3 w-50">
+    <table class="table">
+      <thead>
         <tr>
-            <th>Date</th>
-            <th>Temp. (C)</th>
-            <th>Temp. (F)</th>
-            <th>Summary</th>
+          <th scope="col">#</th>
+          <th scope="col">Vorname</th>
+          <th scope="col">Nachname</th>
         </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let forecast of forecasts">
-            <td>{{ forecast.date }}</td>
-            <td>{{ forecast.temperatureC }}</td>
-            <td>{{ forecast.temperatureF }}</td>
-            <td>{{ forecast.summary }}</td>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
         </tr>
-    </tbody>
-</table>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td colspan="2">Larry the Bird</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
