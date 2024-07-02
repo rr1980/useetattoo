@@ -11,9 +11,8 @@ import { ApiService } from '../../services/api.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnDestroy {
-
   protected _dark: boolean = false;
-  protected _showIntern: boolean = false;
+  protected _location: string = '';
   protected _showLogout: boolean = false;
 
   private _subscriptions: Subscription[] = [];
@@ -34,9 +33,15 @@ export class HeaderComponent implements OnDestroy {
       this._router.events.subscribe((val) => {
         if (val instanceof NavigationEnd) {
           if (val.url.startsWith('/intern')) {
-            this._showIntern = false;
+            this._location = 'intern';
+          } else if (val.url.startsWith('/extern/home')) {
+            this._location = 'home';
+            this._authService.logout();
+          } else if (val.url.startsWith('/extern/newDeclaration')) {
+            this._location = 'declaration';
+            this._authService.logout();
           } else {
-            this._showIntern = true;
+            this._location = 'unknown';
             this._authService.logout();
           }
         }
@@ -60,23 +65,5 @@ export class HeaderComponent implements OnDestroy {
     );
 
     this._storageService.saveToLocale('isDark', this._dark);
-  }
-
-  //---
-
-
-  protected _onClickTest(e: any): void {
-    this._getForecasts();
-  }
-
-  private _getForecasts(): void {
-    this._apiService.get<any[]>('/weatherforecast').subscribe({
-      next: (result: any) => {
-        console.debug('weatherforecast',result);
-      },
-      error: (error: any) => {
-        console.error(error);
-      },
-    });
   }
 }

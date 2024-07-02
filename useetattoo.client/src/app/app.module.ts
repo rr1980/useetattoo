@@ -15,15 +15,18 @@ import { ApiService } from './share/services/api.service';
 import { AuthGuard } from './share/guards/auth.guard';
 import { authInterceptorProvider } from './share/interceptors/auth.interceptor';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './share/components/header/header.component';
+import { NgbDateParserFormatter, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CustomDateParserFormatter } from './share/helper/datePicker.formater';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, LoginComponent],
-  imports: [BrowserModule, CommonModule, FormsModule, AppRoutingModule],
+  imports: [BrowserModule, ReactiveFormsModule, CommonModule, FormsModule, AppRoutingModule, NgbModule],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),
-    { provide: LOCALE_ID, useValue: 'de' },
+    { provide: LOCALE_ID, useValue: 'de-DE' },
+    {provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter},
     AuthGuard,
     StorageService,
     authInterceptorProvider,

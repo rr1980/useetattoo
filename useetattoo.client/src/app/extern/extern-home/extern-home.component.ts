@@ -7,9 +7,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./extern-home.component.scss'],
 })
 export class ExternHomeComponent {
-  constructor() {}
+  constructor(private _router: Router) {}
 
-  protected _onClickSave(e: any): void {
-
+  protected _onClickNew(e: any): void {
+    this._router.navigate(['extern/newDeclaration']);
   }
 }
