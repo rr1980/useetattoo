@@ -3,6 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { StorageService } from '../../services/storage.service';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-header',
@@ -10,6 +11,7 @@ import { StorageService } from '../../services/storage.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnDestroy {
+
   protected _dark: boolean = false;
   protected _showIntern: boolean = false;
   protected _showLogout: boolean = false;
@@ -19,7 +21,8 @@ export class HeaderComponent implements OnDestroy {
   constructor(
     private _router: Router,
     private _authService: AuthService,
-    private _storageService: StorageService
+    private _storageService: StorageService,
+    private _apiService: ApiService
   ) {
     this._dark = this._storageService.getFromLocale<boolean>('isDark') || false;
     document.documentElement.setAttribute(
@@ -57,5 +60,23 @@ export class HeaderComponent implements OnDestroy {
     );
 
     this._storageService.saveToLocale('isDark', this._dark);
+  }
+
+  //---
+
+
+  protected _onClickTest(e: any): void {
+    this._getForecasts();
+  }
+
+  private _getForecasts(): void {
+    this._apiService.get<any[]>('/weatherforecast').subscribe({
+      next: (result: any) => {
+        console.debug('weatherforecast',result);
+      },
+      error: (error: any) => {
+        console.error(error);
+      },
+    });
   }
 }

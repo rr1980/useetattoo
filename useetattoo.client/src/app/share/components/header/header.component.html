@@ -1,9 +1,16 @@
-<div class="d-flex flex-row justify-content-between align-items-center p-4 bo" [class.dark-border]="_dark" [class.light-border]="!_dark">
+<div class="d-flex flex-row justify-content-between align-items-center p-4 bo" [class.dark-border]="_dark"
+  [class.light-border]="!_dark">
 
   <div class="d-flex flex-row align-items-center gap-3">
     <img src="logo-head.webp" [class.inverted-image-100]="!_dark" alt="header-logo" class="header-logo">
     <h1>Best Tattoo Studio In Berlin</h1>
   </div>
+
+  <!-- <div class="d-flex flex-row align-items-center gap-3">
+    <button class="btn btn-success btn-lg btn-block w-100" type="button"
+      (click)="_onClickTest($event)">Speichern</button>
+  </div> -->
+
 
   <div class="d-flex flex-row align-items-center gap-3">
     <a class="nav-link" *ngIf="_showIntern" routerLink="/intern">Intern</a>

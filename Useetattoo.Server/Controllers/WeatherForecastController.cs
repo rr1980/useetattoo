@@ -1,26 +1,9 @@
-using Microsoft.AspNetCore.Identity.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
-using Useetattoo.ViewModels;
 
 namespace Useetattoo.Server.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class AuthController : ControllerBase
-    {
-        [HttpPost("GetToken")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<LoginResponseVM>> GetToken([FromBody, Required] LoginRequestVM vm)
-        {
-
-            return Ok(new LoginResponseVM
-            {
-                Token = "123"
-            });
-        }
-    }
-
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
