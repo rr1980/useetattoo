@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
 using Useetattoo.Services.Interfaces;
+using Useetattoo.ViewModels;
 
 namespace Useetattoo.Server.Controllers
 {
@@ -30,10 +31,9 @@ namespace Useetattoo.Server.Controllers
 
         [HttpPost("Add")]
         //[ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<long?> Add([FromBody, Required] JsonElement body)
+        public ActionResult<long?> Add([FromBody, Required] DeclarationItemAddVM request)
         {
-            throw new NotImplementedException();
-            return Ok(_declarationService.Add(body));
+            return Ok(_declarationService.Add(request));
         }
 
         [HttpPost("Test")]

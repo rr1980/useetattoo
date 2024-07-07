@@ -80,6 +80,57 @@ namespace Useetattoo.Db.Migrations
                     b.ToTable("Declarations");
                 });
 
+            modelBuilder.Entity("Useetattoo.Entities.Signature", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Data")
+                        .HasColumnType("VARCHAR(MAX)");
+
+                    b.Property<string>("Date")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<long?>("DeclarationId")
+                        .IsRequired()
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("ErstelltAm")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ErstelltVon")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("GeaendertAm")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("GeaendertVon")
+                        .HasMaxLength(210)
+                        .HasColumnType("nvarchar(210)");
+
+                    b.Property<string>("Hash")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("varbinary(max) ");
+
+                    b.Property<string>("Points")
+                        .HasColumnType("VARCHAR(MAX)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DeclarationId")
+                        .IsUnique();
+
+                    b.ToTable("Signatures");
+                });
+
             modelBuilder.Entity("Useetattoo.Entities.User", b =>
                 {
                     b.Property<long>("Id")
@@ -99,6 +150,22 @@ namespace Useetattoo.Db.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Useetattoo.Entities.Signature", b =>
+                {
+                    b.HasOne("Useetattoo.Entities.Declaration", "Declaration")
+                        .WithOne("Signagture")
+                        .HasForeignKey("Useetattoo.Entities.Signature", "DeclarationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Declaration");
+                });
+
+            modelBuilder.Entity("Useetattoo.Entities.Declaration", b =>
+                {
+                    b.Navigation("Signagture");
                 });
 #pragma warning restore 612, 618
         }

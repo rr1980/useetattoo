@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json;
 
 namespace Useetattoo.ViewModels
 {
@@ -15,5 +16,77 @@ namespace Useetattoo.ViewModels
     {
         public string? Token { get; set; }
         public bool IsAuthenticated => !string.IsNullOrEmpty(Token);
+    }
+
+    public class DeclarationItemAddVM
+    {
+        public long? Id { get; set; }
+
+        [Required]
+        public string? Name { get; set; }
+
+        [Required]
+        public string? Vorname { get; set; }
+
+        [Required]
+        public string? Anrede { get; set; }
+
+        [Required]
+        public JsonElement? Geburtsdatum { get; set; }
+
+        public string? GeborenIn { get; set; }
+
+        [Required]
+        public string? Strasse { get; set; }
+
+        [Required]
+        public string? Plz { get; set; }
+
+        [Required]
+        public string? Ort { get; set; }
+
+        [Required]
+        public SignatureItemVM? Signature { get; set; }
+    }
+
+    public class DeclarationItemVM
+    {
+        public long? Id { get; set; }
+
+        [Required]
+        public string? Name { get; set; }
+
+        [Required]
+        public string? Vorname { get; set; }
+
+        [Required]
+        public string? Anrede { get; set; }
+
+        [Required]
+        public string? Geburtsdatum { get; set; }
+
+        public string? GeborenIn { get; set; }
+
+        [Required]
+        public string? Strasse { get; set; }
+
+        [Required]
+        public string? Plz { get; set; }
+
+        [Required]
+        public string? Ort { get; set; }
+
+        [Required]
+        public SignatureItemVM? Signature { get; set; }
+    }
+
+    public class SignatureItemVM
+    {
+        public long? Id { get; set; }
+        public string? Hash { get; set; }
+        public string? Data { get; set; }
+        public string? Date { get; set; }
+        public byte[]? Image { get; set; }
+        public string? Points { get; set; }
     }
 }

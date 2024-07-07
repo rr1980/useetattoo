@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Useetattoo.Entities;
+using System.Reflection.Metadata;
 
 namespace Useetattoo.Db
 {
@@ -23,6 +24,7 @@ namespace Useetattoo.Db
 
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Declaration> Declarations { get; set; }
+        public virtual DbSet<Signature> Signatures { get; set; }
 
 
         public DatenbankContext(DbContextOptions options, IHttpContextAccessor httpContextAccessor, IConfiguration configuration)
@@ -61,6 +63,31 @@ namespace Useetattoo.Db
                 table.Property(e => e.Strasse).HasMaxLength(100);
                 table.Property(e => e.Plz).HasMaxLength(10);
                 table.Property(e => e.Ort).HasMaxLength(100);
+
+                table.HasOne(e => e.Signagture)
+                    .WithOne(e => e.Declaration)
+                    .HasForeignKey<Signature>(e => e.DeclarationId)
+                    .IsRequired();
+            });
+
+            modelBuilder.Entity<Signature>(table =>
+            {
+                table.HasKey(e => e.Id);
+
+                table.Property(e => e.ErstelltAm);
+                table.Property(e => e.ErstelltVon).HasMaxLength(50);
+
+                table.Property(e => e.GeaendertAm);
+                table.Property(e => e.GeaendertVon).HasMaxLength(210);
+
+                table.Property(e => e.Hash).HasMaxLength(200);
+                table.Property(e => e.Data).HasColumnType("VARCHAR(MAX)");
+                table.Property(e => e.Date).HasMaxLength(200);
+                table.Property(e => e.Image).HasColumnType("varbinary(max) ");
+                table.Property(e => e.Points).HasColumnType("VARCHAR(MAX)");
+
+                table.HasOne(e => e.Declaration)
+                    .WithOne(e => e.Signagture);
             });
         }
 

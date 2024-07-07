@@ -40,20 +40,26 @@ export class InternNewDeclarationComponent {
   constructor(private _apiService: ApiService) {}
 
   protected _onClickSubmit(e: any): void {
-    // if(!this._signature?.isValidate()){
-    //   return;
-    // }
-    // const _signature = this._signature?.getSignature();
-    // console.debug('_signature', _signature);
+    if(!this._signature?.isValidate()){
+      return;
+    }
+
 
     // return;
 
     this._submitted = true;
 
     if (this._form.valid) {
-      console.debug('Submit value', this._form.value);
+
+      const _signature = this._signature?.getSignature(this._form.value);
+      console.debug('_signature', _signature);
+
+      const _toSend: any = JSON.parse(JSON.stringify(this._form.value));
+      _toSend.signature = _signature;
+
+      console.debug('Submit value', _toSend);
       this._apiService
-        .post<any>(RouteKeys.Intern.Declaration.add, this._form.value)
+        .post<any>(RouteKeys.Intern.Declaration.add, _toSend)
         .subscribe({
           next: (response: any) => {
             console.debug('Response', response);

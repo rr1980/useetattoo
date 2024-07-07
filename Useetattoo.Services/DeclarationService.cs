@@ -1,9 +1,11 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Azure.Core;
+using Microsoft.Extensions.Configuration;
 using System.Text.Json;
 using Useetattoo.Common;
 using Useetattoo.Db;
 using Useetattoo.Entities;
 using Useetattoo.Services.Interfaces;
+using Useetattoo.ViewModels;
 
 namespace Useetattoo.Services
 {
@@ -18,73 +20,98 @@ namespace Useetattoo.Services
             _configuration = configuration;
         }
 
-        public object GetAll()
+        public List<DeclarationItemVM> GetAll()
         {
-            var result = _datenbankContext.Declarations.Select(x => new
+            var result = _datenbankContext.Declarations.Select(x => new DeclarationItemVM
             {
-                x.Id,
-                x.Name,
-                x.Vorname,
-                x.Anrede,
+                Id = x.Id,
+                Name = x.Name,
+                Vorname = x.Vorname,
+                Anrede = x.Anrede,
                 Geburtsdatum = x.Geburtsdatum.ToAngularString(),
-                x.GeborenIn,
-                x.Strasse,
-                x.Plz,
-                x.Ort
+                GeborenIn = x.GeborenIn,
+                Strasse = x.Strasse,
+                Plz = x.Plz,
+                Ort = x.Ort,
+                Signature = x.Signagture != null ? new SignatureItemVM
+                {
+                    Id = x.Signagture.Id,
+                    Data = x.Signagture.Data,
+                    Date = x.Signagture.Date,
+                    Hash = x.Signagture.Hash,
+                    Image = x.Signagture.Image,
+                    Points = x.Signagture.Points,
+                } : null
             }).ToList();
 
             return result;
         }
 
-        public long? Add(JsonElement body)
+        public long? Add(DeclarationItemAddVM request)
         {
-            long? id = null;
-
-            if (body.GetProperty("id").ValueKind == JsonValueKind.Number)
-            {
-                if (body.GetProperty("id").TryGetInt64(out long _id))
-                {
-                    id = _id;
-                }
-            }
-
             Declaration? declaration = null;
 
-            if (id.HasValue)
+            if (request.Id.HasValue)
             {
-                declaration = _datenbankContext.Declarations.Find(id.Value);
+                declaration = _datenbankContext.Declarations.Find(request.Id.Value);
                 if (declaration != null)
                 {
-                    declaration.Name = body.GetProperty("name").GetString();
-                    declaration.Vorname = body.GetProperty("vorname").GetString();
-                    declaration.Anrede = body.GetProperty("anrede").GetString();
-                    declaration.Geburtsdatum = body.GetProperty("geburtsdatum").ToNullableDateTime();
-                    declaration.GeborenIn = body.GetProperty("geborenIn").GetString();
-                    declaration.Strasse = body.GetProperty("strasse").GetString();
-                    declaration.Plz = body.GetProperty("plz").GetString();
-                    declaration.Ort = body.GetProperty("ort").GetString();
+                    declaration.Name = request.Name;
+                    declaration.Vorname = request.Vorname;
+                    declaration.Anrede = request.Anrede;
+                    declaration.Geburtsdatum = request.Geburtsdatum.HasValue ? request.Geburtsdatum.Value.ToNullableDateTime() : null;
+                    declaration.GeborenIn = request.GeborenIn;
+                    declaration.Strasse = request.Strasse;
+                    declaration.Plz = request.Plz;
+                    declaration.Ort = request.Ort;
+                    declaration.Signagture = request.Signature != null ? new Signature
+                    {
+                        Hash = request.Signature.Hash,
+                        Data = request.Signature.Data,
+                        Date = request.Signature.Date,
+                        Image = request.Signature.Image,
+                        Points = request.Signature.Points,
+                    } : null;
 
-                    _datenbankContext.SaveChanges();
+                    if (declaration.Signagture != null)
+                    {
+                        declaration.Signagture.Declaration = declaration;
+                    }
+
+                    _datenbankContext.Update(declaration);
                 }
             }
             else
             {
                 declaration = new Declaration
                 {
-                    Name = body.GetProperty("name").GetString(),
-                    Vorname = body.GetProperty("vorname").GetString(),
-                    Anrede = body.GetProperty("anrede").GetString(),
-                    Geburtsdatum = body.GetProperty("geburtsdatum").ToNullableDateTime(),
-                    GeborenIn = body.GetProperty("geborenIn").GetString(),
-                    Strasse = body.GetProperty("strasse").GetString(),
-                    Plz = body.GetProperty("plz").GetString(),
-                    Ort = body.GetProperty("ort").GetString()
+                    Name = request.Name,
+                    Vorname = request.Vorname,
+                    Anrede = request.Anrede,
+                    Geburtsdatum = request.Geburtsdatum.HasValue ? request.Geburtsdatum.Value.ToNullableDateTime() : null,
+                    GeborenIn = request.GeborenIn,
+                    Strasse = request.Strasse,
+                    Plz = request.Plz,
+                    Ort = request.Ort,
+                    Signagture = request.Signature != null ? new Signature
+                    {
+                        Hash = request.Signature.Hash,
+                        Data = request.Signature.Data,
+                        Date = request.Signature.Date,
+                        Image = request.Signature.Image,
+                        Points = request.Signature.Points,
+                    } : null
                 };
 
-                _datenbankContext.Add(declaration);
+                if (declaration.Signagture != null)
+                {
+                    declaration.Signagture.Declaration = declaration;
+                }
 
-                _datenbankContext.SaveChanges();
-            }
+                _datenbankContext.Add(declaration);
+            };
+
+            _datenbankContext.SaveChanges();
 
             return declaration?.Id;
         }

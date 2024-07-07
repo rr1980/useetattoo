@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Useetattoo.Db.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class Init2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -48,16 +48,53 @@ namespace Useetattoo.Db.Migrations
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Signatures",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Hash = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
+                    Data = table.Column<string>(type: "VARCHAR(MAX)", nullable: true),
+                    Date = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
+                    Image = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    Points = table.Column<string>(type: "VARCHAR(MAX)", nullable: true),
+                    DeclarationId = table.Column<long>(type: "bigint", nullable: false),
+                    ErstelltAm = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ErstelltVon = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    GeaendertAm = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    GeaendertVon = table.Column<string>(type: "nvarchar(210)", maxLength: 210, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Signatures", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Signatures_Declarations_DeclarationId",
+                        column: x => x.DeclarationId,
+                        principalTable: "Declarations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Signatures_DeclarationId",
+                table: "Signatures",
+                column: "DeclarationId",
+                unique: true);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Declarations");
+                name: "Signatures");
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Declarations");
         }
     }
 }

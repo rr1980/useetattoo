@@ -135,7 +135,7 @@ namespace Useetattoo.Server
             if (!string.IsNullOrEmpty(body))
             {
                 JToken token = JToken.Parse(body);
-                string[] jsonPaths = new[] { "AuthToken", "FileContent", "fileContent", "authToken" };
+                string[] jsonPaths = new[] { "AuthToken", "FileContent", "fileContent", "authToken", "Token", "Username", "UserName", "Benutzername", "BenutzerName", "Password", "password", "Name", "name", "Vorname", "VorName", "vorname", "Geburtsdatum", "GeburtsDatum", "geburtsdatum" };
                 ObscureMatchingValues2(new List<JToken> { token }, jsonPaths);
                 result = token.ToString(Formatting.None);
             }

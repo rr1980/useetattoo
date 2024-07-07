@@ -12,5 +12,20 @@ namespace Useetattoo.Entities
         public string? Strasse { get; set; }
         public string? Plz { get; set; }
         public string? Ort { get; set; }
+
+        public Signature? Signagture { get; set; }
+    }
+
+    public class Signature : ChangeStateEntity
+    {
+        public string? Hash { get; set; }
+        public string? Data { get; set; }
+        public string? Date { get; set; }
+        public byte[]? Image { get; set; }
+        public string? Points { get; set; }
+
+
+        public long? DeclarationId { get; set; }
+        public Declaration? Declaration { get; set; }
     }
 }
