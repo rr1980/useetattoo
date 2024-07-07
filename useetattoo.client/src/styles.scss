@@ -18,6 +18,11 @@ body {
   color: #f3f3f3;
   line-height: 1.6666;
   font-weight: 400;
+
+  touch-action: pan-x pan-y;
+
+  /* Präfixe für alle gängigen Browser */
+  -webkit-overflow-scrolling: touch;
 }
 
 .inverted-image-100 {

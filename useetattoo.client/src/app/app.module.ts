@@ -21,6 +21,7 @@ import { NgbDateParserFormatter, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CustomDateParserFormatter } from './share/helper/datePicker.formater';
 import { SpecialErrorHandler } from './share/handler/error.handler';
 import { ModalService } from './share/services/modal.service';
+import { EventService } from './share/services/event.service';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, LoginComponent],
@@ -43,6 +44,7 @@ import { ModalService } from './share/services/modal.service';
     authInterceptorProvider,
     ApiService,
     AuthService,
+    EventService
   ],
   bootstrap: [AppComponent],
 })

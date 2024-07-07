@@ -1,15 +1,9 @@
-import {
-  Component,
-  EventEmitter,
-  OnDestroy,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { StorageService } from '../../services/storage.service';
-import { ApiService } from '../../services/api.service';
+import { EventService } from '../../services/event.service';
 
 @Component({
   selector: 'app-header',
@@ -17,9 +11,6 @@ import { ApiService } from '../../services/api.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  @Output() public onThemeChange: EventEmitter<string> =
-    new EventEmitter<string>();
-
   protected _dark: boolean = false;
   protected _location: string = '';
   protected _showLogout: boolean = false;
@@ -30,7 +21,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private _router: Router,
     private _authService: AuthService,
     private _storageService: StorageService,
-    private _apiService: ApiService
+    private _eventService: EventService
   ) {
     this._dark = this._storageService.getFromLocale<boolean>('isDark') || false;
 
@@ -42,7 +33,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this._subscriptions.push(
       this._router.events.subscribe((val) => {
         if (val instanceof NavigationEnd) {
-          if (val.url.startsWith('/intern') && !val.url.startsWith('/intern/newDeclaration')) {
+          if (
+            val.url.startsWith('/intern') &&
+            !val.url.startsWith('/intern/newDeclaration')
+          ) {
             this._location = 'intern';
           } else if (val.url.startsWith('/extern')) {
             this._location = 'home';
@@ -52,23 +46,23 @@ export class HeaderComponent implements OnInit, OnDestroy {
           } else if (val.url.startsWith('/login')) {
             this._location = 'login';
             this._authService.logout();
-          }
-          else {
+          } else {
             this._location = 'unknown (' + val.url + ')';
             this._authService.logout();
           }
 
-          console.debug('Location is:', this._location);
+          // console.debug('Location is:', this._location);
         }
       })
     );
   }
 
   public ngOnInit(): void {
-    console.debug('Theme is:', this._dark === true ? 'dark' : 'light');
-
     setTimeout(() => {
-      this.onThemeChange.emit(this._dark === true ? 'dark' : 'light');
+      this._eventService.fire(
+        'onThemeChange',
+        this._dark === true ? 'dark' : 'light'
+      );
     }, 0);
   }
 
@@ -88,6 +82,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     );
 
     this._storageService.saveToLocale('isDark', this._dark);
-    this.onThemeChange.emit(this._dark === true ? 'dark' : 'light');
+    this._eventService.fire(
+      'onThemeChange',
+      this._dark === true ? 'dark' : 'light'
+    );
   }
 }

@@ -1,9 +1,14 @@
-import { Component, inject, TemplateRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import localeDeExtra from '@angular/common/locales/extra/de';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalService } from './share/services/modal.service';
+import { EventService } from './share/services/event.service';
 
 @Component({
   selector: 'app-root',
@@ -19,11 +24,16 @@ export class AppComponent {
 
   constructor(
     private _bs_modalService: NgbModal,
-    private _modalService: ModalService
+    private _modalService: ModalService,
+    private _eventService: EventService
   ) {
     registerLocaleData(localeDe, 'de-DE', localeDeExtra);
+
+    this._eventService.on('onThemeChange', (theme: any): void => {
+      this._theme = theme;
+    });
+
     this._modalService.on('error', (error: any): void => {
-      console.debug('Error modal opened', error);
       this._error = error;
 
       this._bs_modalService
@@ -37,10 +47,5 @@ export class AppComponent {
           }
         );
     });
-  }
-
-  protected _onThemeChange(theme: string): void {
-    console.debug('Theme changed to:', theme);
-    this._theme = theme;
   }
 }

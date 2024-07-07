@@ -7,6 +7,7 @@ export class SpecialErrorHandler implements ErrorHandler {
   constructor(private _modalService: ModalService) {}
 
   public handleError(error: any): void {
+    console.error(error);
     if (error instanceof HttpErrorResponse) {
       if (!error.status) {
         console.error(error.message || error.toString());
@@ -31,7 +32,6 @@ export class SpecialErrorHandler implements ErrorHandler {
   }
 
   private _handle(error: any): void {
-    console.error(error);
     this._modalService.openErrorModal(error);
   }
 }

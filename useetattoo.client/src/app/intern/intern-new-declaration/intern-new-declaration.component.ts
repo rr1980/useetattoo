@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { ApiService } from '../../share/services/api.service';
 import { RouteKeys } from '../../share/helper/route-keys.helper';
+import { SignatureComponent } from '../../share/components/signature/signature.component';
 
 @Component({
   selector: 'app-intern-new-declaration',
@@ -10,6 +11,9 @@ import { RouteKeys } from '../../share/helper/route-keys.helper';
   styleUrls: ['./intern-new-declaration.component.scss'],
 })
 export class InternNewDeclarationComponent {
+  @ViewChild('signature', { static: false })
+  private _signature?: SignatureComponent;
+
   protected get _formControls(): any {
     return this._form.controls;
   }
@@ -36,6 +40,16 @@ export class InternNewDeclarationComponent {
   constructor(private _apiService: ApiService) {}
 
   protected _onClickSubmit(e: any): void {
+    if(!this._signature?.isValidate()){
+      return;
+    }
+
+    const _signature = this._signature?.getSignature();
+
+    console.debug('_signature', _signature);
+
+    return;
+
     this._submitted = true;
 
     if (this._form.valid) {
@@ -45,13 +59,13 @@ export class InternNewDeclarationComponent {
         .subscribe({
           next: (response: any) => {
             console.debug('Response', response);
+            this._submitted = false;
           },
           error: (err: any) => {
+            this._submitted = false;
             throw err;
           },
         });
     }
   }
-
-
 }

@@ -29,6 +29,7 @@
     "jest-editor-support": "*",
     "run-script-os": "*",
     "rxjs": "~7.8.1",
+    "signature_pad": "^5.0.2",
     "tslib": "^2.6.3",
     "zone.js": "~0.14.7"
   },
