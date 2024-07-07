@@ -5,11 +5,11 @@ import { ApiService } from '../../share/services/api.service';
 import { RouteKeys } from '../../share/helper/route-keys.helper';
 
 @Component({
-  selector: 'app-extern-new-declaration',
-  templateUrl: './extern-new-declaration.component.html',
-  styleUrls: ['./extern-new-declaration.component.scss'],
+  selector: 'app-intern-new-declaration',
+  templateUrl: './intern-new-declaration.component.html',
+  styleUrls: ['./intern-new-declaration.component.scss'],
 })
-export class ExternNewDeclarationComponent {
+export class InternNewDeclarationComponent {
   protected get _formControls(): any {
     return this._form.controls;
   }

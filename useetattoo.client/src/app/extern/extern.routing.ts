@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ExternComponent } from './extern.component';
 import { ExternHomeComponent } from './extern-home/extern-home.component';
-import { ExternNewDeclarationComponent } from './extern-new-declaration/extern-new-declaration.component';
 
 const routes: Routes = [
   {
@@ -13,10 +12,6 @@ const routes: Routes = [
       {
         path: 'home',
         component: ExternHomeComponent,
-      },
-      {
-        path: 'newDeclaration',
-        component: ExternNewDeclarationComponent,
       },
       {
         path: '**',

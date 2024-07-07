@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
@@ -11,6 +11,9 @@ import { ApiService } from '../../services/api.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnDestroy {
+
+  @Output() public onThemeChange: EventEmitter<string> = new EventEmitter<string>();
+
   protected _dark: boolean = false;
   protected _location: string = '';
   protected _showLogout: boolean = false;
@@ -28,6 +31,8 @@ export class HeaderComponent implements OnDestroy {
       'data-bs-theme',
       this._dark === true ? 'dark' : 'light'
     );
+
+    this.onThemeChange.emit(this._dark === true ? 'dark' : 'light');
 
     this._subscriptions.push(
       this._router.events.subscribe((val) => {
@@ -65,5 +70,6 @@ export class HeaderComponent implements OnDestroy {
     );
 
     this._storageService.saveToLocale('isDark', this._dark);
+    this.onThemeChange.emit(this._dark === true ? 'dark' : 'light');
   }
 }

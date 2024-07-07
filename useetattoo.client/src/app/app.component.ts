@@ -9,7 +9,13 @@ import localeDeExtra from '@angular/common/locales/extra/de';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+  protected _theme: string = 'light';
+
   constructor() {
     registerLocaleData(localeDe, 'de-DE', localeDeExtra);
+  }
+
+  protected _onThemeChange(theme: string): void {
+    this._theme = theme;
   }
 }

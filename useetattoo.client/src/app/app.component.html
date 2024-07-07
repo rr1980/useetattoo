@@ -1,7 +1,8 @@
-﻿<div class="d-flex flex-column w-100 h-100 align-self-stretch">
-  <app-header></app-header>
+﻿<div class="d-flex flex-column w-100 h-100 align-self-stretch" [class.bg1-light]="_theme !== 'dark'" [class.bg1-dark]="_theme === 'dark'">
+  <app-header (onThemeChange)="_onThemeChange($event)"></app-header>
   <router-outlet></router-outlet>
 </div>
+
 <!-- <h1 id="tableLabel">Weather forecast</h1>
 
 <p>This component demonstrates fetching data from the servera.</p>

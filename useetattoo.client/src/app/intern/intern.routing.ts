@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { InternComponent } from './intern.component';
 import { InternHomeComponent } from './intern-home/intern-home.component';
+import { InternNewDeclarationComponent } from './intern-new-declaration/intern-new-declaration.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
       {
         path: 'home',
         component: InternHomeComponent,
+      },
+      {
+        path: 'newDeclaration',
+        component: InternNewDeclarationComponent,
       },
       {
         path: '**',
