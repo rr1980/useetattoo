@@ -1,6 +1,12 @@
-// $bs-body-font-family: "MuktaMahee", "Rubik", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
 $font-family-base: "MuktaMahee", "Rubik", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
 $line-height-base: 1.6666;
+// $table-bg: rgba(255, 255, 255, 0.705);
+$table-bg: theme-color("primary") !default;
 
-// $primaryColor: hotpink;
-// $theme-colors: (primary: $primaryColor);
+
+// $theme-colors: map-merge(
+//   $theme-colors,
+//   (
+//     "bs-body-font-family": $bs-body-font-family
+//   )
+// );

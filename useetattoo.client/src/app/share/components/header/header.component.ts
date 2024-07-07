@@ -1,4 +1,10 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
@@ -11,13 +17,13 @@ import { ApiService } from '../../services/api.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-
-  @Output() public onThemeChange: EventEmitter<string> = new EventEmitter<string>();
+  @Output() public onThemeChange: EventEmitter<string> =
+    new EventEmitter<string>();
 
   protected _dark: boolean = false;
   protected _location: string = '';
   protected _showLogout: boolean = false;
-
+  protected _isMenuCollapsed: boolean = true;
   private _subscriptions: Subscription[] = [];
 
   constructor(
@@ -33,22 +39,27 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this._dark === true ? 'dark' : 'light'
     );
 
-
     this._subscriptions.push(
       this._router.events.subscribe((val) => {
         if (val instanceof NavigationEnd) {
-          if (val.url.startsWith('/intern')) {
+          if (val.url.startsWith('/intern') && !val.url.startsWith('/intern/newDeclaration')) {
             this._location = 'intern';
-          } else if (val.url.startsWith('/extern/home')) {
+          } else if (val.url.startsWith('/extern')) {
             this._location = 'home';
             this._authService.logout();
-          } else if (val.url.startsWith('/extern/newDeclaration')) {
+          } else if (val.url.startsWith('/intern/newDeclaration')) {
             this._location = 'declaration';
             this._authService.logout();
-          } else {
-            this._location = 'unknown';
+          } else if (val.url.startsWith('/login')) {
+            this._location = 'login';
             this._authService.logout();
           }
+          else {
+            this._location = 'unknown (' + val.url + ')';
+            this._authService.logout();
+          }
+
+          console.debug('Location is:', this._location);
         }
       })
     );
