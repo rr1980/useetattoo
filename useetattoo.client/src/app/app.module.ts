@@ -3,7 +3,7 @@ import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { ErrorHandler, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -19,14 +19,25 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './share/components/header/header.component';
 import { NgbDateParserFormatter, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CustomDateParserFormatter } from './share/helper/datePicker.formater';
+import { SpecialErrorHandler } from './share/handler/error.handler';
+import { ModalService } from './share/services/modal.service';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, LoginComponent],
-  imports: [BrowserModule, ReactiveFormsModule, CommonModule, FormsModule, AppRoutingModule, NgbModule],
+  imports: [
+    BrowserModule,
+    ReactiveFormsModule,
+    CommonModule,
+    FormsModule,
+    AppRoutingModule,
+    NgbModule,
+  ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),
     { provide: LOCALE_ID, useValue: 'de-DE' },
-    {provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter},
+    ModalService,
+    { provide: ErrorHandler, useClass: SpecialErrorHandler },
+    { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter },
     AuthGuard,
     StorageService,
     authInterceptorProvider,

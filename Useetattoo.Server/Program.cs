@@ -1,14 +1,18 @@
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.VisualBasic;
+using Newtonsoft.Json;
+using System.Reflection;
 using System.Text;
 using Useetattoo.Db;
 using Useetattoo.Services;
 using Useetattoo.Services.Interfaces;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 // "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=Useetattoo;Trusted_Connection=True;MultipleActiveResultSets=true"
 // "DefaultConnection": "data source=.;AttachDbFileName=Useetattoo.mdf ;Database=Useetattoo;Trusted_Connection=True;MultipleActiveResultSets=true"
@@ -60,10 +64,67 @@ namespace Useetattoo.Server
                 };
             });
 
+            //builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<IDeclarationService, DeclarationService>();
 
             var app = builder.Build();
+            app.UseExceptionHandler(opt => opt.Run(async ctx =>
+            {
+                var feature = ctx.Features.Get<IExceptionHandlerFeature>();
+
+                var result = JsonConvert.SerializeObject(new
+                {
+                    status = 500,
+                    title = "An error occurred while processing your request.",
+                    traceId = "123",
+                    type = ""
+                });
+
+                if (feature != null)
+                {
+
+                    result = JsonConvert.SerializeObject(new
+                    {
+                        status = ctx.Response.StatusCode,
+                        title = feature.Error.Message, // "An error occurred while processing your request.",
+                        traceId = ctx.TraceIdentifier,
+                        type = feature?.Error.GetType().Name
+                    });
+                }
+
+
+
+                ctx.Response.ContentType = "application/json";
+
+
+                await ctx.Response.WriteAsync(result);
+                //if (feature.Error is InvalidStringException ex)
+                //{
+                //    await ctx.Response.WriteAsync(ex.Message);
+                //}
+
+
+                //            {
+                //                "headers": {
+                //                    "normalizedNames": { },
+                //                    "lazyUpdate": null
+                //                                },
+                //                "status": 401,
+                //                "statusText": "Unauthorized",
+                //                "url": "https://127.0.0.1:4200/Api/Declaration/Test",
+                //                "ok": false,
+                //                "name": "HttpErrorResponse",
+                //                "message": "Http failure response for https://127.0.0.1:4200/Api/Declaration/Test: 401 Unauthorized",
+                //                "error": {
+                //                    "type": "https://tools.ietf.org/html/rfc9110#section-15.5.2",
+                //                "title": "Unauthorized",
+                //                "status": 401,
+                //                "traceId": "00-c2d374e89ad7bcbde8c099ef6fa91f34-a042f361251efb23-00"
+                //}
+                //            }
+
+            }));
             app.UseMiddleware<RequestLoggingMiddleware>();
             app.UseDefaultFiles();
             app.UseStaticFiles();

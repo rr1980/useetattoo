@@ -20,7 +20,7 @@ export class InternHomeComponent {
     this._authService.logout();
   }
 
-  protected _onClickTest(e: any): void {
+  protected _onClickTest0(e: any): void {
     console.debug('Test button clicked');
 
     this._apiService.post<any>(RouteKeys.Intern.Declaration.getAll).subscribe({
@@ -32,6 +32,24 @@ export class InternHomeComponent {
       },
     });
   }
+
+  protected _onClickTest(e: any): void {
+    console.debug('Test button clicked');
+
+    this._apiService.post<any>(RouteKeys.Intern.Declaration.test, { id: e }).subscribe({
+      next: (response: any) => {
+        console.debug('Response', response);
+      },
+      error: (err: any) => {
+        throw err;
+      },
+    });
+  }
+
+  protected _onClickTestClient(e: any): void {
+    throw new Error('Test client error');
+  }
+
 
   protected _onClickNew(e: any): void {
     this._router.navigate(['intern/newDeclaration']);

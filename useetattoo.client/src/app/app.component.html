@@ -1,29 +1,18 @@
-﻿<div class="d-flex flex-column w-100 h-100 align-self-stretch" [class.bg1-light]="_theme !== 'dark'" [class.bg1-dark]="_theme === 'dark'">
+﻿<div class="d-flex flex-column w-100 h-100 align-self-stretch" [class.bg1-light]="_theme !== 'dark'"
+  [class.bg1-dark]="_theme === 'dark'">
   <app-header (onThemeChange)="_onThemeChange($event)"></app-header>
   <router-outlet></router-outlet>
 </div>
 
-<!-- <h1 id="tableLabel">Weather forecast</h1>
-
-<p>This component demonstrates fetching data from the servera.</p>
-
-<p *ngIf="!forecasts"><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationangular">https://aka.ms/jspsintegrationangular</a> for more details.</em></p>
-
-<table *ngIf="forecasts">
-    <thead>
-        <tr>
-            <th>Date</th>
-            <th>Temp. (C)</th>
-            <th>Temp. (F)</th>
-            <th>Summary</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let forecast of forecasts">
-            <td>{{ forecast.date }}</td>
-            <td>{{ forecast.temperatureC }}</td>
-            <td>{{ forecast.temperatureF }}</td>
-            <td>{{ forecast.summary }}</td>
-        </tr>
-    </tbody>
-</table> -->
+<ng-template #errorModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">FEHLER {{_error && _error.status ? '(' + _error.status + ')' : ''}}</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    {{_error ? _error.title : ''}}
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.close()">Ok</button>
+  </div>
+</ng-template>

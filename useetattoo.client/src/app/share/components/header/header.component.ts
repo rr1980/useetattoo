@@ -49,7 +49,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
             this._authService.logout();
           } else if (val.url.startsWith('/intern/newDeclaration')) {
             this._location = 'declaration';
-            this._authService.logout();
           } else if (val.url.startsWith('/login')) {
             this._location = 'login';
             this._authService.logout();

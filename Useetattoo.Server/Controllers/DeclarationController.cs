@@ -29,10 +29,33 @@ namespace Useetattoo.Server.Controllers
         }
 
         [HttpPost("Add")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<long?> Add([FromBody, Required] JsonElement body)
         {
             return Ok(_declarationService.Add(body));
+        }
+
+        [HttpPost("Test")]
+        public ActionResult<long?> Test([FromBody, Required] JsonElement body)
+        {
+            int? id = null;
+
+            if (body.GetProperty("id").ValueKind == JsonValueKind.Number)
+            {
+                if (body.GetProperty("id").TryGetInt32(out int _id))
+                {
+                    id = _id;
+                }
+            }
+
+            if (id.HasValue)
+            {
+                return StatusCode(id.Value);
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
     }
 }
