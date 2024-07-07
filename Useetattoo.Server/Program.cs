@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.VisualBasic;
 using Newtonsoft.Json;
+using Serilog;
 using System.Reflection;
 using System.Text;
 using Useetattoo.Db;
@@ -23,7 +24,12 @@ namespace Useetattoo.Server
     {
         public static void Main(string[] args)
         {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
+
             builder.Services.AddDbContext<DatenbankContext>(options =>
             {
                 var connstr = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -36,7 +42,7 @@ namespace Useetattoo.Server
                     builder.MigrationsAssembly(typeof(DatenbankContext).Assembly.FullName);
                     builder.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
                 });
-                options.EnableSensitiveDataLogging();
+                //options.EnableSensitiveDataLogging();
             });
             //builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -126,6 +132,7 @@ namespace Useetattoo.Server
 
             }));
             app.UseMiddleware<RequestLoggingMiddleware>();
+            //app.UseSerilogRequestLogging();
             app.UseDefaultFiles();
             app.UseStaticFiles();
             //if (!env.IsDevelopment())

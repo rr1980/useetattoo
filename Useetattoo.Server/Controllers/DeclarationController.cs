@@ -32,6 +32,7 @@ namespace Useetattoo.Server.Controllers
         //[ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<long?> Add([FromBody, Required] JsonElement body)
         {
+            throw new NotImplementedException();
             return Ok(_declarationService.Add(body));
         }
 

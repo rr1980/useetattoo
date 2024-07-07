@@ -14,6 +14,7 @@ namespace Useetattoo.Server
         private readonly IConfiguration _configuration;
         private readonly bool _hasRequestToLog = false;
         private readonly bool _hasResponseToLog = false;
+        private readonly bool _hasRequestToLogAdvanced = false;
         private readonly bool _hasResponseToLogAdvanced = false;
 
         public RequestLoggingMiddleware(RequestDelegate next, ILogger<RequestLoggingMiddleware> logger, IConfiguration configuration)
@@ -23,6 +24,7 @@ namespace Useetattoo.Server
             _configuration = configuration;
             _hasRequestToLog = configuration.GetValue<bool>("LoggingRequest");
             _hasResponseToLog = configuration.GetValue<bool>("LoggingResponse");
+            _hasRequestToLogAdvanced = configuration.GetValue<bool>("LoggingRequestAdvanced");
             _hasResponseToLogAdvanced = configuration.GetValue<bool>("LoggingResponseAdvanced");
         }
 
@@ -44,16 +46,27 @@ namespace Useetattoo.Server
             {
                 if (_hasRequestToLog == true)
                 {
-                    var rawRequestBody = await context.Request.GetRawBodyAsync();
-                    if (!string.IsNullOrEmpty(rawRequestBody))
+                    if (_hasRequestToLogAdvanced == true)
+                    {
+                        var rawRequestBody = await context.Request.GetRawBodyAsync();
+                        if (!string.IsNullOrEmpty(rawRequestBody))
+                        {
+                            _logger.LogInformation(
+                                "Request {method} {url} => {rawRequestBody}",
+                                context.Request?.Method,
+                                context.Request?.Path.Value,
+                                rawRequestBody);
+                        }
+                    }
+                    else
                     {
                         _logger.LogInformation(
-                            "Request {method} {url} => {rawRequestBody}",
-                            context.Request?.Method,
-                            context.Request?.Path.Value,
-                            rawRequestBody);
+                                      "Request {method} {url} => {rawRequestBody}",
+                                      context.Request?.Method,
+                                      context.Request?.Path.Value);
                     }
                 }
+  
 
                 if (_hasResponseToLog && _hasResponseToLogAdvanced == true && originalBody != null)
                 {
