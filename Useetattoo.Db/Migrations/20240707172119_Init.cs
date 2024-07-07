@@ -24,7 +24,11 @@ namespace Useetattoo.Db.Migrations
                     GeborenIn = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     Strasse = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     Plz = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    Ort = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
+                    Ort = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    ErstelltAm = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ErstelltVon = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    GeaendertAm = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    GeaendertVon = table.Column<string>(type: "nvarchar(210)", maxLength: 210, nullable: true)
                 },
                 constraints: table =>
                 {

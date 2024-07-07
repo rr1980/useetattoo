@@ -40,15 +40,13 @@ export class InternNewDeclarationComponent {
   constructor(private _apiService: ApiService) {}
 
   protected _onClickSubmit(e: any): void {
-    if(!this._signature?.isValidate()){
-      return;
-    }
+    // if(!this._signature?.isValidate()){
+    //   return;
+    // }
+    // const _signature = this._signature?.getSignature();
+    // console.debug('_signature', _signature);
 
-    const _signature = this._signature?.getSignature();
-
-    console.debug('_signature', _signature);
-
-    return;
+    // return;
 
     this._submitted = true;
 

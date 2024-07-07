@@ -1,8 +1,9 @@
-﻿namespace Useetattoo.Entities
+﻿using System.Security.Principal;
+
+namespace Useetattoo.Entities
 {
-    public class Declaration
+    public class Declaration : ChangeStateEntity
     {
-        public long Id { get; set; }
         public string? Name { get; set; }
         public string? Vorname { get; set; }
         public string? Anrede { get; set; }
