@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
@@ -10,7 +10,7 @@ import { ApiService } from '../../services/api.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnDestroy {
+export class HeaderComponent implements OnInit, OnDestroy {
 
   @Output() public onThemeChange: EventEmitter<string> = new EventEmitter<string>();
 
@@ -27,12 +27,12 @@ export class HeaderComponent implements OnDestroy {
     private _apiService: ApiService
   ) {
     this._dark = this._storageService.getFromLocale<boolean>('isDark') || false;
+
     document.documentElement.setAttribute(
       'data-bs-theme',
       this._dark === true ? 'dark' : 'light'
     );
 
-    this.onThemeChange.emit(this._dark === true ? 'dark' : 'light');
 
     this._subscriptions.push(
       this._router.events.subscribe((val) => {
@@ -52,6 +52,14 @@ export class HeaderComponent implements OnDestroy {
         }
       })
     );
+  }
+
+  public ngOnInit(): void {
+    console.debug('Theme is:', this._dark === true ? 'dark' : 'light');
+
+    setTimeout(() => {
+      this.onThemeChange.emit(this._dark === true ? 'dark' : 'light');
+    }, 0);
   }
 
   public ngOnDestroy(): void {

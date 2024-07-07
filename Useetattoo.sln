@@ -9,11 +9,15 @@ Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "useetattoo.client", "useeta
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Useetattoo.ViewModels", "Useetattoo.ViewModels\Useetattoo.ViewModels.csproj", "{7CAABAFA-B617-4D76-83C9-3A63A0752918}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Useetattoo.Db", "Useetattoo.Db\Useetattoo.Db.csproj", "{40C3E9C7-32A9-4BE7-B55A-034D034D9127}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Useetattoo.Db", "Useetattoo.Db\Useetattoo.Db.csproj", "{40C3E9C7-32A9-4BE7-B55A-034D034D9127}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Useetattoo.Entities", "Useetattoo.Entities\Useetattoo.Entities.csproj", "{37717B18-4C19-4DC5-AC64-9947B9A0169A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Useetattoo.Entities", "Useetattoo.Entities\Useetattoo.Entities.csproj", "{37717B18-4C19-4DC5-AC64-9947B9A0169A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Useetattoo.Common", "Useetattoo.Common\Useetattoo.Common.csproj", "{5B3B1AEB-5F91-4464-8375-AD7E541F3067}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Useetattoo.Common", "Useetattoo.Common\Useetattoo.Common.csproj", "{5B3B1AEB-5F91-4464-8375-AD7E541F3067}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Useetattoo.Services", "Useetattoo.Services\Useetattoo.Services.csproj", "{3C43EEA2-1B40-43A4-9194-C4F049C7D26C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Useetattoo.Services.Interfaces", "Useetattoo.Services.Interfaces\Useetattoo.Services.Interfaces.csproj", "{8442E1BA-5BF1-4A44-8286-C03A4BB54F0D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +51,14 @@ Global
 		{5B3B1AEB-5F91-4464-8375-AD7E541F3067}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B3B1AEB-5F91-4464-8375-AD7E541F3067}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B3B1AEB-5F91-4464-8375-AD7E541F3067}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C43EEA2-1B40-43A4-9194-C4F049C7D26C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C43EEA2-1B40-43A4-9194-C4F049C7D26C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C43EEA2-1B40-43A4-9194-C4F049C7D26C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C43EEA2-1B40-43A4-9194-C4F049C7D26C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8442E1BA-5BF1-4A44-8286-C03A4BB54F0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8442E1BA-5BF1-4A44-8286-C03A4BB54F0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8442E1BA-5BF1-4A44-8286-C03A4BB54F0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8442E1BA-5BF1-4A44-8286-C03A4BB54F0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,9 +1,6 @@
 :host {
   display: block;
   width: 100%;
-
-  // background: url('/head.webp') no-repeat center;
-  // background-size: cover;
 }
 
 .header-logo {
@@ -20,4 +17,11 @@
 
 .dark-border {
   border-bottom: 1px solid black;
+}
+
+.title{
+  font-weight: 500;
+  letter-spacing: -0.75px;
+  font-size: 54px;
+
 }

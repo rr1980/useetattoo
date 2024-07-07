@@ -1,6 +1,6 @@
 ﻿namespace Useetattoo.Entities
 {
-    public class Person
+    public class Declaration
     {
         public long Id { get; set; }
         public string? Name { get; set; }

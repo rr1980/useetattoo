@@ -21,8 +21,8 @@ namespace Useetattoo.Db
         private readonly IConfiguration _configuration;
         //-----
 
-        public virtual DbSet<Benutzer> Benutzer { get; set; }
-        public virtual DbSet<Person> Personen { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Declaration> Declarations { get; set; }
 
 
         public DatenbankContext(DbContextOptions options, IHttpContextAccessor httpContextAccessor, IConfiguration configuration)
@@ -35,7 +35,7 @@ namespace Useetattoo.Db
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Benutzer>(table =>
+            modelBuilder.Entity<User>(table =>
             {
                 table.HasKey(e => e.Id);
                 table.Property(e => e.Benutzername).HasMaxLength(100);
@@ -43,7 +43,7 @@ namespace Useetattoo.Db
 
             });
 
-            modelBuilder.Entity<Person>(table =>
+            modelBuilder.Entity<Declaration>(table =>
             {
                 table.HasKey(e => e.Id);
                 table.Property(e => e.Name).HasMaxLength(100);

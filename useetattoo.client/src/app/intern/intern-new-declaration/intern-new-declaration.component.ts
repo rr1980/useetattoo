@@ -41,7 +41,7 @@ export class InternNewDeclarationComponent {
     if (this._form.valid) {
       console.debug('Submit value', this._form.value);
       this._apiService
-        .post<any>(RouteKeys.Intern.Person.add, this._form.value)
+        .post<any>(RouteKeys.Intern.Declaration.add, this._form.value)
         .subscribe({
           next: (response: any) => {
             console.debug('Response', response);

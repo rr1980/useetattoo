@@ -4,9 +4,9 @@ export namespace RouteKeys {
   }
 
   export namespace Intern {
-    export namespace Person {
-      export const add: string = 'Api/Person/Add';
-      export const getAll: string = 'Api/Person/GetAll';
+    export namespace Declaration {
+      export const add: string = 'Api/Declaration/Add';
+      export const getAll: string = 'Api/Declaration/GetAll';
     }
   }
 }

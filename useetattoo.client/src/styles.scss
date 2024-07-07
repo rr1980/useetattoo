@@ -1,6 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 
-
 *{
     // margin: 0!important;
     // padding: 0!important;
@@ -13,6 +12,11 @@
 html, body {
     height: 100%!important;
     width: 100%!important;
+
+    font-family: "MuktaMahee", "Rubik", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #f3f3f3;
+    line-height: 1.6666;
+    font-weight: 400;
 }
 
 .inverted-image-100 {
@@ -21,4 +25,17 @@ html, body {
 }
 
 /* Importing Bootstrap SCSS file. */
+@import 'variables';
 @import 'bootstrap/scss/bootstrap';
+
+// @import "functions";
+// @import "variables";
+// @import "mixins";
+
+
+// $theme-colors: map-merge(
+//   $theme-colors,
+//   (
+//     "bs-body-font-family": $bs-body-font-family
+//   )
+// );

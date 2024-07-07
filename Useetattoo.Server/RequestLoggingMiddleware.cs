@@ -28,7 +28,7 @@ namespace Useetattoo.Server
 
         public async Task Invoke(HttpContext context)
         {
-            Stream originalBody;
+            Stream? originalBody;
             string responseBody = "";
 
             if (_hasResponseToLog && _hasResponseToLogAdvanced == true)
@@ -55,7 +55,7 @@ namespace Useetattoo.Server
                     }
                 }
 
-                if (_hasResponseToLog && _hasResponseToLogAdvanced == true)
+                if (_hasResponseToLog && _hasResponseToLogAdvanced == true && originalBody != null)
                 {
                     using (var memStream = new MemoryStream())
                     {
@@ -77,7 +77,7 @@ namespace Useetattoo.Server
             }
             finally
             {
-                if (_hasResponseToLog && _hasResponseToLogAdvanced == true)
+                if (_hasResponseToLog && _hasResponseToLogAdvanced == true && originalBody != null)
                 {
                     context.Response.Body = originalBody;
 
@@ -102,7 +102,7 @@ namespace Useetattoo.Server
 
     public static class RequestReaderHelper
     {
-        public static async Task<string> GetRawBodyAsync(this HttpRequest request, Encoding encoding = null)
+        public static async Task<string> GetRawBodyAsync(this HttpRequest request, Encoding? encoding = null)
         {
             if (!request.Body.CanSeek)
             {

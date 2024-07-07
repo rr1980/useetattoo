@@ -7,6 +7,8 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.VisualBasic;
 using System.Text;
 using Useetattoo.Db;
+using Useetattoo.Services;
+using Useetattoo.Services.Interfaces;
 
 // "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=Useetattoo;Trusted_Connection=True;MultipleActiveResultSets=true"
 // "DefaultConnection": "data source=.;AttachDbFileName=Useetattoo.mdf ;Database=Useetattoo;Trusted_Connection=True;MultipleActiveResultSets=true"
@@ -21,7 +23,7 @@ namespace Useetattoo.Server
             builder.Services.AddDbContext<DatenbankContext>(options =>
             {
                 var connstr = builder.Configuration.GetConnectionString("DefaultConnection");
-                if (connstr.Contains("%CONTENTROOTPATH%"))
+                if (!string.IsNullOrEmpty(connstr) && connstr.Contains("%CONTENTROOTPATH%"))
                 {
                     connstr = connstr.Replace("%CONTENTROOTPATH%", builder.Environment.ContentRootPath);
                 }
@@ -54,9 +56,12 @@ namespace Useetattoo.Server
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = builder.Configuration["Jwt:Issuer"],
                     ValidAudience = builder.Configuration["Jwt:Audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
                 };
             });
+
+            builder.Services.AddScoped<IAuthService, AuthService>();
+            builder.Services.AddScoped<IDeclarationService, DeclarationService>();
 
             var app = builder.Build();
             app.UseMiddleware<RequestLoggingMiddleware>();
@@ -87,7 +92,7 @@ namespace Useetattoo.Server
 
             app.MapFallbackToFile("/index.html");
 
-            CreateDbIfNotExists(app, builder.Configuration["Salt"]);
+            CreateDbIfNotExists(app, builder.Configuration["Salt"] ?? "7O123KYwvrAyGpudfdgTTZsoGPDqTKrFUPsiV3Ot");
             app.Run();
         }
 

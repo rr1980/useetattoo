@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Useetattoo.Db.Migrations
 {
     /// <inheritdoc />
-    public partial class Person1 : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Personen",
+                name: "Declarations",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
@@ -28,7 +28,21 @@ namespace Useetattoo.Db.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Personen", x => x.Id);
+                    table.PrimaryKey("PK_Declarations", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Benutzername = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Passwort = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
         }
 
@@ -36,7 +50,10 @@ namespace Useetattoo.Db.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Personen");
+                name: "Declarations");
+
+            migrationBuilder.DropTable(
+                name: "Users");
         }
     }
 }

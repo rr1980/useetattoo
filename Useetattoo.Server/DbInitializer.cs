@@ -13,19 +13,19 @@ namespace Useetattoo.Server
             context.Database.Migrate();
 
             // Look for any students.
-            if (context.Benutzer.Any())
+            if (context.Users.Any())
             {
                 return;   // DB has been seeded
             }
 
 
-            var benutzer = new Benutzer
+            var benutzer = new User
             {
                 Benutzername = "rr1980",
                 Passwort = PasswortHasher.HashPasswort("123", salt)
 
             };
-            context.Benutzer.Add(benutzer);
+            context.Users.Add(benutzer);
             context.SaveChanges();
         }
     }

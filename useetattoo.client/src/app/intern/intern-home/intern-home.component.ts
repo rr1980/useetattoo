@@ -23,7 +23,7 @@ export class InternHomeComponent {
   protected _onClickTest(e: any): void {
     console.debug('Test button clicked');
 
-    this._apiService.post<any>(RouteKeys.Intern.Person.getAll).subscribe({
+    this._apiService.post<any>(RouteKeys.Intern.Declaration.getAll).subscribe({
       next: (response: any) => {
         console.debug('Response', response);
       },

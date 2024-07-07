@@ -16,6 +16,7 @@ export class AppComponent {
   }
 
   protected _onThemeChange(theme: string): void {
+    console.debug('Theme changed to:', theme);
     this._theme = theme;
   }
 }
