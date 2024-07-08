@@ -13,17 +13,11 @@ export class InternHome3Component {
 
   constructor(private _apiService: ApiService) {
     this._dataSource = new DataSource({
-      key: 'v_id',
+      key: 'id',
+
       load: (loadOptions: any): any => {
         // console.debug('query', _query);
-        return lastValueFrom(this._apiService.post(RouteKeys.Intern.Declaration.search, loadOptions)).then(
-          (response: any): any => {
-            return {
-              data: response.values,
-              totalCount: response.totalCount,
-            };
-          }
-        );
+        return lastValueFrom(this._apiService.post(RouteKeys.Intern.Declaration.search, loadOptions));
       },
     });
   }

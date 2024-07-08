@@ -5,9 +5,10 @@ import localeDeExtra from '@angular/common/locales/extra/de';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalService } from './share/services/modal.service';
 import { EventService } from './share/services/event.service';
+import DataGrid from 'devextreme/ui/data_grid';
+import config from 'devextreme/core/config';
 
-import themes from 'devextreme/ui/themes';
-themes.current('generic.contrast');
+
 
 @Component({
   selector: 'app-root',
@@ -45,6 +46,36 @@ export class AppComponent {
             // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
           }
         );
+    });
+
+    DataGrid.defaultOptions({
+      options: {
+        columnAutoWidth: false,
+        showColumnLines: true,
+        showRowLines: false,
+        showBorders: false,
+        hoverStateEnabled: true,
+        rowAlternationEnabled: true,
+        allowColumnReordering: true,
+        allowColumnResizing: true,
+        columnResizingMode: 'widget',
+        width: 100 + '%',
+        height: 100 + '%',
+        loadPanel: {
+          enabled: false,
+        },
+        paging: {
+          pageSize: 40,
+        },
+        scrolling: {
+          useNative: true,
+          mode: 'virtual',
+          showScrollbar: 'always',
+        },
+        stateStoring: {
+          savingTimeout: 0,
+        },
+      } as any,
     });
   }
 }

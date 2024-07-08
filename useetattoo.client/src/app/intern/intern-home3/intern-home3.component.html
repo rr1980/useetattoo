@@ -1,4 +1,5 @@
-<dx-data-grid #dxDataGrid [dataSource]="_dataSource" [remoteOperations]="true" keyExpr="id">
+<div class="d-flex flex-column align-items-center w-100 h-100 align-self-stretch p-5">
+<dx-data-grid #dxDataGrid [dataSource]="_dataSource" [remoteOperations]="true" keyExpr="id" [height]="600">
 
   <dxo-sorting mode="multiple"></dxo-sorting>
   <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
@@ -19,3 +20,4 @@
 
 
 </dx-data-grid>
+</div>

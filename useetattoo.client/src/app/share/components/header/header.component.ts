@@ -4,7 +4,8 @@ import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { StorageService } from '../../services/storage.service';
 import { EventService } from '../../services/event.service';
-
+import themes from 'devextreme/ui/themes';
+import { refreshTheme } from 'devextreme/viz/themes';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -24,6 +25,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private _eventService: EventService
   ) {
     this._dark = this._storageService.getFromLocale<boolean>('isDark') || false;
+
+    themes.current('generic.' + (this._dark === true ? 'dark' : 'light'));
+    refreshTheme();
 
     document.documentElement.setAttribute(
       'data-bs-theme',
@@ -80,6 +84,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
       'data-bs-theme',
       this._dark === true ? 'dark' : 'light'
     );
+
+    themes.current('generic.' + (this._dark === true ? 'dark' : 'light'));
+    refreshTheme();
+    console.debug(themes.current());
 
     this._storageService.saveToLocale('isDark', this._dark);
     this._eventService.fire(

@@ -43,6 +43,7 @@ namespace Useetattoo.Services
 
             loadOptions.PrimaryKey = new[] { "Id" };
             loadOptions.PaginateViaPrimaryKey = true;
+            loadOptions.RequireTotalCount = true;
 
             return await DataSourceLoader.LoadAsync(source, loadOptions);
         }

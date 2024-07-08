@@ -44,3 +44,12 @@ h6.h6-xl,
 p.p-xl {
   font-size: 1.25rem;
 }
+
+
+.dx-datagrid {
+  background-color: #2a2a2a8e;
+}
+
+.dx-datagrid .dx-row-alt > td, .dx-datagrid .dx-row-alt > tr > td {
+    background-color: #34343444;
+}
