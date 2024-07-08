@@ -21,6 +21,13 @@ namespace Useetattoo.Server.Controllers
             _declarationService = declarationService;
         }
 
+        [HttpPost("Search")]
+        //[ProducesResponseType(StatusCodes.Status200OK)]
+        public ActionResult<long?> Search([FromBody, Required] DeclarationSearchRequestVM request)
+        {
+            return Ok(_declarationService.Search(request));
+        }
+
         [Authorize]
         [HttpPost("GetAll")]
         [ProducesResponseType(StatusCodes.Status200OK)]

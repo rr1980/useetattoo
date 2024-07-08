@@ -17,8 +17,8 @@ interface SearchResult {
 }
 
 interface State {
-  page: number;
-  pageSize: number;
+  // page: number;
+  // pageSize: number;
   searchTerm: string;
   sortColumn: SortColumn;
   sortDirection: SortDirection;
@@ -56,8 +56,8 @@ export class DeclarationService {
   private _allItems: any = [];
 
   private _state: State = {
-    page: 1,
-    pageSize: 4,
+    // page: 1,
+    // pageSize: 4,
     searchTerm: '',
     sortColumn: '',
     sortDirection: '',
@@ -97,22 +97,22 @@ export class DeclarationService {
   public get loading$(): Observable<boolean> {
     return this._loading$.asObservable();
   }
-  public get page(): number {
-    return this._state.page;
-  }
-  public get pageSize(): number {
-    return this._state.pageSize;
-  }
+  // public get page(): number {
+  //   return this._state.page;
+  // }
+  // public get pageSize(): number {
+  //   return this._state.pageSize;
+  // }
   public get searchTerm(): string {
     return this._state.searchTerm;
   }
 
-  public set page(page: number) {
-    this._set({ page });
-  }
-  public set pageSize(pageSize: number) {
-    this._set({ pageSize });
-  }
+  // public set page(page: number) {
+  //   this._set({ page });
+  // }
+  // public set pageSize(pageSize: number) {
+  //   this._set({ pageSize });
+  // }
   public set searchTerm(searchTerm: string) {
     this._set({ searchTerm });
   }
@@ -128,48 +128,47 @@ export class DeclarationService {
     this._search$.next();
   }
 
-  private _search(): Observable<SearchResult> {
-    const { sortColumn, sortDirection, pageSize, page, searchTerm } =
-      this._state;
-
-    // 1. sort
-    let items = sort(this._allItems, sortColumn, sortDirection);
-
-    // 2. filter
-    items = items.filter((item) => matches(item, searchTerm, this._pipe));
-    const total = items.length;
-
-    // 3. paginate
-    items = items.slice(
-      (page - 1) * pageSize,
-      (page - 1) * pageSize + pageSize
-    );
-    return of({ items, total });
-  }
-
   // private _search(): Observable<SearchResult> {
-  //   const { sortColumn, sortDirection, pageSize, page, searchTerm } =
-  //     this._state;
+  //   // const { sortColumn, sortDirection, pageSize, page, searchTerm } = this._state;
+  //   const { sortColumn, sortDirection,searchTerm } = this._state;
 
-  //   return this._apiService.post<any>(RouteKeys.Intern.Declaration.getAll).pipe(
-  //     map((response) => {
-  //       // console.debug('Response', response);
+  //   // 1. sort
+  //   let items = sort(this._allItems, sortColumn, sortDirection);
 
-  //       // 1. sort
-  //       let items = sort(response, sortColumn, sortDirection);
+  //   // 2. filter
+  //   items = items.filter((item) => matches(item, searchTerm, this._pipe));
+  //   const total = items.length;
 
-  //       // 2. filter
-  //       items = items.filter((item) => matches(item, searchTerm, this._pipe));
-  //       const total = items.length;
-
-  //       // 3. paginate
-  //       items = items.slice(
-  //         (page - 1) * pageSize,
-  //         (page - 1) * pageSize + pageSize
-  //       );
-
-  //       return { items, total };
-  //     })
+  //   // 3. paginate
+  //   items = items.slice(
+  //     (page - 1) * pageSize,
+  //     (page - 1) * pageSize + pageSize
   //   );
+  //   return of({ items, total });
   // }
+
+  private _search(): Observable<SearchResult> {
+    const { sortColumn, sortDirection, searchTerm } = this._state;
+
+    return this._apiService.post<any>(RouteKeys.Intern.Declaration.getAll).pipe(
+      map((response) => {
+        // console.debug('Response', response);
+
+        // 1. sort
+        let items = sort(response, sortColumn, sortDirection);
+
+        // 2. filter
+        items = items.filter((item) => matches(item, searchTerm, this._pipe));
+        const total = items.length;
+
+        // 3. paginate
+        // items = items.slice(
+        //   (page - 1) * pageSize,
+        //   (page - 1) * pageSize + pageSize
+        // );
+
+        return { items, total };
+      })
+    );
+  }
 }

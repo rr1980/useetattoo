@@ -7,6 +7,7 @@ namespace Useetattoo.Services.Interfaces
     {
         List<DeclarationItemVM> GetAll();
         long? Add(DeclarationItemAddVM request);
+        DeclarationSearchResponseVM Search(DeclarationSearchRequestVM request);
     }
     
 }

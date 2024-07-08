@@ -89,4 +89,22 @@ namespace Useetattoo.ViewModels
         public byte[]? Image { get; set; }
         public string? Points { get; set; }
     }
+
+    public class DeclarationSearchRequestVM
+    {
+        public int Skip { get; set; }
+        public int Take { get; set; }
+        public string? SearchTerm { get; set; }
+        public string? SortColumn { get; set; }
+        public string? SortDirection { get; set; }
+    }
+    public class DeclarationSearchResponseVM
+    {
+        public DeclarationSearchResponseVM()
+        {
+            Items = new List<DeclarationItemVM>();
+        }
+        public List<DeclarationItemVM> Items { get; set; }
+        public long TotalCount { get; set; } = 0;
+    }
 }

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { InternComponent } from './intern.component';
 import { InternHomeComponent } from './intern-home/intern-home.component';
 import { InternNewDeclarationComponent } from './intern-new-declaration/intern-new-declaration.component';
+import { InternHome2Component } from './intern-home2/intern-home2.component';
 
 const routes: Routes = [
   {

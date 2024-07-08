@@ -9,6 +9,9 @@ import { NgbDatepickerModule, NgbHighlight, NgbPaginationModule } from '@ng-boot
 import { SignatureComponent } from '../share/components/signature/signature.component';
 import { NgbdSortableHeaderDirective } from '../share/directives/sortable.directive';
 import { DeclarationService } from './intern-home/intern-home.service';
+import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
+import { InternHome2Component } from './intern-home2/intern-home2.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   imports: [
@@ -19,10 +22,13 @@ import { DeclarationService } from './intern-home/intern-home.service';
     NgbHighlight,
     NgbPaginationModule,
     InternRoutingModule,
+    InfiniteScrollDirective,
+    ScrollingModule
   ],
   declarations: [
     InternComponent,
     InternHomeComponent,
+    InternHome2Component,
     InternNewDeclarationComponent,
     SignatureComponent,
     NgbdSortableHeaderDirective

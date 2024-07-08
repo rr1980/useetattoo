@@ -1,0 +1,21 @@
+<!-- <div class="d-flex flex-column align-items-center w-100 h-100 align-self-stretch p-4"> -->
+
+<!-- <small>items: {{_sum}}, now triggering scroll: {{_direction}}</small>
+  <div class="search-results"
+      infinite-scroll
+      [infiniteScrollDistance]="_scrollDistance"
+      [infiniteScrollUpDistance]="_scrollUpDistance"
+      [infiniteScrollThrottle]="_throttle"
+      (scrolled)="_onScrollDown($event)"
+      (scrolledUp)="_onUp($event)">
+  <p *ngFor="let i of _array">
+    {{ i }}
+  </p>
+</div> -->
+<!-- </div> -->
+
+
+
+<cdk-virtual-scroll-viewport itemSize="50" class="example-viewport">
+  <div *cdkVirtualFor="let item of _ds" class="example-item">{{item || 'Loading...'}}</div>
+</cdk-virtual-scroll-viewport>
