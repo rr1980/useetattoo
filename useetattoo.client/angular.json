@@ -40,11 +40,6 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              },
-              {
-                  "glob": "**/*",
-                  "input": "./node_modules/devextreme/dist/css/",
-                  "output": "assets"
               }
             ],
             "styles": [
