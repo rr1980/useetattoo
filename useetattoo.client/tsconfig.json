@@ -2,6 +2,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "strict": true,
     "strictNullChecks": true,
@@ -20,10 +21,16 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "lib": [
-      "ES2022",
-      "dom"
-    ],
+
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": false,
+    "downlevelIteration": true,
+    "emitDecoratorMetadata": false,
+
+    "lib": ["ES2022", "dom"],
+    "paths": {
+      "jszip": ["./node_modules/jszip/dist/jszip.min.js"]
+    },
     "resolveJsonModule": true
   },
   "angularCompilerOptions": {

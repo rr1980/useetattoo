@@ -12,6 +12,8 @@ import { DeclarationService } from './intern-home/intern-home.service';
 import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
 import { InternHome2Component } from './intern-home2/intern-home2.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { InternHome3Component } from './intern-home3/intern-home3.component';
+import { DxDataGridModule } from 'devextreme-angular/ui/data-grid';
 
 @NgModule({
   imports: [
@@ -23,12 +25,14 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     NgbPaginationModule,
     InternRoutingModule,
     InfiniteScrollDirective,
-    ScrollingModule
+    ScrollingModule,
+    DxDataGridModule
   ],
   declarations: [
     InternComponent,
     InternHomeComponent,
     InternHome2Component,
+    InternHome3Component,
     InternNewDeclarationComponent,
     SignatureComponent,
     NgbdSortableHeaderDirective

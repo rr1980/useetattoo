@@ -23,6 +23,8 @@ import { SpecialErrorHandler } from './share/handler/error.handler';
 import { ModalService } from './share/services/modal.service';
 import { EventService } from './share/services/event.service';
 
+import {InternModule} from './intern/intern.module';
+
 @NgModule({
   declarations: [AppComponent, HeaderComponent, LoginComponent],
   imports: [

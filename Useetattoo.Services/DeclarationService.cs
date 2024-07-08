@@ -1,4 +1,6 @@
 ﻿using Azure.Core;
+using DevExtreme.AspNet.Data;
+using DevExtreme.AspNet.Data.ResponseModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -23,50 +25,70 @@ namespace Useetattoo.Services
             _configuration = configuration;
         }
 
-
-        public DeclarationSearchResponseVM Search(DeclarationSearchRequestVM request)
+        public async Task<LoadResult> Search(DataSourceLoadOptions loadOptions)
         {
-            var query = _datenbankContext.Declarations.AsQueryable();
-            if (!string.IsNullOrEmpty(request.SearchTerm))
-            {
-                query = query.Where(x =>
-                    !string.IsNullOrEmpty(x.Name) && !string.IsNullOrEmpty(request.SearchTerm) && x.Name.ToLower().Contains(request.SearchTerm.ToLower()) ||
-                    !string.IsNullOrEmpty(x.Vorname) && !string.IsNullOrEmpty(request.SearchTerm) && x.Vorname.ToLower().Contains(request.SearchTerm.ToLower())
-                );
-            }
-            var totalCount = query.Count();
+            var source = from x in _datenbankContext.Declarations
+                         select new DeclarationItemVM
+                         {
+                             Id = x.Id,
+                             Name = x.Name,
+                             Vorname = x.Vorname,
+                             Anrede = x.Anrede,
+                             Geburtsdatum = x.Geburtsdatum.ToAngularString(),
+                             GeborenIn = x.GeborenIn,
+                             Strasse = x.Strasse,
+                             Plz = x.Plz,
+                             Ort = x.Ort,
+                         };
 
-            query = query.Skip(request.Skip).Take(request.Take);
+            loadOptions.PrimaryKey = new[] { "Id" };
+            loadOptions.PaginateViaPrimaryKey = true;
 
-            var result = query.Select(x => new DeclarationItemVM
-            {
-                Id = x.Id,
-                Name = x.Name,
-                Vorname = x.Vorname,
-                Anrede = x.Anrede,
-                Geburtsdatum = x.Geburtsdatum.ToAngularString(),
-                GeborenIn = x.GeborenIn,
-                Strasse = x.Strasse,
-                Plz = x.Plz,
-                Ort = x.Ort,
-                //Signature = x.Signagture != null ? new SignatureItemVM
-                //{
-                //    Id = x.Signagture.Id,
-                //    Data = x.Signagture.Data,
-                //    Date = x.Signagture.Date,
-                //    Hash = x.Signagture.Hash,
-                //    Image = x.Signagture.Image,
-                //    Points = x.Signagture.Points,
-                //} : null
-            }
-                 ).ToList();
-
-            return new DeclarationSearchResponseVM
-            {
-                Items = result,
-                TotalCount = totalCount,
-            };
+            return await DataSourceLoader.LoadAsync(source, loadOptions);
         }
+        //public DeclarationSearchResponseVM Search(DeclarationSearchRequestVM request)
+        //{
+        //    var query = _datenbankContext.Declarations.AsQueryable();
+        //    if (!string.IsNullOrEmpty(request.SearchTerm))
+        //    {
+        //        query = query.Where(x =>
+        //            !string.IsNullOrEmpty(x.Name) && !string.IsNullOrEmpty(request.SearchTerm) && x.Name.ToLower().Contains(request.SearchTerm.ToLower()) ||
+        //            !string.IsNullOrEmpty(x.Vorname) && !string.IsNullOrEmpty(request.SearchTerm) && x.Vorname.ToLower().Contains(request.SearchTerm.ToLower())
+        //        );
+        //    }
+        //    var totalCount = query.Count();
+
+        //    query = query.Skip(request.Skip).Take(request.Take);
+
+        //    var result = query.Select(x => new DeclarationItemVM
+        //    {
+        //        Id = x.Id,
+        //        Name = x.Name,
+        //        Vorname = x.Vorname,
+        //        Anrede = x.Anrede,
+        //        Geburtsdatum = x.Geburtsdatum.ToAngularString(),
+        //        GeborenIn = x.GeborenIn,
+        //        Strasse = x.Strasse,
+        //        Plz = x.Plz,
+        //        Ort = x.Ort,
+        //        //Signature = x.Signagture != null ? new SignatureItemVM
+        //        //{
+        //        //    Id = x.Signagture.Id,
+        //        //    Data = x.Signagture.Data,
+        //        //    Date = x.Signagture.Date,
+        //        //    Hash = x.Signagture.Hash,
+        //        //    Image = x.Signagture.Image,
+        //        //    Points = x.Signagture.Points,
+        //        //} : null
+        //    }
+        //         ).ToList();
+
+        //    return new DeclarationSearchResponseVM
+        //    {
+        //        Items = result,
+        //        TotalCount = totalCount,
+        //    };
+        //}
 
         public List<DeclarationItemVM> GetAll()
         {

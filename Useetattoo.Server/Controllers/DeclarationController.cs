@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using DevExtreme.AspNet.Data.ResponseModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
+using System.IO.Pipelines;
 using System.Text.Json;
 using Useetattoo.Services.Interfaces;
 using Useetattoo.ViewModels;
@@ -22,10 +24,9 @@ namespace Useetattoo.Server.Controllers
         }
 
         [HttpPost("Search")]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<long?> Search([FromBody, Required] DeclarationSearchRequestVM request)
+        public async Task<LoadResult> Search(DataSourceLoadOptions loadOptions)
         {
-            return Ok(_declarationService.Search(request));
+            return await _declarationService.Search(loadOptions);
         }
 
         [Authorize]

@@ -1,0 +1,21 @@
+<dx-data-grid #dxDataGrid [dataSource]="_dataSource" [remoteOperations]="true" keyExpr="id">
+
+  <dxo-sorting mode="multiple"></dxo-sorting>
+  <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+
+  <dxo-load-panel [enabled]="true"></dxo-load-panel>
+  <dxo-selection mode="none" [deferred]="false"> </dxo-selection>
+
+  <dxo-editing mode="row" [allowUpdating]="false" [allowDeleting]="false" [useIcons]="true"></dxo-editing>
+
+  <dxo-search-panel [visible]="true"></dxo-search-panel>
+
+
+
+  <dxi-column dataField="id" caption="Id"></dxi-column>
+  <dxi-column dataField="name" caption="Name"></dxi-column>
+  <dxi-column dataField="vorname" caption="Vorname"></dxi-column>
+  <!-- <dxi-column dataField="v_datum" dataType="date" format="dd.MM.yyyy" caption="U-Datum" width="100px"></dxi-column> -->
+
+
+</dx-data-grid>

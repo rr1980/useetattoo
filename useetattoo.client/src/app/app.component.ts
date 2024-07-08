@@ -1,14 +1,13 @@
-import {
-  Component,
-  TemplateRef,
-  ViewChild,
-} from '@angular/core';
+import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import localeDeExtra from '@angular/common/locales/extra/de';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalService } from './share/services/modal.service';
 import { EventService } from './share/services/event.service';
+
+import themes from 'devextreme/ui/themes';
+themes.current('generic.contrast');
 
 @Component({
   selector: 'app-root',
