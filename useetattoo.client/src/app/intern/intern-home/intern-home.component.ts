@@ -26,10 +26,12 @@ export class InternHomeComponent {
 
     this._apiService.post<any>(RouteKeys.Intern.Declaration.getAll).subscribe({
       next: (response: any) => {
-        for (let index = 0; index < response.length; index++) {
-          const element = response[index];
-          this._validate(element);
-        }
+        console.debug('Response', response);
+
+        // for (let index = 0; index < response.length; index++) {
+        //   const element = response[index];
+        //   this._validate(element);
+        // }
       },
       error: (err: any) => {
         throw err;

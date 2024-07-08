@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Useetattoo.Common\Useetattoo.Common.csproj" />
     <ProjectReference Include="..\Useetattoo.Db\Useetattoo.Db.csproj" />
     <ProjectReference Include="..\Useetattoo.Entities\Useetattoo.Entities.csproj" />

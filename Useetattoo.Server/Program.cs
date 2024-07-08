@@ -1,19 +1,16 @@
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http.Json;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.VisualBasic;
 using Newtonsoft.Json;
 using Serilog;
-using System.Reflection;
 using System.Text;
+using System.Text.Json.Serialization;
 using Useetattoo.Db;
 using Useetattoo.Services;
 using Useetattoo.Services.Interfaces;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 // "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=Useetattoo;Trusted_Connection=True;MultipleActiveResultSets=true"
 // "DefaultConnection": "data source=.;AttachDbFileName=Useetattoo.mdf ;Database=Useetattoo;Trusted_Connection=True;MultipleActiveResultSets=true"
@@ -27,8 +24,16 @@ namespace Useetattoo.Server
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
             var builder = WebApplication.CreateBuilder(args);
-
             builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
+
+            //builder.Services.Configure<JsonOptions>(options => options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+            //builder.Services.Configure<JsonOptions>(options =>
+            //{
+            //    //options.SerializerOptions.Converters.Add(new TimeSpanConverter());
+            //    //options.SerializerOptions.Converters.Add(new JsonDateTimeConverter());
+            //    options.SerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+            //    options.SerializerOptions.MaxDepth = 1000;
+            //});
 
             builder.Services.AddDbContext<DatenbankContext>(options =>
             {
@@ -50,7 +55,10 @@ namespace Useetattoo.Server
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers().AddNewtonsoftJson(x =>
+            {
+                x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -138,7 +146,6 @@ namespace Useetattoo.Server
             //if (!env.IsDevelopment())
             //{
             //}
-
 
             // Configure the HTTP request pipeline.
             //if (app.Environment.IsDevelopment())

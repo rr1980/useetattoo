@@ -1,5 +1,8 @@
 ﻿using Azure.Core;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using System.Text;
 using System.Text.Json;
 using Useetattoo.Common;
 using Useetattoo.Db;
@@ -22,6 +25,18 @@ namespace Useetattoo.Services
 
         public List<DeclarationItemVM> GetAll()
         {
+            //var _S = _datenbankContext.Declarations.Include(x => x.Signagture).FirstOrDefault();
+            //if ((_S != null))
+            //{
+            //    _S.Signagture!.Declaration = null;
+            //    _S.Signagture!.DeclarationId = null;
+            //    var tmp = JsonConvert.SerializeObject(_S);
+            //    File.WriteAllText(@"c:\temp\signature.json", tmp, Encoding.UTF8);
+            //}
+
+
+
+
             var result = _datenbankContext.Declarations.Select(x => new DeclarationItemVM
             {
                 Id = x.Id,
