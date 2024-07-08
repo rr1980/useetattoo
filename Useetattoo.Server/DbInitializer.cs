@@ -36,7 +36,7 @@ namespace Useetattoo.Server
 
                 var source = File.ReadAllText(@"c:\temp\signature.json", Encoding.UTF8);
                 
-                for (int i = 0; i < 100; i++)
+                for (int i = 0; i < 10000; i++)
                 {
                     var orgDeclaration = JsonConvert.DeserializeObject<Declaration>(source)!;
 
