@@ -48,9 +48,9 @@
     <div class="form-outline h-104px">
       <label class="form-label" for="p_geburtsdatum">Geburtsdatum</label>
       <div class="input-group">
-        <input id="p_geburtsdatum" class="form-control form-control-sm w-135px" formControlName="geburtsdatum"
-          #geburtsdatumEditor="ngbDatepicker" ngbDatepicker />
-        <button class="btn btn-outline-secondary bi bi-calendar3 py-s-4" (click)="geburtsdatumEditor.toggle()" type="button"></button>
+        <input id="p_geburtsdatum" class="form-control form-control-sm w-135px" formControlName="geburtsdatum" />
+        <!-- <button class="btn btn-outline-secondary bi bi-calendar3 py-s-4" (click)="geburtsdatumEditor.toggle()"
+          type="button"></button> -->
       </div>
       <span class="text-danger"
         *ngIf="(_formControls.geburtsdatum.touched || _submitted) && _formControls.geburtsdatum.errors?.required">
@@ -92,8 +92,7 @@
     <div class="form-outline h-104px">
       <label class="form-label" for="p_plz">PLZ</label>
       <input type="text" id="p_plz" class="form-control form-control-sm" formControlName="plz" />
-      <span class="text-danger"
-        *ngIf="(_formControls.plz.touched || _submitted) && _formControls.plz.errors?.required">
+      <span class="text-danger" *ngIf="(_formControls.plz.touched || _submitted) && _formControls.plz.errors?.required">
         Pflichtfeld
       </span>
     </div>
@@ -101,8 +100,7 @@
     <div class="form-outline h-104px">
       <label class="form-label" for="p_ort">Ort</label>
       <input type="text" id="p_ort" class="form-control form-control-sm" formControlName="ort" />
-      <span class="text-danger"
-        *ngIf="(_formControls.ort.touched || _submitted) && _formControls.ort.errors?.required">
+      <span class="text-danger" *ngIf="(_formControls.ort.touched || _submitted) && _formControls.ort.errors?.required">
         Pflichtfeld
       </span>
     </div>

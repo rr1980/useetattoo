@@ -19,6 +19,9 @@ body {
   line-height: 1.6666;
   font-weight: 400;
 
+  padding: 0;
+  margin: 0;
+
   touch-action: pan-x pan-y;
 
   /* Präfixe für alle gängigen Browser */
@@ -30,20 +33,66 @@ body {
   filter: invert(100%);
 }
 
+.d-flex {
+  display: flex;
+  flex-direction: row;
+  // flex-wrap: wrap;
+  // justify-content: space-between;
+  // align-items: center;
+  // align-content: center;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.w-100 {
+  width: 100%;
+}
+.h-100 {
+  height: 100%;
+}
+
+.justify-content-between{
+  justify-content: space-between;
+}
+
+.align-self-stretch {
+  align-self: stretch;
+}
+
+.align-items-center{
+  align-items: center;
+}
+
+.px-4{
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+}
+
+.gap-3 {
+  gap: 3rem;
+}
+
 /* Importing Bootstrap SCSS file. */
-@import "variables";
-@import "bootstrap/scss/bootstrap";
+// @import "variables";
+// @import "bootstrap/scss/bootstrap";
 
-h1-title-xl,
-h2.h2-md {
-  font-size: 3.375rem;
-}
+// h1-title-xl,
+// h2.h2-md {
+//   font-size: 3.375rem;
+// }
 
-.rtl-direction p.p-md,
-h6.h6-xl,
-p.p-xl {
-  font-size: 1.25rem;
-}
+// .rtl-direction p.p-md,
+// h6.h6-xl,
+// p.p-xl {
+//   font-size: 1.25rem;
+// }
 
 .dx-datagrid-search-panel {
   margin-left: 0;

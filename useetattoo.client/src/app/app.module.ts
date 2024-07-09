@@ -1,5 +1,4 @@
 import {
-  HttpClientModule,
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
@@ -17,13 +16,14 @@ import { authInterceptorProvider } from './share/interceptors/auth.interceptor';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './share/components/header/header.component';
-import { NgbDateParserFormatter, NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CustomDateParserFormatter } from './share/helper/datePicker.formater';
 import { SpecialErrorHandler } from './share/handler/error.handler';
 import { ModalService } from './share/services/modal.service';
 import { EventService } from './share/services/event.service';
 
 import {InternModule} from './intern/intern.module';
+import { DxFormModule } from 'devextreme-angular/ui/form';
+import { DxButtonModule } from 'devextreme-angular/ui/button';
+import { DxLoadIndicatorModule } from 'devextreme-angular/ui/load-indicator';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, LoginComponent],
@@ -33,14 +33,15 @@ import {InternModule} from './intern/intern.module';
     CommonModule,
     FormsModule,
     AppRoutingModule,
-    NgbModule,
+    DxFormModule,
+    DxLoadIndicatorModule,
+    DxButtonModule
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),
     { provide: LOCALE_ID, useValue: 'de-DE' },
     ModalService,
     { provide: ErrorHandler, useClass: SpecialErrorHandler },
-    { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter },
     AuthGuard,
     StorageService,
     authInterceptorProvider,

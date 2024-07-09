@@ -2,7 +2,6 @@ import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import localeDeExtra from '@angular/common/locales/extra/de';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalService } from './share/services/modal.service';
 import { EventService } from './share/services/event.service';
 import DataGrid from 'devextreme/ui/data_grid';
@@ -23,7 +22,6 @@ export class AppComponent {
   protected _error?: any;
 
   constructor(
-    private _bs_modalService: NgbModal,
     private _modalService: ModalService,
     private _eventService: EventService
   ) {
@@ -35,17 +33,18 @@ export class AppComponent {
 
     this._modalService.on('error', (error: any): void => {
       this._error = error;
+      console.debug('open popup error', error);
 
-      this._bs_modalService
-        .open(this._errorModal, { ariaLabelledBy: 'modal-basic-title' })
-        .result.then(
-          (result) => {
-            // this.closeResult = `Closed with: ${result}`;
-          },
-          (reason) => {
-            // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-          }
-        );
+      // this._bs_modalService
+      //   .open(this._errorModal, { ariaLabelledBy: 'modal-basic-title' })
+      //   .result.then(
+      //     (result) => {
+      //       // this.closeResult = `Closed with: ${result}`;
+      //     },
+      //     (reason) => {
+      //       // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      //     }
+      //   );
     });
 
     DataGrid.defaultOptions({

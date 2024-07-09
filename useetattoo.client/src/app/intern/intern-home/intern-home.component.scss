@@ -1,27 +1,11 @@
 :host {
-  display: block;
+  display: flex;
+  flex-direction: column;
   height: 100%;
   width: 100%;
 }
 
-.table-caption1 {
-  font-size: 18px;
-}
-
-.example-viewport {
-  height: 300px;
-  width: 100%;
-  border: 1px solid black;
-}
-
-.example-item {
-  // height: 50px;
-}
-
-.table {
-  margin-bottom: 0 !important;
-}
-
-.header {
-  width: 100px;
+.dg-declarations{
+  height: 100%;
+  flex: 1 1 100%
 }
