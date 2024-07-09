@@ -53,6 +53,13 @@ namespace Useetattoo.ViewModels
     {
         public long? Id { get; set; }
 
+        public DateTime? ErstelltAm { get; set; }
+        public string? ErstelltVon { get; set; }
+
+        public DateTime? GeaendertAm { get; set; }
+        public string? GeaendertVon { get; set; }
+
+
         [Required]
         public string? Name { get; set; }
 
@@ -80,12 +87,41 @@ namespace Useetattoo.ViewModels
         public SignatureItemVM? Signature { get; set; }
     }
 
+    public class DeclarationSearchItemVM
+    {
+        public long? Id { get; set; }
+
+        public DateTime? ErstelltAm { get; set; }
+        public string? ErstelltVon { get; set; }
+
+        public DateTime? GeaendertAm { get; set; }
+        public string? GeaendertVon { get; set; }
+
+        public DateTime? Signiert { get; set; }
+
+        public string? Name { get; set; }
+
+        public string? Vorname { get; set; }
+
+        public string? Anrede { get; set; }
+
+        public string? Geburtsdatum { get; set; }
+
+        public string? GeborenIn { get; set; }
+
+        public string? Strasse { get; set; }
+
+        public string? Plz { get; set; }
+
+        public string? Ort { get; set; }
+
+    }
+
     public class SignatureItemVM
     {
         public long? Id { get; set; }
         public string? Hash { get; set; }
-        public string? Data { get; set; }
-        public string? Date { get; set; }
+        public DateTime? Date { get; set; }
         public byte[]? Image { get; set; }
         public string? Points { get; set; }
     }

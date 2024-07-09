@@ -33,9 +33,13 @@ namespace Useetattoo.Services
                 throw new ArgumentException("loadOptions.Take > 1000 !!!", "loadOptions.Take");
             }
             var source = from x in _datenbankContext.Declarations
-                         select new DeclarationItemVM
+                         select new DeclarationSearchItemVM
                          {
                              Id = x.Id,
+                             ErstelltAm = x.ErstelltAm,
+                             ErstelltVon = x.ErstelltVon,
+                             GeaendertAm = x.GeaendertAm,
+                             GeaendertVon = x.GeaendertVon,
                              Name = x.Name,
                              Vorname = x.Vorname,
                              Anrede = x.Anrede,
@@ -44,6 +48,7 @@ namespace Useetattoo.Services
                              Strasse = x.Strasse,
                              Plz = x.Plz,
                              Ort = x.Ort,
+                             Signiert = x.Signagture != null ? x.Signagture.Date : null,
                          };
 
             loadOptions.PrimaryKey = new[] { "Id" };
@@ -124,7 +129,6 @@ namespace Useetattoo.Services
                 Signature = x.Signagture != null ? new SignatureItemVM
                 {
                     Id = x.Signagture.Id,
-                    Data = x.Signagture.Data,
                     Date = x.Signagture.Date,
                     Hash = x.Signagture.Hash,
                     Image = x.Signagture.Image,
@@ -155,7 +159,6 @@ namespace Useetattoo.Services
                     declaration.Signagture = request.Signature != null ? new Signature
                     {
                         Hash = request.Signature.Hash,
-                        Data = request.Signature.Data,
                         Date = request.Signature.Date,
                         Image = request.Signature.Image,
                         Points = request.Signature.Points,
@@ -184,7 +187,6 @@ namespace Useetattoo.Services
                     Signagture = request.Signature != null ? new Signature
                     {
                         Hash = request.Signature.Hash,
-                        Data = request.Signature.Data,
                         Date = request.Signature.Date,
                         Image = request.Signature.Image,
                         Points = request.Signature.Points,

@@ -88,12 +88,9 @@ namespace Useetattoo.Db.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<string>("Data")
-                        .HasColumnType("VARCHAR(MAX)");
-
-                    b.Property<string>("Date")
+                    b.Property<DateTime?>("Date")
                         .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("datetime2");
 
                     b.Property<long?>("DeclarationId")
                         .IsRequired()

@@ -81,7 +81,6 @@ namespace Useetattoo.Db
                 table.Property(e => e.GeaendertVon).HasMaxLength(210);
 
                 table.Property(e => e.Hash).HasMaxLength(200);
-                table.Property(e => e.Data).HasColumnType("VARCHAR(MAX)");
                 table.Property(e => e.Date).HasMaxLength(200);
                 table.Property(e => e.Image).HasColumnType("varbinary(max) ");
                 table.Property(e => e.Points).HasColumnType("VARCHAR(MAX)");

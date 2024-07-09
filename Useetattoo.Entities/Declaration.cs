@@ -19,8 +19,7 @@ namespace Useetattoo.Entities
     public class Signature : ChangeStateEntity
     {
         public string? Hash { get; set; }
-        public string? Data { get; set; }
-        public string? Date { get; set; }
+        public DateTime? Date { get; set; }
         public byte[]? Image { get; set; }
         public string? Points { get; set; }
 

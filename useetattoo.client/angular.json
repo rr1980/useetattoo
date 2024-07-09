@@ -47,6 +47,7 @@
               "src/styles.scss"
             ],
             "scripts": [
+              "./node_modules/jsonminify/minify.json.js"
             ]
           },
           "configurations": {

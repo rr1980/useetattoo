@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Useetattoo.Db.Migrations
 {
     /// <inheritdoc />
-    public partial class Init2 : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -56,8 +56,7 @@ namespace Useetattoo.Db.Migrations
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Hash = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
-                    Data = table.Column<string>(type: "VARCHAR(MAX)", nullable: true),
-                    Date = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
+                    Date = table.Column<DateTime>(type: "datetime2", maxLength: 200, nullable: true),
                     Image = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     Points = table.Column<string>(type: "VARCHAR(MAX)", nullable: true),
                     DeclarationId = table.Column<long>(type: "bigint", nullable: false),

@@ -1,9 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import SignaturePad from 'signature_pad';
 import { EventService } from '../../services/event.service';
 import * as CryptoJS from 'crypto-js';
@@ -80,19 +75,27 @@ export class SignatureComponent implements OnInit {
 
   public getSignature(data: any): any | null {
     if (this._signaturePad && this.isValidate()) {
+      const _date = new Date();
       const result: any = {
         hash: null,
-        date: new Date().toISOString(),
-        data: JSON.stringify(data),
-        points: JSON.stringify(this._signaturePad.toData()),
+        date: _date,
+        points: JSON.minify(JSON.stringify(this._signaturePad.toData())),
         image: btoa(this._signaturePad.toDataURL().split(',')[1]),
       };
 
-      const _s = result.date + '|' + result.data + '|' + result.points + '|' + result.image;
+      const _s =
+        _date.toISOString() +
+        '|' +
+        result.data +
+        '|' +
+        result.points +
+        '|' +
+        result.image;
       result.hash = CryptoJS.SHA256(_s).toString();
 
-      return result;
+      console.debug('result', result);
 
+      return result;
     } else {
       return null;
     }

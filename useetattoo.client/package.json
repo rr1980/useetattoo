@@ -30,6 +30,7 @@
     "devextreme": "23.1.6",
     "devextreme-angular": "23.1.6",
     "jest-editor-support": "*",
+    "jsonminify": "^0.4.2",
     "run-script-os": "*",
     "rxjs": "~7.8.1",
     "signature_pad": "^5.0.2",

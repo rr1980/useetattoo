@@ -5,6 +5,7 @@ import { ApiService } from '../../share/services/api.service';
 import { RouteKeys } from '../../share/helper/route-keys.helper';
 import { EventService } from 'src/app/share/services/event.service';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-intern-home',
   templateUrl: './intern-home.component.html',
