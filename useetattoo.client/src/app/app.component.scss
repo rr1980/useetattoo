@@ -1,16 +1,28 @@
-﻿
-:host {
+﻿:host {
   display: block;
   height: 100%;
   width: 100%;
-  background: url('/assets/head.webp') no-repeat center;
+  background: url("/assets/head.webp") no-repeat center;
   background-size: cover;
+  overflow: hidden;
 }
 
-.bg1-light{
+.bg1-light {
   background-color: rgb(255 255 255 / 65%);
 }
 
-.bg1-dark{
+.bg1-dark {
   background-color: rgb(0 0 0 / 92%);
+}
+
+.section-header {
+  display: block;
+  width: 100%;
+  height: 150px;
+}
+
+.section-body {
+  display: block;
+  width: 100%;
+  height: calc(100% - 150px);
 }

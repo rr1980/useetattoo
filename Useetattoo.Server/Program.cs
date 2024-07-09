@@ -23,6 +23,8 @@ namespace Useetattoo.Server
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
+            //var builder = WebApplication.CreateBuilder(new WebApplicationOptions() { WebRootPath = "wwwroot/browser" });
+
             var builder = WebApplication.CreateBuilder(args);
             builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
 
@@ -51,7 +53,6 @@ namespace Useetattoo.Server
             });
             //builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            //var builder = WebApplication.CreateBuilder(new WebApplicationOptions() { WebRootPath = "wwwroot/browser" });
 
             // Add services to the container.
 

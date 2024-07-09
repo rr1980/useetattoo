@@ -61,7 +61,7 @@ namespace Useetattoo.Server
                     else
                     {
                         _logger.LogInformation(
-                                      "Request {method} {url} => {rawRequestBody}",
+                                      "Request {method} {url}",
                                       context.Request?.Method,
                                       context.Request?.Path.Value);
                     }

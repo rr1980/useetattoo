@@ -45,11 +45,41 @@ p.p-xl {
   font-size: 1.25rem;
 }
 
-
-.dx-datagrid {
-  background-color: #2a2a2a8e;
+.dx-datagrid-search-panel {
+  margin-left: 0;
+  width: 350px !important;
 }
 
-.dx-datagrid .dx-row-alt > td, .dx-datagrid .dx-row-alt > tr > td {
+dx-data-grid {
+  .dx-gridbase-container {
+    padding: 5px;
+  }
+}
+
+.dg-light {
+  .dx-datagrid {
+    // background-color: #2a2a2a8e;
+    // background-color: green;
+    background-color: #ffffff91;
+  }
+
+  .dx-datagrid .dx-row-alt > td,
+  .dx-datagrid .dx-row-alt > tr > td {
+    // background-color: #34343444;
+    // background-color: green;
+    background-color: #d7d6d67d;
+  }
+}
+
+.dg-dark {
+  .dx-datagrid {
+    background-color: #2a2a2a8e;
+    // background-color: red;
+  }
+
+  .dx-datagrid .dx-row-alt > td,
+  .dx-datagrid .dx-row-alt > tr > td {
     background-color: #34343444;
+    // background-color: red;
+  }
 }

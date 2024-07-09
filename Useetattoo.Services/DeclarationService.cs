@@ -27,6 +27,11 @@ namespace Useetattoo.Services
 
         public async Task<LoadResult> Search(DataSourceLoadOptions loadOptions)
         {
+            //loadOptions.Take = loadOptions.Take > 1000 ? 40 : loadOptions.Take;
+            if (loadOptions.Take > 1000)
+            {
+                throw new ArgumentException("loadOptions.Take > 1000 !!!", "loadOptions.Take");
+            }
             var source = from x in _datenbankContext.Declarations
                          select new DeclarationItemVM
                          {

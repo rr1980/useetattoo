@@ -38,5 +38,9 @@
     <ProjectReference Include="..\Useetattoo.ViewModels\Useetattoo.ViewModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
 
 </Project>
