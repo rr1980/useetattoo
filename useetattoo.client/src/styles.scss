@@ -57,8 +57,16 @@ body {
   height: 100%;
 }
 
+.justify-content-center {
+  justify-content: center;
+}
+
 .justify-content-between {
   justify-content: space-between;
+}
+
+.justify-content-end {
+  justify-content: flex-end;
 }
 
 .align-self-stretch {
@@ -74,22 +82,66 @@ body {
   padding-right: 1rem;
 }
 
+p.p-xl {
+  font-size: 1.25rem;
+}
+
 .p-5 {
   padding: 1.25rem;
+}
+
+.gap-1 {
+  gap: 1rem;
+}
+
+.gap-2 {
+  gap: 2rem;
 }
 
 .gap-3 {
   gap: 3rem;
 }
 
+.container-lg {
+  max-width: 1140px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mt-1 {
+  margin-top: 0.25rem;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
 /* Importing Bootstrap SCSS file. */
 // @import "variables";
 // @import "bootstrap/scss/bootstrap";
 
-// h1-title-xl,
-// h2.h2-md {
-//   font-size: 3.375rem;
-// }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  // color: #fff;
+  font-family: "MuktaMahee", "Rubik", sans-serif !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.75px !important;
+  line-height: 1.2 !important;
+}
+
+h1.h1-title-xl {
+  font-size: 5.3125rem !important;
+}
 
 // .rtl-direction p.p-md,
 // h6.h6-xl,
@@ -134,4 +186,9 @@ dx-data-grid {
     background-color: #34343444;
     // background-color: red;
   }
+}
+
+.nav-link{
+  text-decoration: none;
+  min-width: 50px;
 }

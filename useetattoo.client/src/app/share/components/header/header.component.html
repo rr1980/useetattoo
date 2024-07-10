@@ -1,40 +1,17 @@
-<!-- <nav class="navbar navbar-expand-lg">
-	<div class="container-fluid">
-		<button class="navbar-toggler" type="button" (click)="_isMenuCollapsed = !_isMenuCollapsed">&#9776;</button>
-
-		<div  class="collapse navbar-collapse">
-			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-				<li class="nav-item active" *ngIf="_location !== 'home'" >
-					<a class="nav-link" [routerLink]="'/extern'" (click)="_isMenuCollapsed = true">Home</a>
-				</li>
-				<li class="nav-item" *ngIf="_location !== 'intern' && _location !== 'login'" >
-					<a class="nav-link" [routerLink]="'/intern'" (click)="_isMenuCollapsed = true">Intern</a>
-				</li>
-			</ul>
-      <div class="d-flex flex-row align-items-center gap-3">
-
-        <div class="form-check form-switch m-0">
-          <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" [(ngModel)]="_dark"
-            (change)="_change($event)">
-          <label class="form-check-label" for="flexSwitchCheckChecked">Dark</label>
-        </div>
-      </div>
-		</div>
-	</div>
-</nav> -->
-
-<div class="d-flex flex-row justify-content-between align-items-center px-4" [class.dark-border]="_dark"
+<div class="d-flex flex-row justify-content-end align-items-center px-4 gap-2" [class.dark-border]="_dark"
   [class.light-border]="!_dark">
-  <a class="nav-link" *ngIf="_location !== 'home'" [routerLink]="'/extern'" (click)="_isMenuCollapsed = true">Home</a>
-  <a *ngIf="_location !== 'intern' && _location !== 'login'" [routerLink]="'/intern'" (click)="_isMenuCollapsed = true">Intern</a>
 
-  <div class="d-flex flex-row align-items-center gap-3">
+  <div class="d-flex flex-row align-items-center gap-1 mt-2">
+    Dark:<dx-switch [(value)]="_dark" (onValueChanged)="_change($event)"></dx-switch>
+  </div>
 
-    <div class="form-check form-switch m-0">
-      <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" [(ngModel)]="_dark"
-        (change)="_change($event)">
-      <label class="form-check-label" for="flexSwitchCheckChecked">Dark</label>
-    </div>
+  <div class="d-flex flex-row align-items-center gap-1 mt-2">
+    <a class="nav-link" *ngIf="_location === 'login'" [routerLink]="'/extern'"
+      (click)="_isMenuCollapsed = true">Home</a>
+    <a class="nav-link" *ngIf="_location === 'intern'" [routerLink]="'/extern'"
+      (click)="_isMenuCollapsed = true">Logout</a>
+    <a class="nav-link" *ngIf="_location !== 'intern' && _location !== 'login'" [routerLink]="'/intern'"
+      (click)="_isMenuCollapsed = true">Login</a>
   </div>
 </div>
 
@@ -45,19 +22,4 @@
     <img src="assets/logo-head.webp" [class.inverted-image-100]="!_dark" alt="header-logo" class="header-logo">
     <span class="title">Best Tattoo Studio In Berlin</span>
   </div>
-
-
-  <!-- <div class="d-flex flex-row align-items-center gap-3">
-    <a class="nav-link" *ngIf="_location !== 'home'" routerLink="/extern">Home</a>
-    <a class="nav-link" *ngIf="_location !== 'intern'" routerLink="/intern">Intern</a>
-
-    <div class="form-check form-switch m-0">
-      <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" [(ngModel)]="_dark"
-        (change)="_change($event)">
-      <label class="form-check-label" for="flexSwitchCheckChecked">Dark</label>
-    </div>
-  </div> -->
 </div>
-
-
-

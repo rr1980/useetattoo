@@ -79,7 +79,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  protected _change(changes: any): void {
+  protected _change(e: any): void {
     document.documentElement.setAttribute(
       'data-bs-theme',
       this._dark === true ? 'dark' : 'light'

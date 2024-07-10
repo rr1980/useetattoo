@@ -24,6 +24,7 @@ import {InternModule} from './intern/intern.module';
 import { DxFormModule } from 'devextreme-angular/ui/form';
 import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxLoadIndicatorModule } from 'devextreme-angular/ui/load-indicator';
+import { DxSwitchModule } from 'devextreme-angular/ui/switch';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, LoginComponent],
@@ -35,7 +36,8 @@ import { DxLoadIndicatorModule } from 'devextreme-angular/ui/load-indicator';
     AppRoutingModule,
     DxFormModule,
     DxLoadIndicatorModule,
-    DxButtonModule
+    DxButtonModule,
+    DxSwitchModule
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),
