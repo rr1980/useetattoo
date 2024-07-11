@@ -135,6 +135,7 @@ namespace Useetattoo.Services
                     Hash = x.Signagture.Hash,
                     Image = x.Signagture.Image,
                     Points = x.Signagture.Points,
+                    PointerTypes = x.Signagture.PointerTypes,
                 } : null
             }).ToList();
 
@@ -165,6 +166,7 @@ namespace Useetattoo.Services
                         Date = request.Signature.Date,
                         Image = request.Signature.Image,
                         Points = request.Signature.Points,
+                        PointerTypes = request.Signature.PointerTypes,
                     } : null;
 
                     if (declaration.Signagture != null)
@@ -194,6 +196,7 @@ namespace Useetattoo.Services
                         Date = request.Signature.Date,
                         Image = request.Signature.Image,
                         Points = request.Signature.Points,
+                        PointerTypes = request.Signature.PointerTypes,
                     } : null
                 };
 

@@ -60,6 +60,7 @@ namespace Useetattoo.Db.Migrations
                     Date = table.Column<DateTime>(type: "datetime2", maxLength: 200, nullable: true),
                     Image = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     Points = table.Column<string>(type: "VARCHAR(MAX)", nullable: true),
+                    PointerTypes = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     DeclarationId = table.Column<long>(type: "bigint", nullable: false),
                     ErstelltAm = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ErstelltVon = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),

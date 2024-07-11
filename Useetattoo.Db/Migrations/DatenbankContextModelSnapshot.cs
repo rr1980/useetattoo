@@ -121,6 +121,10 @@ namespace Useetattoo.Db.Migrations
                     b.Property<byte[]>("Image")
                         .HasColumnType("varbinary(max) ");
 
+                    b.Property<string>("PointerTypes")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<string>("Points")
                         .HasColumnType("VARCHAR(MAX)");
 

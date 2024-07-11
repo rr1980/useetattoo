@@ -85,6 +85,7 @@ namespace Useetattoo.Db
                 table.Property(e => e.Date).HasMaxLength(200);
                 table.Property(e => e.Image).HasColumnType("varbinary(max) ");
                 table.Property(e => e.Points).HasColumnType("VARCHAR(MAX)");
+                table.Property(e => e.PointerTypes).HasMaxLength(50);
 
                 table.HasOne(e => e.Declaration)
                     .WithOne(e => e.Signagture);

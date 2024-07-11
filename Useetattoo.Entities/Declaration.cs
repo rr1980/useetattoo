@@ -23,6 +23,7 @@ namespace Useetattoo.Entities
         public DateTime? Date { get; set; }
         public byte[]? Image { get; set; }
         public string? Points { get; set; }
+        public string? PointerTypes { get; set; }
 
 
         public long? DeclarationId { get; set; }

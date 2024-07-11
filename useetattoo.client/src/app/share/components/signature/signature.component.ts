@@ -14,7 +14,7 @@ export class SignatureComponent implements OnInit {
   @ViewChild('signatureCanvas', { static: false })
   private _signatureCanvas?: ElementRef<HTMLCanvasElement>;
   private _signaturePad?: SignaturePad;
-
+  private _penTypes: string[] = [];
   constructor(private _eventService: EventService) {
     this._resizeCanvas = this._resizeCanvas.bind(this);
   }
@@ -29,6 +29,21 @@ export class SignatureComponent implements OnInit {
           // maxWidth: 10,
           penColor: 'rgb(255, 255, 255)',
         }
+      );
+
+      this._signaturePad.addEventListener(
+        'afterUpdateStroke',
+        (e: any) => {
+          this._addPenType(e.detail.event.pointerType);
+        },
+        { once: false }
+      );
+      this._signaturePad.addEventListener(
+        'endStroke',
+        (e: any) => {
+          this._addPenType(e.detail.event.pointerType);
+        },
+        { once: false }
       );
 
       window.addEventListener('resize', this._resizeCanvas);
@@ -71,6 +86,7 @@ export class SignatureComponent implements OnInit {
         date: _date,
         points: JSON.minify(JSON.stringify(this._signaturePad.toData())),
         image: btoa(this._signaturePad.toDataURL().split(',')[1]),
+        pointerTypes: JSON.stringify(this._penTypes),
       };
 
       const _s =
@@ -83,7 +99,7 @@ export class SignatureComponent implements OnInit {
         result.image;
       result.hash = CryptoJS.SHA256(_s).toString();
 
-      console.debug('result', result);
+      // console.debug('result', result);
 
       return result;
     } else {
@@ -120,9 +136,20 @@ export class SignatureComponent implements OnInit {
     }
   }
 
-  // protected _onOkClick(e: any): void {
-  //   const data = this._signaturePad!.toData();
-  //   // console.debug('data', data);
-  //   console.debug('data', this._signaturePad);
-  // }
+  private _addPenType(pType: string): void {
+    setTimeout(() => {
+      const _pType: string = pType?.toLowerCase();
+      if (_pType === undefined || _pType === null || _pType === '') return;
+
+      if (!this._penTypes.includes(pType)) {
+        this._penTypes.push(pType);
+      }
+    }, 0);
+  }
+
+  protected _onOkClick(e: any): void {
+    const data = this._signaturePad!.toData();
+    // console.debug('data', data);
+    console.debug('data', this._signaturePad);
+  }
 }

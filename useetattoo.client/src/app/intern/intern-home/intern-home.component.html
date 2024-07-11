@@ -3,7 +3,7 @@
     class="dg-declarations dg-dark">
 
     <dxo-sorting mode="multiple"></dxo-sorting>
-    <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+    <dxo-column-chooser [enabled]="true" mode="select" title="Spaltenauswahl"></dxo-column-chooser>
 
     <dxo-load-panel [enabled]="true"></dxo-load-panel>
     <dxo-selection mode="none" [deferred]="false"> </dxo-selection>
@@ -22,9 +22,8 @@
     </dxo-toolbar>
 
 
-    <dxi-column type="buttons" fixedPosition="left" [allowResizing]="false">
-      <dxi-button name="bearbeiten" hint="Anzeigen" icon="search"
-        [onClick]="_onEditClick"></dxi-button>
+    <dxi-column type="buttons" fixedPosition="left" [allowResizing]="false" [showInColumnChooser]="false">
+      <dxi-button name="bearbeiten" hint="Anzeigen" icon="search" [onClick]="_onEditClick"></dxi-button>
       <dxi-button name="loeschen" hint="Löschen" icon="trash" [onClick]="_onRemoveClick"></dxi-button>
     </dxi-column>
 
@@ -37,6 +36,14 @@
     <dxi-column dataField="plz" caption="Plz" width="100px"></dxi-column>
     <dxi-column dataField="ort" caption="Ort"></dxi-column>
     <dxi-column dataField="strasse" caption="Straße"></dxi-column>
+    <dxi-column dataField="erstelltAm" dataType="date" format="dd.MM.yyyy HH:mm:ss" caption="Erstellt am"
+      width="150px"></dxi-column>
+    <dxi-column dataField="erstelltVon" caption="Erstellt von"></dxi-column>
+
+    <dxi-column dataField="geaendertAm" dataType="date" format="dd.MM.yyyy HH:mm:ss" caption="Geändert am"
+      width="150px"></dxi-column>
+    <dxi-column dataField="geaendertVon" caption="Geändert von"></dxi-column>
+
     <!-- <dxi-column dataField="v_datum" dataType="date" format="dd.MM.yyyy" caption="U-Datum" width="100px"></dxi-column> -->
 
 

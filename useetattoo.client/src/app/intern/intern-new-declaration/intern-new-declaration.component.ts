@@ -52,30 +52,13 @@ export class InternNewDeclarationComponent {
       return;
     }
 
-    // return;
-
     this._submitted = true;
 
     if (this._declatationForm) {
-      if (this._declatationForm.instance.validate()) {
+      if (this._declatationForm.instance.validate().isValid) {
         const _signature = this._signature?.getSignature(this._formData);
-        console.debug('_signature', _signature);
-
         const _toSend: any = JSON.parse(JSON.stringify(this._formData));
         _toSend.signature = _signature;
-
-        // const _toSend: any = {
-        //   vorname: 'Rene',
-        //   name: 'Riesner',
-        //   geschlecht: 'männlich',
-        //   geburtsdatum: null,
-        //   geborenIn: 'Altdöbern',
-        //   strasse: 'Am Annatal',
-        //   hausnummer: '11a',
-        //   plz: '15344',
-        //   ort: 'Strausberg',
-        //   signature: _signature
-        // };
 
         console.debug('Submit value', _toSend);
         this._apiService

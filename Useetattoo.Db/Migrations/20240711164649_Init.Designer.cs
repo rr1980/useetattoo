@@ -12,7 +12,7 @@ using Useetattoo.Db;
 namespace Useetattoo.Db.Migrations
 {
     [DbContext(typeof(DatenbankContext))]
-    [Migration("20240711154246_Init")]
+    [Migration("20240711164649_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -123,6 +123,10 @@ namespace Useetattoo.Db.Migrations
 
                     b.Property<byte[]>("Image")
                         .HasColumnType("varbinary(max) ");
+
+                    b.Property<string>("PointerTypes")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Points")
                         .HasColumnType("VARCHAR(MAX)");
