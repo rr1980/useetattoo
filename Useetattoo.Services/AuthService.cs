@@ -27,7 +27,7 @@ namespace Useetattoo.Services
         {
             var response = new LoginResponseVM();
 
-            var hash = PasswortHasher.HashPasswort(request.Password!, _configuration["Salt"] ?? "7O123KYwvrAyGpudfdgTTZsoGPDqTKrFUPsiV3Ot");
+            var hash = PasswortHasher.HashPasswort(request.Password!.ToLower(), _configuration["Salt"] ?? "7O123KYwvrAyGpudfdgTTZsoGPDqTKrFUPsiV3Ot");
             var benutzer = await _datenbankContext.Users.SingleOrDefaultAsync(x => !string.IsNullOrEmpty(x.Benutzername) && x.Benutzername.ToLower() == request.Username!.ToLower() && x.Passwort == hash);
 
             if (benutzer == null)

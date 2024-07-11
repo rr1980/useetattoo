@@ -23,21 +23,36 @@ export class InternNewDeclarationComponent implements OnInit {
   protected _errorText: string = '';
 
   protected _formData: any = {
-    vorname: 'Rene',
-    name: 'Riesner',
-    geschlecht: 'männlich',
+    vorname: 'Maxin',
+    name: 'Mustermann',
+    geschlecht: 'weiblich',
     geburtsdatum: null,
     geborenIn: 'Altdöbern',
-    strasse: 'Am Annatal',
-    hausnummer: '11a',
+    strasse: 'Am Waldweg',
+    hausnummer: '3a',
     plz: '15344',
     ort: 'Strausberg',
+    land: 'Deutschland',
+    bundesland: 'Brandenburg',
+    telefon: '03341/3010',
+    email: null,
+    bluterkrankung: 'Ja',
+    hauterkrankungen: 'Nein',
+    blutverduennendeMedikamente: 'Nein',
+    allergien: 'Nein',
+    herzKreislaufbeschwerden: 'Ja',
+    abc: 'Ja',
   };
 
   protected _datasource_geschlecht: string[] = [
     'männlich',
     'weiblich',
     'divers',
+  ];
+
+  protected _datasource_jaNein: string[] = [
+    'Ja',
+    'Nein',
   ];
 
   protected _colCountByScreen: any = {
@@ -48,6 +63,7 @@ export class InternNewDeclarationComponent implements OnInit {
   protected _screen = (width: number): string => (width < 720 ? 'sm' : 'md');
 
   protected _imageData?: string;
+
 
   constructor(
     private _apiService: ApiService,
@@ -116,6 +132,7 @@ export class InternNewDeclarationComponent implements OnInit {
 
         const _signature = this._signature?.getSignature(this._formData);
         const _toSend: any = JSON.parse(JSON.stringify(this._formData));
+        delete _toSend.abc; // !!!
         _toSend.signature = _signature;
 
         console.debug('Submit value', _toSend);
@@ -125,7 +142,7 @@ export class InternNewDeclarationComponent implements OnInit {
             next: (response: any) => {
               console.debug('Response', response);
               this._submitted = false;
-              // this._router.navigate(['intern/home']);
+              this._router.navigate(['intern/home']);
             },
             error: (err: any) => {
               this._submitted = false;

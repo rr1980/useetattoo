@@ -39,11 +39,22 @@ namespace Useetattoo.ViewModels
 
         public string? Strasse { get; set; }
 
+        public string? Hausnummer { get; set; }
+
+
         public string? Plz { get; set; }
 
         public string? Ort { get; set; }
+        public string? Land { get; set; }
+        public string? Bundesland { get; set; }
+        public string? Telefon { get; set; }
+        public string? Email { get; set; }
 
-        public string? Hausnummer { get; set; }
+        public string? Bluterkrankung { get; set; }
+        public string? Hauterkrankungen { get; set; }
+        public string? BlutverduennendeMedikamente { get; set; }
+        public string? Allergien { get; set; }
+        public string? HerzKreislaufbeschwerden { get; set; }
 
         public SignatureItemVM? Signature { get; set; }
     }
@@ -74,6 +85,17 @@ namespace Useetattoo.ViewModels
 
         public string? Ort { get; set; }
 
+        public string? Land { get; set; }
+        public string? Bundesland { get; set; }
+        public string? Telefon { get; set; }
+        public string? Email { get; set; }
+
+        public string? Bluterkrankung { get; set; }
+        public string? Hauterkrankungen { get; set; }
+        public string? BlutverduennendeMedikamente { get; set; }
+        public string? Allergien { get; set; }
+        public string? HerzKreislaufbeschwerden { get; set; }
+
         public SignatureItemVM? Signature { get; set; }
     }
 
@@ -100,11 +122,11 @@ namespace Useetattoo.ViewModels
         public string? GeborenIn { get; set; }
 
         public string? Strasse { get; set; }
+        public string? Hausnummer { get; set; }
 
         public string? Plz { get; set; }
 
         public string? Ort { get; set; }
-        public string? Hausnummer { get; set; }
 
     }
 

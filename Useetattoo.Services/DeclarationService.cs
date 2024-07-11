@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System.Text;
 using System.Text.Json;
 using Useetattoo.Common;
+using Useetattoo.Common.Interfaces;
 using Useetattoo.Db;
 using Useetattoo.Entities;
 using Useetattoo.Services.Interfaces;
@@ -83,6 +84,15 @@ namespace Useetattoo.Services
                 Hausnummer = entity.Hausnummer,
                 Plz = entity.Plz,
                 Ort = entity.Ort,
+                Land = entity.Land,
+                Bundesland = entity.Bundesland,
+                Telefon = entity.Telefon,
+                Email = entity.Email,
+                Bluterkrankung = entity.Bluterkrankung,
+                Hauterkrankungen = entity.Hauterkrankungen,
+                BlutverduennendeMedikamente = entity.BlutverduennendeMedikamente,
+                Allergien = entity.Allergien,
+                HerzKreislaufbeschwerden = entity.HerzKreislaufbeschwerden,
                 ErstelltAm = entity.ErstelltAm,
                 ErstelltVon = entity.ErstelltVon,
                 GeaendertAm = entity.GeaendertAm,
@@ -145,6 +155,28 @@ namespace Useetattoo.Services
                     declaration.Hausnummer = request.Hausnummer;
                     declaration.Plz = request.Plz;
                     declaration.Ort = request.Ort;
+
+                    declaration.Land = request.Land;
+                    declaration.Bundesland = request.Bundesland;
+                    declaration.Telefon = request.Telefon;
+                    declaration.Email = request.Email;
+                    declaration.Bluterkrankung  = request.Bluterkrankung;
+                    declaration.Hauterkrankungen = request.Hauterkrankungen;
+                    declaration.BlutverduennendeMedikamente = request.BlutverduennendeMedikamente;
+                    declaration.Allergien = request.Allergien;
+                    declaration.HerzKreislaufbeschwerden = request.HerzKreislaufbeschwerden;
+
+                    //Land = entity.Land;
+                    //Bundesland = entity.Bundesland,
+                    //Telefon = entity.Telefon,
+                    //Email = entity.Email,
+                    //Bluterkrankung = entity.Bluterkrankung,
+                    //Hauterkrankungen = entity.Hauterkrankungen,
+                    //BlutverduennendeMedikamente = entity.BlutverduennendeMedikamente,
+                    //Allergien = entity.Allergien,
+                    //HerzKreislaufbeschwerden = entity.HerzKreislaufbeschwerden,
+
+
                     declaration.Signagture = request.Signature != null ? new Signature
                     {
                         Hash = request.Signature.Hash,
@@ -175,6 +207,15 @@ namespace Useetattoo.Services
                     Hausnummer = request.Hausnummer,
                     Plz = request.Plz,
                     Ort = request.Ort,
+                    Land = request.Land,
+                    Bundesland = request.Bundesland,
+                    Telefon = request.Telefon,
+                    Email = request.Email,
+                    Bluterkrankung = request.Bluterkrankung,
+                    Hauterkrankungen = request.Hauterkrankungen,
+                    BlutverduennendeMedikamente = request.BlutverduennendeMedikamente,
+                    Allergien = request.Allergien,
+                    HerzKreislaufbeschwerden = request.HerzKreislaufbeschwerden,
                     Signagture = request.Signature != null ? new Signature
                     {
                         Hash = request.Signature.Hash,
@@ -196,6 +237,23 @@ namespace Useetattoo.Services
             _datenbankContext.SaveChanges();
 
             return declaration?.Id;
+        }
+
+
+
+        public async Task Del(DeclarationItemRequestVM request)
+        {
+            var entity = await _datenbankContext.Declarations
+            .Include(x => x.Signagture)
+            .FirstOrDefaultAsync(x => x.Id == request.Id);
+
+            if (entity == null)
+            {
+                throw new Exception("Entity with " + request.Id + " not found!");
+            }
+
+            _datenbankContext.Remove(entity);
+            await _datenbankContext.SaveChangesAsync();
         }
     }
 }

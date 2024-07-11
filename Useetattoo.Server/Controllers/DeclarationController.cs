@@ -44,10 +44,18 @@ namespace Useetattoo.Server.Controllers
         }
 
         [HttpPost("Add")]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<long?> Add(DeclarationItemAddVM request)
         {
             return Ok(_declarationService.Add(request));
+        }
+
+        [HttpPost("Del")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> Del(DeclarationItemRequestVM request)
+        {
+            await _declarationService.Del(request);
+            return Ok();
         }
 
         [HttpPost("Test")]

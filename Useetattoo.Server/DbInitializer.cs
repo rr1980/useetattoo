@@ -20,13 +20,24 @@ namespace Useetattoo.Server
             {
 
 
-                var benutzer = new User
+                context.Users.Add(new User
+                {
+                    Benutzername = "Josef",
+                    Passwort = PasswortHasher.HashPasswort("jander", salt),
+                    Name = "Jander",
+                    Vorname = "Josef"
+
+                });
+
+                context.Users.Add(new User
                 {
                     Benutzername = "rr1980",
-                    Passwort = PasswortHasher.HashPasswort("123", salt)
+                    Passwort = PasswortHasher.HashPasswort("1980", salt),
+                    Name = "Mustermann",
+                    Vorname = "Max"
 
-                };
-                context.Users.Add(benutzer);
+                });
+
                 context.SaveChanges();
             }
 

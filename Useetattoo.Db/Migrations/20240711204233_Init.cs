@@ -26,10 +26,19 @@ namespace Useetattoo.Db.Migrations
                     Hausnummer = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
                     Plz = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
                     Ort = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Land = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Bundesland = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Telefon = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Bluterkrankung = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    Hauterkrankungen = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    BlutverduennendeMedikamente = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    Allergien = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    HerzKreislaufbeschwerden = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
                     ErstelltAm = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ErstelltVon = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    ErstelltVon = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     GeaendertAm = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    GeaendertVon = table.Column<string>(type: "nvarchar(210)", maxLength: 210, nullable: true)
+                    GeaendertVon = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -43,7 +52,9 @@ namespace Useetattoo.Db.Migrations
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Benutzername = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    Passwort = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true)
+                    Passwort = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Vorname = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true)
                 },
                 constraints: table =>
                 {

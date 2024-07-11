@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 export class LoginComponent {
 
   protected _formData: any = {
-    user: 'rr1980',
-    password: '123'
+    user: '',
+    password: ''
   };
   protected _isLoading: boolean = false;
 

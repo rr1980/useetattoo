@@ -42,6 +42,8 @@ namespace Useetattoo.Db
                 table.HasKey(e => e.Id);
                 table.Property(e => e.Benutzername).HasMaxLength(100);
                 table.Property(e => e.Passwort).HasMaxLength(300);
+                table.Property(e => e.Name).HasMaxLength(100);
+                table.Property(e => e.Vorname).HasMaxLength(200);
 
             });
 
@@ -50,10 +52,10 @@ namespace Useetattoo.Db
                 table.HasKey(e => e.Id);
 
                 table.Property(e => e.ErstelltAm);
-                table.Property(e => e.ErstelltVon).HasMaxLength(50);
+                table.Property(e => e.ErstelltVon).HasMaxLength(100);
 
                 table.Property(e => e.GeaendertAm);
-                table.Property(e => e.GeaendertVon).HasMaxLength(210);
+                table.Property(e => e.GeaendertVon).HasMaxLength(100);
 
                 table.Property(e => e.Name).HasMaxLength(100);
                 table.Property(e => e.Vorname).HasMaxLength(100);
@@ -64,6 +66,16 @@ namespace Useetattoo.Db
                 table.Property(e => e.Hausnummer).HasMaxLength(10);
                 table.Property(e => e.Plz).HasMaxLength(10);
                 table.Property(e => e.Ort).HasMaxLength(100);
+                table.Property(e => e.Land).HasMaxLength(100);
+                table.Property(e => e.Bundesland).HasMaxLength(100);
+                table.Property(e => e.Telefon).HasMaxLength(100);
+                table.Property(e => e.Email).HasMaxLength(100);
+
+                table.Property(e => e.Bluterkrankung).HasMaxLength(10);
+                table.Property(e => e.Hauterkrankungen).HasMaxLength(10);
+                table.Property(e => e.BlutverduennendeMedikamente).HasMaxLength(10);
+                table.Property(e => e.Allergien).HasMaxLength(10);
+                table.Property(e => e.HerzKreislaufbeschwerden).HasMaxLength(10);
 
                 table.HasOne(e => e.Signagture)
                     .WithOne(e => e.Declaration)

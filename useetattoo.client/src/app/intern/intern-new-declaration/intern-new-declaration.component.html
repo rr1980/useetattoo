@@ -1,8 +1,8 @@
-<div class="d-flex flex-column w-100 align-items-center p-5" *ngIf="_isInited">
+<div class="d-flex flex-column w-100 align-items-center p-5 gap-1" *ngIf="_isInited">
   <dx-form id="form" #declatationForm [(formData)]="_formData" labelLocation="top" [minColWidth]="233"
     [screenByWidth]="_screen" [colCount]="1" class=" max-w-1600" [readOnly]="(_id && _id > 0 ? true : false)">
 
-    <dxi-item itemType="group" [colCount]="4">
+    <dxi-item itemType="group" [colCount]="4" caption="Person">
 
       <dxi-item dataField="geschlecht" [label]="{ text: 'Geschlecht' }" editorType="dxRadioGroup"
         [editorOptions]="{ items: _datasource_geschlecht, layout: 'horizontal' }">
@@ -19,38 +19,147 @@
     </dxi-item>
 
     <dxi-item itemType="group" [colSpan]="1" [colCountByScreen]="_colCountByScreen">
-      <dxi-item dataField="name" [label]="{ text: 'Nachname' }">
+      <dxi-item dataField="name" [label]="{ text: 'Nachname' }" [editorOptions]="{ maxLength: 99}">
         <dxi-validation-rule type="required"></dxi-validation-rule>
       </dxi-item>
 
-      <dxi-item dataField="vorname" [label]="{ text: 'Vorname' }">
-        <dxi-validation-rule type="required"></dxi-validation-rule>
-      </dxi-item>
-
-      <dxi-item dataField="strasse" [label]="{ text: 'Stra0e' }">
-        <dxi-validation-rule type="required"></dxi-validation-rule>
-      </dxi-item>
-
-      <dxi-item dataField="hausnummer" [label]="{ text: 'Hausnummer' }">
-        <dxi-validation-rule type="required"></dxi-validation-rule>
-      </dxi-item>
-
-      <dxi-item dataField="plz" [label]="{ text: 'Plz' }">
-        <dxi-validation-rule type="required"></dxi-validation-rule>
-      </dxi-item>
-
-      <dxi-item dataField="ort" [label]="{ text: 'Ort' }">
+      <dxi-item dataField="vorname" [label]="{ text: 'Vorname' }" [editorOptions]="{ maxLength: 99}">
         <dxi-validation-rule type="required"></dxi-validation-rule>
       </dxi-item>
     </dxi-item>
+    <dxi-item itemType="group" [colSpan]="1" [colCountByScreen]="_colCountByScreen" caption="Adresse">
 
-    <dxi-item itemType="group" [colSpan]="1">
+      <dxi-item dataField="strasse" [label]="{ text: 'Stra0e' }" [editorOptions]="{ maxLength: 99}">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+      </dxi-item>
+
+      <dxi-item dataField="hausnummer" [label]="{ text: 'Hausnummer' }" [editorOptions]="{ maxLength: 9}">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+      </dxi-item>
+
+      <dxi-item dataField="plz" [label]="{ text: 'Plz' }" [editorOptions]="{ maxLength: 9}">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+      </dxi-item>
+
+      <dxi-item dataField="ort" [label]="{ text: 'Ort' }" [editorOptions]="{ maxLength: 99}">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+      </dxi-item>
+
+      <dxi-item dataField="land" [label]="{ text: 'Land' }" [editorOptions]="{ maxLength: 99}">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+      </dxi-item>
+
+      <dxi-item dataField="bundesland" [label]="{ text: 'Bundesland' }" [editorOptions]="{ maxLength: 99}">
+      </dxi-item>
+
+    </dxi-item>
+    <dxi-item itemType="group" [colSpan]="1" [colCountByScreen]="_colCountByScreen" caption="Kontakt">
+
+      <dxi-item dataField="telefon" [label]="{ text: 'Telefon' }" [editorOptions]="{ maxLength: 99 }">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+      </dxi-item>
+
+      <dxi-item dataField="email" [label]="{ text: 'E-Mail' }" [editorOptions]="{ maxLength: 99 }">
+        <!-- <dxi-validation-rule type="required"></dxi-validation-rule> -->
+        <dxi-validation-rule type="email" message="Email invalid"></dxi-validation-rule>
+      </dxi-item>
+
+    </dxi-item>
+
+    <dxi-item itemType="group" [colSpan]="1" [colCount]="2" caption="Der Kunde / die Kundin erklärt hierzu (Anamnese)"
+      [label]="{ location: 'left' }">
+
+
+      <dxi-item dataField="bluterkrankung"
+        [label]="{ text: 'Besteht eine Bluterkrankung, oder erhöhte Blutungsneigung?' }" editorType="dxRadioGroup"
+        [editorOptions]="{ items: _datasource_jaNein, layout: 'horizontal' }">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+      </dxi-item>
+
+      <dxi-item dataField="hauterkrankungen" [label]="{ text: 'Bestehen Hauterkrankungen (Neurodermitis etc.)?' }"
+        editorType="dxRadioGroup" [editorOptions]="{ items: _datasource_jaNein, layout: 'horizontal' }">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+      </dxi-item>
+
+
+      <dxi-item dataField="blutverduennendeMedikamente"
+        [label]="{ text: 'Werden blutverdünnende Medikamente (Marcumar, Aspirin, Heparin etc.) eingenommen?' }"
+        editorType="dxRadioGroup" [editorOptions]="{ items: _datasource_jaNein, layout: 'horizontal' }">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+      </dxi-item>
+
+      <dxi-item dataField="allergien" [label]="{ text: 'Bestehen Allergien?' }" editorType="dxRadioGroup"
+        [editorOptions]="{ items: _datasource_jaNein, layout: 'horizontal' }">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+      </dxi-item>
+
+      <dxi-item dataField="herzKreislaufbeschwerden" [label]="{ text: 'Bestehen Herz- oder Kreislaufbeschwerden?' }"
+        editorType="dxRadioGroup" [editorOptions]="{ items: _datasource_jaNein, layout: 'horizontal' }">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+      </dxi-item>
+
+      <dxi-item dataField="abc" [label]="{ text: '???' }" editorType="dxRadioGroup"
+        [editorOptions]="{ items: _datasource_jaNein, layout: 'horizontal' }">
+      </dxi-item>
+    </dxi-item>
+
+    <!-- <dxi-item itemType="group" [colSpan]="1">
       <dxi-item itemType="button" cssClass="button-add-kind" *ngIf="!_id"
         [buttonOptions]="{ type: 'default', text: 'Absenden', icon: 'add', onClick: _onClickSubmit}">
       </dxi-item>
-    </dxi-item>
+    </dxi-item> -->
   </dx-form>
 
+
+  <div class="datenscnhutz-container">
+    <strong>Datenschutzrechtliche Erklärung</strong><br>
+    <span>
+      Wir werden von dem fer! ggestellten Werk Lichtbildaufnahmen fer! gen. Der Kunde/die Kundin willigt hiermit
+      ausdrücklich darin ein, dass diese
+      Lichtbilder jenseits eines gemäß Art. 6 Absatz 1(f) EU-DSGVO zulässigen Zwecks zum Zwecke der Außendarstellung auf
+      unserer Website, unseren
+      Social Media Auftri" en (Facebook, Instagram, Twi" er usw.) oder auf Werbebannern verö# entlich werden.
+      Zudem werden mit dieser Einwilligungserklärung Gesundheitsdaten erhoben, damit wir entscheiden können, ob die
+      Durchführung des Vertrags ohne
+      Gefahr für Eure Gesundheit und ohne Beeinträch! gung des Ergebnisses unserer Arbeit möglich ist. Daher kann ohne
+      diese Datenerhebung der Vertrag
+      von uns nicht durchgeführt werden. Bei diesen Daten handelt es sich um besondere Daten im Sinne des Art. 9
+      EU-DSGVO. In deren Erhebung wird
+      hiermit durch Dich ausdrücklich eingewilligt. Diese Daten werden von uns nicht an Dri" e weitergegeben und sie
+      werden für die Dauer von 10 Jahren
+      bei uns aufbewahrt. Hiernach werden die Einwilligungserklärung und diese Zus! mmungserklärung vernichtet.
+      Diese Einwilligung kann uns gegenüber jederzeit widerrufen werden (Art. 7 Abs. 3 EU-DSGVO). Hiernach dürfen wir
+      die Verarbeitung der unter der
+      Einwilligung erhobenen und/oder verwendeten Lichtbilder nicht mehr fortsetzen. Die erhobenen Gesundheitsdaten
+      werden – da deren Verarbeitung
+      bis zum Zeitpunkt des Widerrufs legi! m ist – bis zum Ablauf der Aufbewahrungsfrist verwahrt.
+    </span>
+  </div>
+
+  <div class="datenscnhutz-container">
+    <strong>Einwilligung:</strong><br>
+    <span>
+      Ich habe das Vorstehende gelesen und verstanden. Ich fühle mich fi t und gesund.
+      Die ordnungsgemäße Nachsorge einer Tätowierung wurde mir erläutert und ich habe diese Erläuterung verstanden.
+      Ich versichere, die obigen Angaben wahrheitsgemäß und sorgfäl! g gemacht zu haben.
+      Über die Risiken der Tätowierung und deren ordnungsgemäße Nachsorge wurde ich umfassend aufgeklärt.
+      Ich bestä! ge, dass die zu stechende Vorlage gestalterisch meinem Wunsch entspricht.
+      Vor diesem Hintergrund erkläre ich meine Einwilligung in die Durchführung der Tätowierung.
+    </span>
+  </div>
+
+  <div class="datenscnhutz-container">
+    <strong>Der Kunde / die Kundin wurde auf folgendes hingewiesen::</strong><br>
+    <p>
+      1. Bei der Tätowierung wird die Tattoofarbe mittels Nadeln in die zweite Hautschicht, die Dermis, eingebracht. Da
+      die Haut hierbei
+      verletzt wird und dies schmerzhaft ist, handelt es sich bei dem Vorgang tatbestandlich um eine Körperverletzung
+      gemäß § 223 Abs. 1 StGB.
+    </p>
+    <p>
+      2. Die Beschaffenheit...
+    </p>
+  </div>
 
   <div class="info-text-container">
     <span class="error-text" *ngIf="_errorText">{{_errorText}}</span>
@@ -58,7 +167,11 @@
   </div>
   <app-signature #signature *ngIf="!_id"></app-signature>
   <div class="signature-container" *ngIf="_id && _imageData">
-    <img [src]="_imageData" width="100%" height="100%" draggable="false"/>
+    <img [src]="_imageData" width="100%" height="100%" draggable="false" />
   </div>
 
+
+
+  <dx-button *ngIf="!_id" text="Absenden" icon="check" type="default" (onClick)="_onClickSubmit($event)">
+  </dx-button>
 </div>
