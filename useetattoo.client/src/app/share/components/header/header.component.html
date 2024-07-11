@@ -1,10 +1,14 @@
 <div class="d-flex flex-row justify-content-end align-items-center px-4 gap-2">
   <div class="d-flex flex-row align-items-center gap-1 mt-2">
-    <a class="nav-link" *ngIf="_location === 'login'" [routerLink]="'/extern'"
+    <a class="nav-link" *ngIf="_location === 'editDeclaration'" [routerLink]="'/intern'"
       (click)="_isMenuCollapsed = true">Home</a>
-    <a class="nav-link" *ngIf="_location === 'intern'" [routerLink]="'/extern'"
+    <a class="nav-link" *ngIf="_location === 'editDeclaration'" [routerLink]="'/extern'"
       (click)="_isMenuCollapsed = true">Logout</a>
-    <a class="nav-link" *ngIf="_location !== 'intern' && _location !== 'login'" [routerLink]="'/intern'"
+      <a class="nav-link" *ngIf="_location === 'login'" [routerLink]="'/extern'"
+      (click)="_isMenuCollapsed = true">Zurück</a>
+    <a class="nav-link" *ngIf="_location === 'intern/home'" [routerLink]="'/extern'"
+      (click)="_isMenuCollapsed = true">Logout</a>
+    <a class="nav-link" *ngIf="_location === 'extern/home'" [routerLink]="'/intern'"
       (click)="_isMenuCollapsed = true">Login</a>
   </div>
 </div>

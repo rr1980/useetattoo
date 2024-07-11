@@ -47,6 +47,8 @@ export class InternNewDeclarationComponent implements OnInit {
 
   protected _screen = (width: number): string => (width < 720 ? 'sm' : 'md');
 
+  protected _imageData?: string;
+
   constructor(
     private _apiService: ApiService,
     private _route: ActivatedRoute,
@@ -64,6 +66,9 @@ export class InternNewDeclarationComponent implements OnInit {
           (response: any): void => {
             if (response) {
               this._formData = response;
+              this._imageData = response.signature?.image
+                ? 'data:image/png;base64,' + atob(response.signature?.image)
+                : undefined;
             } else {
               this._errorText = 'Deklaration nicht gefunden.';
             }

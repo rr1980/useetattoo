@@ -25,21 +25,19 @@ export class HeaderComponent implements OnDestroy {
     this._subscriptions.push(
       this._router.events.subscribe((val) => {
         if (val instanceof NavigationEnd) {
-          if (
-            val.url.startsWith('/intern') &&
-            !val.url.startsWith('/intern/newDeclaration')
-          ) {
-            this._location = 'intern';
-          } else if (val.url.startsWith('/extern')) {
-            this._location = 'home';
+          console.debug('NavigationEnd:', val.url);
+          if (val.urlAfterRedirects.startsWith('/intern/home')) {
+            this._location = 'intern/home';
+          } else if (val.urlAfterRedirects.startsWith('/extern/home')) {
+            this._location = 'extern/home';
             this._authService.logout();
-          } else if (val.url.startsWith('/intern/newDeclaration')) {
-            this._location = 'declaration';
-          } else if (val.url.startsWith('/login')) {
+          } else if (val.urlAfterRedirects.startsWith('/intern/newDeclaration') || val.urlAfterRedirects.startsWith('/intern/showDeclaration')) {
+            this._location = 'editDeclaration';
+          } else if (val.urlAfterRedirects.startsWith('/login')) {
             this._location = 'login';
             this._authService.logout();
           } else {
-            this._location = 'unknown (' + val.url + ')';
+            this._location = 'unknown (' + val.urlAfterRedirects + ')';
             this._authService.logout();
           }
 

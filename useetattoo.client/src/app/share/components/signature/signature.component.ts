@@ -81,6 +81,7 @@ export class SignatureComponent implements OnInit {
   public getSignature(data: any): any | null {
     if (this._signaturePad && this.isValidate()) {
       const _date = new Date();
+      console.debug('this._signaturePad', this._signaturePad.toDataURL());
       const result: any = {
         hash: null,
         date: _date,
