@@ -2,7 +2,7 @@ import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
-import { ErrorHandler, LOCALE_ID, NgModule } from '@angular/core';
+import { ErrorHandler, LOCALE_ID, NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -25,6 +25,7 @@ import { DxFormModule } from 'devextreme-angular/ui/form';
 import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxLoadIndicatorModule } from 'devextreme-angular/ui/load-indicator';
 import { DxSwitchModule } from 'devextreme-angular/ui/switch';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, LoginComponent],
@@ -37,7 +38,13 @@ import { DxSwitchModule } from 'devextreme-angular/ui/switch';
     DxFormModule,
     DxLoadIndicatorModule,
     DxButtonModule,
-    DxSwitchModule
+    DxSwitchModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),
