@@ -42,10 +42,11 @@ namespace Useetattoo.Services
                              GeaendertVon = x.GeaendertVon,
                              Name = x.Name,
                              Vorname = x.Vorname,
-                             Anrede = x.Anrede,
+                             Geschlecht = x.Geschlecht,
                              Geburtsdatum = x.Geburtsdatum.ToAngularString(),
                              GeborenIn = x.GeborenIn,
                              Strasse = x.Strasse,
+                             Hasunummer = x.Hasunummer,
                              Plz = x.Plz,
                              Ort = x.Ort,
                              Signiert = x.Signagture != null ? x.Signagture.Date : null,
@@ -120,10 +121,11 @@ namespace Useetattoo.Services
                 Id = x.Id,
                 Name = x.Name,
                 Vorname = x.Vorname,
-                Anrede = x.Anrede,
+                Anrede = x.Geschlecht,
                 Geburtsdatum = x.Geburtsdatum.ToAngularString(),
                 GeborenIn = x.GeborenIn,
                 Strasse = x.Strasse,
+                Hasunummer = x.Hasunummer,
                 Plz = x.Plz,
                 Ort = x.Ort,
                 Signature = x.Signagture != null ? new SignatureItemVM
@@ -150,10 +152,11 @@ namespace Useetattoo.Services
                 {
                     declaration.Name = request.Name;
                     declaration.Vorname = request.Vorname;
-                    declaration.Anrede = request.Anrede;
-                    declaration.Geburtsdatum = request.Geburtsdatum.HasValue ? request.Geburtsdatum.Value.ToNullableDateTime() : null;
+                    declaration.Geschlecht = request.Geschlecht;
+                    declaration.Geburtsdatum = request.Geburtsdatum; //.HasValue ? request.Geburtsdatum.Value.ToNullableDateTime() : null;
                     declaration.GeborenIn = request.GeborenIn;
                     declaration.Strasse = request.Strasse;
+                    declaration.Hasunummer = request.Hausnummer;
                     declaration.Plz = request.Plz;
                     declaration.Ort = request.Ort;
                     declaration.Signagture = request.Signature != null ? new Signature
@@ -178,10 +181,11 @@ namespace Useetattoo.Services
                 {
                     Name = request.Name,
                     Vorname = request.Vorname,
-                    Anrede = request.Anrede,
-                    Geburtsdatum = request.Geburtsdatum.HasValue ? request.Geburtsdatum.Value.ToNullableDateTime() : null,
+                    Geschlecht = request.Geschlecht,
+                    Geburtsdatum = request.Geburtsdatum, //.HasValue ? request.Geburtsdatum.Value.ToNullableDateTime() : null,
                     GeborenIn = request.GeborenIn,
                     Strasse = request.Strasse,
+                    Hasunummer = request.Hausnummer,
                     Plz = request.Plz,
                     Ort = request.Ort,
                     Signagture = request.Signature != null ? new Signature

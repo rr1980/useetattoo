@@ -1,4 +1,4 @@
-<form [formGroup]="_form" (ngSubmit)="_onClickSubmit($event)"
+<!-- <form [formGroup]="_form" (ngSubmit)="_onClickSubmit($event)"
   class="d-flex flex-column align-items-center w-100 h-100 align-self-stretch p-5 gap-2">
 
   <div class="d-flex flex-column align-items-center w-100 h-50px">
@@ -49,8 +49,6 @@
       <label class="form-label" for="p_geburtsdatum">Geburtsdatum</label>
       <div class="input-group">
         <input id="p_geburtsdatum" class="form-control form-control-sm w-135px" formControlName="geburtsdatum" />
-        <!-- <button class="btn btn-outline-secondary bi bi-calendar3 py-s-4" (click)="geburtsdatumEditor.toggle()"
-          type="button"></button> -->
       </div>
       <span class="text-danger"
         *ngIf="(_formControls.geburtsdatum.touched || _submitted) && _formControls.geburtsdatum.errors?.required">
@@ -107,7 +105,65 @@
 
   </div>
 
-  <app-signature #signature></app-signature>
 
   <button class="btn btn-success btn-lg btn-block" type="submit">Senden</button>
-</form>
+</form> -->
+
+
+
+<div class="d-flex flex-column w-100 h-100 align-self-stretch p-5">
+  <dx-form id="form" #declatationForm [(formData)]="_formData" labelLocation="top" [minColWidth]="233" [screenByWidth]="_screen"
+    [colCount]="1">
+
+    <dxi-item itemType="group" [colCount]="4">
+
+      <dxi-item dataField="geschlecht" [label]="{ text: 'Geschlecht' }" editorType="dxRadioGroup"
+        [editorOptions]="{ items: _datasource_geschlecht, layout: 'horizontal' }">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+      </dxi-item>
+
+      <dxi-item dataField="geborenIn" [label]="{ text: 'Geboren in' }">
+      </dxi-item>
+
+      <dxi-item editorType="dxDateBox" dataField="geburtsdatum" [label]="{ text: 'Geburtsdatum' }" width="200">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+      </dxi-item>
+
+    </dxi-item>
+
+    <dxi-item itemType="group" [colSpan]="1" [colCountByScreen]="_colCountByScreen">
+      <dxi-item dataField="name" [label]="{ text: 'Nachname' }">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+      </dxi-item>
+
+      <dxi-item dataField="vorname" [label]="{ text: 'Vorname' }">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+      </dxi-item>
+
+      <dxi-item dataField="strasse" [label]="{ text: 'Stra0e' }">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+      </dxi-item>
+
+      <dxi-item dataField="hausnummer" [label]="{ text: 'Hausnummer' }">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+      </dxi-item>
+
+      <dxi-item dataField="plz" [label]="{ text: 'Plz' }">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+      </dxi-item>
+
+      <dxi-item dataField="ort" [label]="{ text: 'Ort' }">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+      </dxi-item>
+    </dxi-item>
+
+    <dxi-item itemType="group" [colSpan]="1">
+      <dxi-item itemType="button" cssClass="button-add-kind"
+        [buttonOptions]="{ type: 'default', text: 'Absenden', icon: 'add', onClick: _onClickSubmit}">
+      </dxi-item>
+    </dxi-item>
+  </dx-form>
+
+  <app-signature #signature></app-signature>
+
+</div>

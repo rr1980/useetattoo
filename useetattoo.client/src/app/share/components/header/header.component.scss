@@ -1,7 +1,6 @@
 :host {
   display: block;
   width: 100%;
-  // border: 1px solid black;
 }
 
 .header-logo {
@@ -12,17 +11,8 @@
   font-weight: 600;
 }
 
-.light-border {
-  border-bottom: 1px solid rgba(168, 168, 168, 0.623);
-}
-
-.dark-border {
-  border-bottom: 1px solid black;
-}
-
-.title{
+.title {
   font-weight: 500;
   letter-spacing: -0.75px;
   font-size: 54px;
-
 }

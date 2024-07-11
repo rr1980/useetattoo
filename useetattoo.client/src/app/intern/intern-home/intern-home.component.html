@@ -1,9 +1,9 @@
 <div class="d-flex flex-column align-items-center w-100 h-100 align-self-stretch p-5">
-  <dx-data-grid #dxDataGrid [dataSource]="_dataSource" [remoteOperations]="true" keyExpr="id" class="dg-declarations"
-    [class.dg-light]="_theme === 'light'" [class.dg-dark]="_theme === 'dark'">
+  <dx-data-grid #dxDataGrid [dataSource]="_dataSource" [remoteOperations]="true" keyExpr="id"
+    class="dg-declarations dg-dark">
 
     <dxo-sorting mode="multiple"></dxo-sorting>
-    <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+    <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
 
     <dxo-load-panel [enabled]="true"></dxo-load-panel>
     <dxo-selection mode="none" [deferred]="false"> </dxo-selection>
@@ -16,17 +16,27 @@
     <dxo-toolbar>
       <dxi-item name="searchPanel" location="before" width="250"></dxi-item>
       <dxi-item location="after" widget="dxButton"
-        [options]="{ text: 'Neu', icon: 'add', type: 'success', stylingMode: 'outlined', onClick: _onNewClick }">
+        [options]="{ text: 'Neu', icon: 'add', type: 'default', stylingMode: 'outlined', onClick: _onNewClick }">
       </dxi-item>
-
-
       <dxi-item name="columnChooserButton"></dxi-item>
     </dxo-toolbar>
 
 
-    <dxi-column dataField="id" caption="Id"></dxi-column>
+    <dxi-column type="buttons" fixedPosition="left" [allowResizing]="false">
+      <dxi-button name="bearbeiten" hint="Anzeigen" icon="search"
+        [onClick]="_onEditClick"></dxi-button>
+      <dxi-button name="loeschen" hint="Löschen" icon="trash" [onClick]="_onRemoveClick"></dxi-button>
+    </dxi-column>
+
+    <!-- <dxi-column dataField="id" caption="Id"></dxi-column> -->
+    <dxi-column dataField="geschlecht" caption="Geschlecht" width="150px"></dxi-column>
     <dxi-column dataField="name" caption="Name"></dxi-column>
     <dxi-column dataField="vorname" caption="Vorname"></dxi-column>
+    <dxi-column dataField="geburtsdatum" dataType="date" format="dd.MM.yyyy" caption="Geburtsdatum"
+      width="120px"></dxi-column>
+    <dxi-column dataField="plz" caption="Plz" width="100px"></dxi-column>
+    <dxi-column dataField="ort" caption="Ort"></dxi-column>
+    <dxi-column dataField="strasse" caption="Straße"></dxi-column>
     <!-- <dxi-column dataField="v_datum" dataType="date" format="dd.MM.yyyy" caption="U-Datum" width="100px"></dxi-column> -->
 
 

@@ -17,9 +17,6 @@ export class SignatureComponent implements OnInit {
 
   constructor(private _eventService: EventService) {
     this._resizeCanvas = this._resizeCanvas.bind(this);
-    this._eventService.on('onThemeChange', (theme: any): void => {
-      this._rePaint(theme);
-    });
   }
 
   public ngOnInit(): void {
@@ -30,16 +27,9 @@ export class SignatureComponent implements OnInit {
         {
           // minWidth: 5,
           // maxWidth: 10,
-          penColor: 'rgb(0, 0, 0)',
+          penColor: 'rgb(255, 255, 255)',
         }
       );
-
-      this._eventService.getLasValue('onThemeChange', (theme: any): void => {
-        if (this._isInited && this._signaturePad) {
-          this._signaturePad!.penColor =
-            theme === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)';
-        }
-      });
 
       window.addEventListener('resize', this._resizeCanvas);
       this._resizeCanvas();
@@ -113,27 +103,20 @@ export class SignatureComponent implements OnInit {
     }
   }
 
-  private _rePaint(theme: any = null): void {
-    if (theme === null) {
-      theme =
-        this._signaturePad!.penColor === 'rgb(255, 255, 255)'
-          ? 'dark'
-          : 'light';
-    }
+  private _rePaint(): void {
     if (this._isInited && this._signaturePad) {
       const data = this._signaturePad.toData();
-      if (data && data.length > 0) {
-        this._signaturePad!.penColor =
-          theme === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)';
-        data.forEach((d: any) => {
-          d.penColor = theme === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)';
-        });
+      this._signaturePad.fromData(data, { clear: true });
+      // if (data && data.length > 0) {
+      //   // this._signaturePad!.penColor = 'rgb(255, 255, 255)';
+      //   // data.forEach((d: any) => {
+      //   //   d.penColor = theme === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)';
+      //   // });
 
-        this._signaturePad.fromData(data, { clear: true });
-      } else {
-        this._signaturePad!.penColor =
-          theme === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)';
-      }
+      //   this._signaturePad.fromData(data, { clear: true });
+      // } else {
+      //   this._signaturePad!.penColor = 'rgb(255, 255, 255)';
+      // }
     }
   }
 

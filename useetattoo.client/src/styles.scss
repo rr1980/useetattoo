@@ -4,6 +4,7 @@
   // margin: 0!important;
   // padding: 0!important;
   box-sizing: border-box !important;
+  text-size-adjust: none;
   // border-radius: 0!important;
   // background-color: rgb(21, 21, 21);
   // color: white;
@@ -78,16 +79,16 @@ body {
 }
 
 .px-4 {
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 p.p-xl {
-  font-size: 1.25rem;
+  font-size: 20px;
 }
 
 .p-5 {
-  padding: 1.25rem;
+  padding: 20px;
 }
 
 .gap-1 {
@@ -191,4 +192,8 @@ dx-data-grid {
 .nav-link{
   text-decoration: none;
   min-width: 50px;
+}
+
+.dx-datebox{
+  max-width: 150px!important;
 }

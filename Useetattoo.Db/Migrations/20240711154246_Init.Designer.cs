@@ -12,7 +12,7 @@ using Useetattoo.Db;
 namespace Useetattoo.Db.Migrations
 {
     [DbContext(typeof(DatenbankContext))]
-    [Migration("20240709191150_Init")]
+    [Migration("20240711154246_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -32,10 +32,6 @@ namespace Useetattoo.Db.Migrations
                         .HasColumnType("bigint");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<string>("Anrede")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
 
                     b.Property<DateTime?>("ErstelltAm")
                         .HasColumnType("datetime2");
@@ -57,6 +53,14 @@ namespace Useetattoo.Db.Migrations
 
                     b.Property<DateTime?>("Geburtsdatum")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Geschlecht")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Hasunummer")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Name")
                         .HasMaxLength(100)

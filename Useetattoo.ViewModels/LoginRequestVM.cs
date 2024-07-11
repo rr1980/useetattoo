@@ -22,30 +22,24 @@ namespace Useetattoo.ViewModels
     {
         public long? Id { get; set; }
 
-        [Required]
         public string? Name { get; set; }
 
-        [Required]
         public string? Vorname { get; set; }
 
-        [Required]
-        public string? Anrede { get; set; }
+        public string? Geschlecht { get; set; }
 
-        [Required]
-        public JsonElement? Geburtsdatum { get; set; }
+        public DateTime? Geburtsdatum { get; set; }
 
         public string? GeborenIn { get; set; }
 
-        [Required]
         public string? Strasse { get; set; }
 
-        [Required]
         public string? Plz { get; set; }
 
-        [Required]
         public string? Ort { get; set; }
 
-        [Required]
+        public string? Hausnummer { get; set; }
+
         public SignatureItemVM? Signature { get; set; }
     }
 
@@ -60,30 +54,21 @@ namespace Useetattoo.ViewModels
         public string? GeaendertVon { get; set; }
 
 
-        [Required]
         public string? Name { get; set; }
-
-        [Required]
         public string? Vorname { get; set; }
 
-        [Required]
         public string? Anrede { get; set; }
-
-        [Required]
         public string? Geburtsdatum { get; set; }
 
         public string? GeborenIn { get; set; }
 
-        [Required]
         public string? Strasse { get; set; }
+        public string? Hasunummer { get; set; }
 
-        [Required]
         public string? Plz { get; set; }
 
-        [Required]
         public string? Ort { get; set; }
 
-        [Required]
         public SignatureItemVM? Signature { get; set; }
     }
 
@@ -103,7 +88,7 @@ namespace Useetattoo.ViewModels
 
         public string? Vorname { get; set; }
 
-        public string? Anrede { get; set; }
+        public string? Geschlecht { get; set; }
 
         public string? Geburtsdatum { get; set; }
 
@@ -114,6 +99,7 @@ namespace Useetattoo.ViewModels
         public string? Plz { get; set; }
 
         public string? Ort { get; set; }
+        public string? Hasunummer { get; set; }
 
     }
 

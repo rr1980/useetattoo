@@ -39,7 +39,7 @@ namespace Useetattoo.Server.Controllers
 
         [HttpPost("Add")]
         //[ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<long?> Add([FromBody, Required] DeclarationItemAddVM request)
+        public ActionResult<long?> Add(DeclarationItemAddVM request)
         {
             return Ok(_declarationService.Add(request));
         }

@@ -5,6 +5,7 @@ import localeDeExtra from '@angular/common/locales/extra/de';
 import { ModalService } from './share/services/modal.service';
 import { EventService } from './share/services/event.service';
 import DataGrid from 'devextreme/ui/data_grid';
+import DateBox from 'devextreme/ui/date_box';
 import config from 'devextreme/core/config';
 
 
@@ -18,7 +19,7 @@ export class AppComponent {
   @ViewChild('errorModal', { static: false })
   protected _errorModal?: TemplateRef<any>;
 
-  protected _theme: string = 'light';
+  // protected _theme: string = 'light';
   protected _error?: any;
 
   constructor(
@@ -27,9 +28,9 @@ export class AppComponent {
   ) {
     registerLocaleData(localeDe, 'de-DE', localeDeExtra);
 
-    this._eventService.on('onThemeChange', (theme: any): void => {
-      this._theme = theme;
-    });
+    // this._eventService.on('onThemeChange', (theme: any): void => {
+    //   this._theme = theme;
+    // });
 
     this._modalService.on('error', (error: any): void => {
       this._error = error;
@@ -74,6 +75,19 @@ export class AppComponent {
         stateStoring: {
           savingTimeout: 0,
         },
+      } as any,
+    });
+
+    DateBox.defaultOptions({
+      options: {
+        //showClearButton: true,
+        displayFormat: 'dd.MM.yyyy',
+        type: 'date',
+        pickerType: 'calendar',
+        min: '1900/1/1',
+        max: '2099/12/31',
+        useMaskBehavior: true,
+        dateSerializationFormat: 'yyyy-MM-ddTHH:mm:ss',
       } as any,
     });
   }

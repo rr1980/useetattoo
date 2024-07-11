@@ -57,10 +57,11 @@ namespace Useetattoo.Db
 
                 table.Property(e => e.Name).HasMaxLength(100);
                 table.Property(e => e.Vorname).HasMaxLength(100);
-                table.Property(e => e.Anrede).HasMaxLength(20);
+                table.Property(e => e.Geschlecht).HasMaxLength(20);
                 table.Property(e => e.Geburtsdatum);
                 table.Property(e => e.GeborenIn).HasMaxLength(100);
                 table.Property(e => e.Strasse).HasMaxLength(100);
+                table.Property(e => e.Hasunummer).HasMaxLength(10);
                 table.Property(e => e.Plz).HasMaxLength(10);
                 table.Property(e => e.Ort).HasMaxLength(100);
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import DataSource from 'devextreme/data/data_source';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, tap } from 'rxjs';
 import { ApiService } from '../../share/services/api.service';
 import { RouteKeys } from '../../share/helper/route-keys.helper';
 import { EventService } from 'src/app/share/services/event.service';
@@ -13,7 +13,6 @@ import { Router } from '@angular/router';
 })
 export class InternHomeComponent {
   protected _dataSource: DataSource;
-  protected _theme: string = 'light';
 
   constructor(
     private _apiService: ApiService,
@@ -21,10 +20,8 @@ export class InternHomeComponent {
     private _router: Router
   ) {
     this._onNewClick = this._onNewClick.bind(this);
-
-    this._eventService.on('onThemeChange', (theme: any): void => {
-      this._theme = theme;
-    });
+    this._onEditClick = this._onEditClick.bind(this);
+    this._onRemoveClick = this._onRemoveClick.bind(this);
 
     this._dataSource = new DataSource({
       key: 'id',
@@ -35,7 +32,7 @@ export class InternHomeComponent {
           this._apiService.post(
             RouteKeys.Intern.Declaration.search,
             loadOptions
-          )
+          ).pipe(tap((res) => console.log(res)))
         );
       },
     });
@@ -44,4 +41,7 @@ export class InternHomeComponent {
   protected _onNewClick(e: any): void {
     this._router.navigate(['intern/newDeclaration']);
   }
+
+  protected _onEditClick(e: any): void {}
+  protected _onRemoveClick(e: any): void {}
 }

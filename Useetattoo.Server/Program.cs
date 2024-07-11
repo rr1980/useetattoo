@@ -3,9 +3,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
+//using Newtonsoft.Json;
 using Serilog;
 using System.Text;
+using System.Text.Json;
 using Useetattoo.Db;
 using Useetattoo.Services;
 using Useetattoo.Services.Interfaces;
@@ -26,6 +27,12 @@ namespace Useetattoo.Server
             var builder = WebApplication.CreateBuilder(args);
             //builder.WebHost.UseKestrel();
             builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
+
+            //builder.Services.ConfigureHttpJsonOptions(options =>
+            //{
+            //    // Prepend my source generated context so that it takes precedence over other registered contexts
+            //    options.SerializerOptions.TypeInfoResolverChain.Insert(0, MyContext.Default);
+            //});
 
             //builder.Services.Configure<JsonOptions>(options => options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
             //builder.Services.Configure<JsonOptions>(options =>
@@ -59,11 +66,11 @@ namespace Useetattoo.Server
 
 
             // Add services to the container.
-
-            builder.Services.AddControllers().AddNewtonsoftJson(x =>
-            {
-                x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-            });
+            builder.Services.AddControllers();
+            //builder.Services.AddControllers().AddNewtonsoftJson(x =>
+            //{
+            //    x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            //});
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             //builder.Services.AddEndpointsApiExplorer();
             //builder.Services.AddSwaggerGen();
@@ -94,7 +101,7 @@ namespace Useetattoo.Server
             {
                 var feature = ctx.Features.Get<IExceptionHandlerFeature>();
 
-                var result = JsonConvert.SerializeObject(new
+                var result = JsonSerializer.Serialize(new
                 {
                     status = 500,
                     title = "An error occurred while processing your request.",
@@ -105,7 +112,7 @@ namespace Useetattoo.Server
                 if (feature != null)
                 {
 
-                    result = JsonConvert.SerializeObject(new
+                    result = JsonSerializer.Serialize(new
                     {
                         status = ctx.Response.StatusCode,
                         title = feature.Error.Message, // "An error occurred while processing your request.",
