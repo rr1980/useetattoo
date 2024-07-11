@@ -10,7 +10,7 @@ namespace Useetattoo.Entities
         public DateTime? Geburtsdatum { get; set; }
         public string? GeborenIn { get; set; }
         public string? Strasse { get; set; }
-        public string? Hasunummer { get; set; }
+        public string? Hausnummer { get; set; }
         public string? Plz { get; set; }
         public string? Ort { get; set; }
 

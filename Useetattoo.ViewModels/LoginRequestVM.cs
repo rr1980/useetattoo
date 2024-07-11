@@ -18,6 +18,11 @@ namespace Useetattoo.ViewModels
         public bool IsAuthenticated => !string.IsNullOrEmpty(Token);
     }
 
+    public class DeclarationItemRequestVM
+    {
+        public long Id { get; set; }
+    }
+
     public class DeclarationItemAddVM
     {
         public long? Id { get; set; }
@@ -57,13 +62,13 @@ namespace Useetattoo.ViewModels
         public string? Name { get; set; }
         public string? Vorname { get; set; }
 
-        public string? Anrede { get; set; }
-        public string? Geburtsdatum { get; set; }
+        public string? Geschlecht { get; set; }
+        public DateTime? Geburtsdatum { get; set; }
 
         public string? GeborenIn { get; set; }
 
         public string? Strasse { get; set; }
-        public string? Hasunummer { get; set; }
+        public string? Hausnummer { get; set; }
 
         public string? Plz { get; set; }
 
@@ -99,7 +104,7 @@ namespace Useetattoo.ViewModels
         public string? Plz { get; set; }
 
         public string? Ort { get; set; }
-        public string? Hasunummer { get; set; }
+        public string? Hausnummer { get; set; }
 
     }
 
@@ -113,14 +118,6 @@ namespace Useetattoo.ViewModels
         public string? PointerTypes { get; set; }
     }
 
-    public class DeclarationSearchRequestVM
-    {
-        public int Skip { get; set; }
-        public int Take { get; set; }
-        public string? SearchTerm { get; set; }
-        public string? SortColumn { get; set; }
-        public string? SortDirection { get; set; }
-    }
     public class DeclarationSearchResponseVM
     {
         public DeclarationSearchResponseVM()

@@ -1,9 +1,9 @@
 <div class="d-flex flex-column align-items-center w-100 h-100 align-self-stretch p-5">
   <dx-data-grid #dxDataGrid [dataSource]="_dataSource" [remoteOperations]="true" keyExpr="id"
-    class="dg-declarations dg-dark">
+    class="dg-declarations dg-dark" (onRowDblClick)="_onEditClick($event)">
 
     <dxo-sorting mode="multiple"></dxo-sorting>
-    <dxo-column-chooser [enabled]="true" mode="select" title="Spaltenauswahl"></dxo-column-chooser>
+    <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
 
     <dxo-load-panel [enabled]="true"></dxo-load-panel>
     <dxo-selection mode="none" [deferred]="false"> </dxo-selection>

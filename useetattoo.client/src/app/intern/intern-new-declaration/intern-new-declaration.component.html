@@ -1,119 +1,6 @@
-<!-- <form [formGroup]="_form" (ngSubmit)="_onClickSubmit($event)"
-  class="d-flex flex-column align-items-center w-100 h-100 align-self-stretch p-5 gap-2">
-
-  <div class="d-flex flex-column align-items-center w-100 h-50px">
-    <div class="form-outline d-flex flex-row gap-3">
-      <div class="form-check">
-        <input class="form-check-input" value="Herr" type="radio" name="anrede" id="p-gender-1"
-          formControlName="anrede">
-        <label class="form-check-label" for="p-gender-1">
-          Herr
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" value="Frau" type="radio" name="anrede" id="p-gender-2"
-          formControlName="anrede">
-        <label class="form-check-label" for="p-gender-2">
-          Frau
-        </label>
-      </div>
-    </div>
-
-    <span class="text-danger"
-      *ngIf="(_formControls.anrede.touched || _submitted) && _formControls.anrede.errors?.required">
-      Pflichtfeld
-    </span>
-  </div>
-
-  <div class="d-flex flex-row justify-content-center w-100 gap-5">
-
-    <div class="form-outline h-104px">
-      <label class="form-label" for="p_name">Name</label>
-      <input type="text" id="p_name" class="form-control form-control-sm" formControlName="name" />
-      <span class="text-danger"
-        *ngIf="(_formControls.name.touched || _submitted) && _formControls.name.errors?.required">
-        Pflichtfeld
-      </span>
-    </div>
-
-    <div class="form-outline h-104px">
-      <label class="form-label" for="p_vorname">Vorname</label>
-      <input type="text" id="p_vorname" class="form-control form-control-sm" formControlName="vorname" />
-      <span class="text-danger"
-        *ngIf="(_formControls.vorname.touched || _submitted) && _formControls.vorname.errors?.required">
-        Pflichtfeld
-      </span>
-    </div>
-
-    <div class="form-outline h-104px">
-      <label class="form-label" for="p_geburtsdatum">Geburtsdatum</label>
-      <div class="input-group">
-        <input id="p_geburtsdatum" class="form-control form-control-sm w-135px" formControlName="geburtsdatum" />
-      </div>
-      <span class="text-danger"
-        *ngIf="(_formControls.geburtsdatum.touched || _submitted) && _formControls.geburtsdatum.errors?.required">
-        Pflichtfeld
-      </span>
-    </div>
-
-    <div class="form-outline h-104px">
-      <label class="form-label" for="p_geborenIn">Geboren in</label>
-      <input type="text" id="p_geborenIn" class="form-control form-control-sm" formControlName="geborenIn" />
-      <span class="text-danger"
-        *ngIf="(_formControls.geborenIn.touched || _submitted) && _formControls.geborenIn.errors?.required">
-        Pflichtfeld
-      </span>
-    </div>
-
-  </div>
-
-  <div class="d-flex flex-row justify-content-center w-100 gap-5">
-
-    <div class="form-outline h-104px">
-      <label class="form-label" for="p_strasse">Straße</label>
-      <input type="text" id="p_strasse" class="form-control form-control-sm" formControlName="strasse" />
-      <span class="text-danger"
-        *ngIf="(_formControls.strasse.touched || _submitted) && _formControls.strasse.errors?.required">
-        Pflichtfeld
-      </span>
-    </div>
-
-    <div class="form-outline h-104px">
-      <label class="form-label" for="p_hausnummer">Hausnummer</label>
-      <input type="text" id="p_hausnummer" class="form-control form-control-sm" formControlName="hausnummer" />
-      <span class="text-danger"
-        *ngIf="(_formControls.hausnummer.touched || _submitted) && _formControls.hausnummer.errors?.required">
-        Pflichtfeld
-      </span>
-    </div>
-
-    <div class="form-outline h-104px">
-      <label class="form-label" for="p_plz">PLZ</label>
-      <input type="text" id="p_plz" class="form-control form-control-sm" formControlName="plz" />
-      <span class="text-danger" *ngIf="(_formControls.plz.touched || _submitted) && _formControls.plz.errors?.required">
-        Pflichtfeld
-      </span>
-    </div>
-
-    <div class="form-outline h-104px">
-      <label class="form-label" for="p_ort">Ort</label>
-      <input type="text" id="p_ort" class="form-control form-control-sm" formControlName="ort" />
-      <span class="text-danger" *ngIf="(_formControls.ort.touched || _submitted) && _formControls.ort.errors?.required">
-        Pflichtfeld
-      </span>
-    </div>
-
-  </div>
-
-
-  <button class="btn btn-success btn-lg btn-block" type="submit">Senden</button>
-</form> -->
-
-
-
-<div class="d-flex flex-column w-100 h-100 align-self-stretch p-5">
-  <dx-form id="form" #declatationForm [(formData)]="_formData" labelLocation="top" [minColWidth]="233" [screenByWidth]="_screen"
-    [colCount]="1">
+<div class="d-flex flex-column w-100 h-100 align-items-center p-5" *ngIf="_isInited">
+  <dx-form id="form" #declatationForm [(formData)]="_formData" labelLocation="top" [minColWidth]="233"
+    [screenByWidth]="_screen" [colCount]="1" class=" max-w-1600" [readOnly]="(_id && _id > 0 ? true : false)">
 
     <dxi-item itemType="group" [colCount]="4">
 
@@ -164,6 +51,11 @@
     </dxi-item>
   </dx-form>
 
-  <app-signature #signature></app-signature>
+
+  <div class="info-text-container">
+    <span class="error-text" *ngIf="_errorText">{{_errorText}}</span>
+    <span *ngIf="!_errorText">Unterschrift:</span>
+  </div>
+  <app-signature #signature *ngIf="!_id"></app-signature>
 
 </div>

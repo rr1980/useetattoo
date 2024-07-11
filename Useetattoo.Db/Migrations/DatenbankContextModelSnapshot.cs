@@ -55,7 +55,7 @@ namespace Useetattoo.Db.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("Hasunummer")
+                    b.Property<string>("Hausnummer")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 

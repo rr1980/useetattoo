@@ -23,6 +23,12 @@ namespace Useetattoo.Server.Controllers
             _declarationService = declarationService;
         }
 
+        [HttpPost("Get")]
+        public async Task<DeclarationItemVM> Get(DeclarationItemRequestVM request)
+        {
+            return await _declarationService.Get(request);
+        }
+
         [HttpPost("Search")]
         public async Task<LoadResult> Search(DataSourceLoadOptions loadOptions)
         {

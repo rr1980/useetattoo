@@ -19,6 +19,10 @@ const routes: Routes = [
         component: InternNewDeclarationComponent,
       },
       {
+        path: 'showDeclaration/:id',
+        component: InternNewDeclarationComponent,
+      },
+      {
         path: '**',
         redirectTo: '',
       },

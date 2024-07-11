@@ -23,7 +23,7 @@ namespace Useetattoo.Db.Migrations
                     Geburtsdatum = table.Column<DateTime>(type: "datetime2", nullable: true),
                     GeborenIn = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     Strasse = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    Hasunummer = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    Hausnummer = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
                     Plz = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
                     Ort = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     ErstelltAm = table.Column<DateTime>(type: "datetime2", nullable: true),

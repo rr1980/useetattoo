@@ -8,7 +8,8 @@ import DataGrid from 'devextreme/ui/data_grid';
 import DateBox from 'devextreme/ui/date_box';
 import config from 'devextreme/core/config';
 
-
+import deMessages from 'devextreme/localization/messages/de.json';
+import { locale, loadMessages } from 'devextreme/localization';
 
 @Component({
   selector: 'app-root',
@@ -27,6 +28,8 @@ export class AppComponent {
     private _eventService: EventService
   ) {
     registerLocaleData(localeDe, 'de-DE', localeDeExtra);
+    loadMessages(deMessages);
+    locale(navigator.language);
 
     // this._eventService.on('onThemeChange', (theme: any): void => {
     //   this._theme = theme;

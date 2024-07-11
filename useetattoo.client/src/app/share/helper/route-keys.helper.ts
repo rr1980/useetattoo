@@ -5,6 +5,7 @@ export namespace RouteKeys {
 
   export namespace Intern {
     export namespace Declaration {
+      export const get: string = 'Api/Declaration/Get';
       export const add: string = 'Api/Declaration/Add';
       export const getAll: string = 'Api/Declaration/GetAll';
       export const search: string = 'Api/Declaration/Search';

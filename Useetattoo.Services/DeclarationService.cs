@@ -46,7 +46,7 @@ namespace Useetattoo.Services
                              Geburtsdatum = x.Geburtsdatum.ToAngularString(),
                              GeborenIn = x.GeborenIn,
                              Strasse = x.Strasse,
-                             Hasunummer = x.Hasunummer,
+                             Hausnummer = x.Hausnummer,
                              Plz = x.Plz,
                              Ort = x.Ort,
                              Signiert = x.Signagture != null ? x.Signagture.Date : null,
@@ -58,74 +58,59 @@ namespace Useetattoo.Services
 
             return await DataSourceLoader.LoadAsync(source, loadOptions);
         }
-        //public DeclarationSearchResponseVM Search(DeclarationSearchRequestVM request)
-        //{
-        //    var query = _datenbankContext.Declarations.AsQueryable();
-        //    if (!string.IsNullOrEmpty(request.SearchTerm))
-        //    {
-        //        query = query.Where(x =>
-        //            !string.IsNullOrEmpty(x.Name) && !string.IsNullOrEmpty(request.SearchTerm) && x.Name.ToLower().Contains(request.SearchTerm.ToLower()) ||
-        //            !string.IsNullOrEmpty(x.Vorname) && !string.IsNullOrEmpty(request.SearchTerm) && x.Vorname.ToLower().Contains(request.SearchTerm.ToLower())
-        //        );
-        //    }
-        //    var totalCount = query.Count();
 
-        //    query = query.Skip(request.Skip).Take(request.Take);
 
-        //    var result = query.Select(x => new DeclarationItemVM
-        //    {
-        //        Id = x.Id,
-        //        Name = x.Name,
-        //        Vorname = x.Vorname,
-        //        Anrede = x.Anrede,
-        //        Geburtsdatum = x.Geburtsdatum.ToAngularString(),
-        //        GeborenIn = x.GeborenIn,
-        //        Strasse = x.Strasse,
-        //        Plz = x.Plz,
-        //        Ort = x.Ort,
-        //        //Signature = x.Signagture != null ? new SignatureItemVM
-        //        //{
-        //        //    Id = x.Signagture.Id,
-        //        //    Data = x.Signagture.Data,
-        //        //    Date = x.Signagture.Date,
-        //        //    Hash = x.Signagture.Hash,
-        //        //    Image = x.Signagture.Image,
-        //        //    Points = x.Signagture.Points,
-        //        //} : null
-        //    }
-        //         ).ToList();
+        public async Task<DeclarationItemVM> Get(DeclarationItemRequestVM request)
+        {
+            var entity = await _datenbankContext.Declarations
+                .Include(x => x.Signagture)
+                .FirstOrDefaultAsync(x => x.Id == request.Id);
 
-        //    return new DeclarationSearchResponseVM
-        //    {
-        //        Items = result,
-        //        TotalCount = totalCount,
-        //    };
-        //}
+            if (entity == null)
+            {
+                throw new Exception("Entity with " + request.Id + " not found!");
+            }
+
+            return new DeclarationItemVM
+            {
+                Id = entity!.Id,
+                Name = entity!.Name,
+                Vorname = entity!.Vorname,
+                Geschlecht = entity!.Geschlecht,
+                Geburtsdatum = entity.Geburtsdatum,
+                GeborenIn = entity.GeborenIn,
+                Strasse = entity.Strasse,
+                Hausnummer = entity.Hausnummer,
+                Plz = entity.Plz,
+                Ort = entity.Ort,
+                ErstelltAm = entity.ErstelltAm,
+                ErstelltVon = entity.ErstelltVon,
+                GeaendertAm = entity.GeaendertAm,
+                GeaendertVon = entity.GeaendertVon,
+                Signature = entity.Signagture != null ? new SignatureItemVM
+                {
+                    Id = entity.Signagture.Id,
+                    Date = entity.Signagture.Date,
+                    Hash = entity.Signagture.Hash,
+                    Image = entity.Signagture.Image,
+                    Points = entity.Signagture.Points,
+                    PointerTypes = entity.Signagture.PointerTypes,
+                } : null
+            };
+        }
 
         public List<DeclarationItemVM> GetAll()
         {
-            //var _S = _datenbankContext.Declarations.Include(x => x.Signagture).FirstOrDefault();
-            //if ((_S != null))
-            //{
-            //    _S.Signagture!.Declaration = null;
-            //    _S.Signagture!.DeclarationId = null;
-            //    var tmp = JsonConvert.SerializeObject(_S);
-            //    File.WriteAllText(@"c:\temp\signature.json", tmp, Encoding.UTF8);
-            //}
-
-
-
-
             var result = _datenbankContext.Declarations.Select(x => new DeclarationItemVM
             {
                 Id = x.Id,
                 Name = x.Name,
                 Vorname = x.Vorname,
-                Anrede = x.Geschlecht,
-                Geburtsdatum = x.Geburtsdatum.ToAngularString(),
+                Geschlecht = x.Geschlecht,
+                Geburtsdatum = x.Geburtsdatum,
                 GeborenIn = x.GeborenIn,
                 Strasse = x.Strasse,
-                Hasunummer = x.Hasunummer,
+                Hausnummer = x.Hausnummer,
                 Plz = x.Plz,
                 Ort = x.Ort,
                 Signature = x.Signagture != null ? new SignatureItemVM
@@ -157,7 +142,7 @@ namespace Useetattoo.Services
                     declaration.Geburtsdatum = request.Geburtsdatum; //.HasValue ? request.Geburtsdatum.Value.ToNullableDateTime() : null;
                     declaration.GeborenIn = request.GeborenIn;
                     declaration.Strasse = request.Strasse;
-                    declaration.Hasunummer = request.Hausnummer;
+                    declaration.Hausnummer = request.Hausnummer;
                     declaration.Plz = request.Plz;
                     declaration.Ort = request.Ort;
                     declaration.Signagture = request.Signature != null ? new Signature
@@ -187,7 +172,7 @@ namespace Useetattoo.Services
                     Geburtsdatum = request.Geburtsdatum, //.HasValue ? request.Geburtsdatum.Value.ToNullableDateTime() : null,
                     GeborenIn = request.GeborenIn,
                     Strasse = request.Strasse,
-                    Hasunummer = request.Hausnummer,
+                    Hausnummer = request.Hausnummer,
                     Plz = request.Plz,
                     Ort = request.Ort,
                     Signagture = request.Signature != null ? new Signature
@@ -212,6 +197,5 @@ namespace Useetattoo.Services
 
             return declaration?.Id;
         }
-
     }
 }

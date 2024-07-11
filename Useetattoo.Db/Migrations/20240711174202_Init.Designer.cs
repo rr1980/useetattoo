@@ -12,7 +12,7 @@ using Useetattoo.Db;
 namespace Useetattoo.Db.Migrations
 {
     [DbContext(typeof(DatenbankContext))]
-    [Migration("20240711164649_Init")]
+    [Migration("20240711174202_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -58,7 +58,7 @@ namespace Useetattoo.Db.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("Hasunummer")
+                    b.Property<string>("Hausnummer")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 

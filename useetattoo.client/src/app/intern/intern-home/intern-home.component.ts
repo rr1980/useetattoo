@@ -42,6 +42,18 @@ export class InternHomeComponent {
     this._router.navigate(['intern/newDeclaration']);
   }
 
-  protected _onEditClick(e: any): void {}
+  protected _onEditClick(e: any): void {
+    let _id = -1;
+    if (e && e.row && e.row.data && e.row.data.id) {
+      _id = e.row.data.id;
+    } else if (e && e.data && e.data.id) {
+      _id = e.data.id;
+    }
+    else{
+      return;
+    }
+
+    this._router.navigate(['intern/showDeclaration', _id]);
+  }
   protected _onRemoveClick(e: any): void {}
 }
