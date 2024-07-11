@@ -1,13 +1,11 @@
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Http.Json;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Serilog;
 using System.Text;
-using System.Text.Json.Serialization;
 using Useetattoo.Db;
 using Useetattoo.Services;
 using Useetattoo.Services.Interfaces;
@@ -26,6 +24,7 @@ namespace Useetattoo.Server
             //var builder = WebApplication.CreateBuilder(new WebApplicationOptions() { WebRootPath = "wwwroot/browser" });
 
             var builder = WebApplication.CreateBuilder(args);
+            //builder.WebHost.UseKestrel();
             builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
 
             //builder.Services.Configure<JsonOptions>(options => options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
@@ -36,6 +35,11 @@ namespace Useetattoo.Server
             //    options.SerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
             //    options.SerializerOptions.MaxDepth = 1000;
             //});
+
+            builder.Services.Configure<IISOptions>(options =>
+            {
+                options.ForwardClientCertificate = false;
+            });
 
             builder.Services.AddDbContext<DatenbankContext>(options =>
             {
@@ -61,8 +65,10 @@ namespace Useetattoo.Server
                 x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            //builder.Services.AddEndpointsApiExplorer();
+            //builder.Services.AddSwaggerGen();
+
+
             builder.Services.AddHttpContextAccessor();
 
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
@@ -151,8 +157,8 @@ namespace Useetattoo.Server
             // Configure the HTTP request pipeline.
             //if (app.Environment.IsDevelopment())
             //{
-            app.UseSwagger();
-            app.UseSwaggerUI();
+            //app.UseSwagger();
+            //app.UseSwaggerUI();
             //app.UseSpaStaticFiles();
 
             //}
