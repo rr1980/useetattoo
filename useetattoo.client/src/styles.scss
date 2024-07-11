@@ -1,5 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 
+
+
+:root{
+  --scrollbar-color: #4b4848;
+  --scrollbar-background-color: #2a2a2a;;
+  --scrollbar-color-hover: #858484;
+}
+
 * {
   // margin: 0!important;
   // padding: 0!important;
@@ -27,11 +35,40 @@ body {
 
   /* Präfixe für alle gängigen Browser */
   -webkit-overflow-scrolling: touch;
+  scrollbar-color: var(--scrollbar-color) var(--scrollbar-background-color) !important;
+  scrollbar-width: 10px !important;
+  touch-action: pan-x pan-y;
+}
+
+  /* Präfixe für alle gängigen Browser */
+
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-background-color);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: var(--scrollbar-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-color-hover);
 }
 
 .inverted-image-100 {
   -webkit-filter: invert(100%); /* Safari/Chrome */
   filter: invert(100%);
+}
+
+.d-block {
+  display: block;
 }
 
 .d-flex {
@@ -51,6 +88,10 @@ body {
   flex-direction: row;
 }
 
+.f-1 {
+  flex: 1;
+}
+
 .w-100 {
   width: 100%;
 }
@@ -61,6 +102,14 @@ body {
 
 .h-100 {
   height: 100%;
+}
+
+.min-h-100 {
+  min-height: 100%;
+}
+
+.max-h-100 {
+  max-height: 100%;
 }
 
 .justify-content-center {
@@ -126,6 +175,11 @@ p.p-xl {
 
 .mb-4 {
   margin-bottom: 1rem;
+}
+
+.overflow-y-a{
+  overflow-y: auto;
+
 }
 
 /* Importing Bootstrap SCSS file. */

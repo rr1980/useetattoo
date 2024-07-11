@@ -120,7 +120,7 @@ export class InternNewDeclarationComponent implements OnInit {
             next: (response: any) => {
               console.debug('Response', response);
               this._submitted = false;
-              this._router.navigate(['intern/home']);
+              // this._router.navigate(['intern/home']);
             },
             error: (err: any) => {
               this._submitted = false;
