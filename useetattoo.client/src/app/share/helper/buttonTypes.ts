@@ -7,6 +7,17 @@ export class ButtonTypes {
 }
 
 export namespace CustomButton {
+  export const okButton = {
+    text: 'Ok',
+    type: 'success',
+    icon: 'check',
+    width: 100,
+    stylingMode: 'outlined',
+    onClick: (e: any): boolean => {
+      return true;
+    },
+  } as any;
+
   export const yesButton = {
     text: 'Ja',
     type: 'success',

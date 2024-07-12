@@ -18,6 +18,21 @@ export class InternHomeComponent {
   private _dxDataGrid?: DxDataGridComponent;
 
   protected _dataSource: DataSource;
+  protected _advancedSearch: boolean = false;
+
+  protected _filterBtnOptions = {
+    stylingMode: 'outlined',
+    type: 'default',
+    icon: 'undo',
+    hint: 'Alle Filter zurücksetzen',
+    onClick: (event: any): void => {
+      if (this._dxDataGrid) {
+        this._dxDataGrid.instance.clearSelection();
+        this._dxDataGrid.instance.clearFilter();
+        this._dxDataGrid.instance.clearSorting();
+      }
+    },
+  };
 
   constructor(
     private _apiService: ApiService,
@@ -27,6 +42,10 @@ export class InternHomeComponent {
     this._onNewClick = this._onNewClick.bind(this);
     this._onEditClick = this._onEditClick.bind(this);
     this._onRemoveClick = this._onRemoveClick.bind(this);
+    this._onadvancedSearchValueChanged =
+      this._onadvancedSearchValueChanged.bind(this);
+    this._loadStateSource = this._loadStateSource.bind(this);
+    this._saveStateSource = this._saveStateSource.bind(this);
 
     this._dataSource = new DataSource({
       key: 'id',
@@ -75,5 +94,37 @@ export class InternHomeComponent {
           });
       });
     }
+  }
+
+  protected _onadvancedSearchValueChanged(e: any): void {
+    this._advancedSearch = e.value;
+    if (this._dxDataGrid) {
+      this._dxDataGrid.instance.repaint();
+      this._saveStateSource(this._dxDataGrid.instance.state());
+    }
+  }
+
+  protected _loadStateSource(): any {
+    let _state: any | null = null;
+    const _stateString: string | null = localStorage.getItem(
+      'declarationSearchA1'
+    );
+    if (_stateString) {
+      const _state_loaded = JSON.parse(_stateString);
+      _state = _state_loaded.state;
+      this._advancedSearch = _state_loaded.showAdvancedSearch;
+      _state.selectedRowKeys = [];
+    }
+
+    return _state || null;
+  }
+
+  protected _saveStateSource(state: any): void {
+    state.selectedRowKeys = [];
+    const _state = {
+      state: state,
+      showAdvancedSearch: this._advancedSearch,
+    };
+    localStorage.setItem('declarationSearchA1', JSON.stringify(_state));
   }
 }

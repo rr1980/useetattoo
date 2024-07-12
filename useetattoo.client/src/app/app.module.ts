@@ -25,6 +25,7 @@ import { DxFormModule } from 'devextreme-angular/ui/form';
 import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxLoadIndicatorModule } from 'devextreme-angular/ui/load-indicator';
 import { DxSwitchModule } from 'devextreme-angular/ui/switch';
+import { DxCheckBoxModule } from 'devextreme-angular/ui/check-box';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
@@ -39,6 +40,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     DxLoadIndicatorModule,
     DxButtonModule,
     DxSwitchModule,
+    DxCheckBoxModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable

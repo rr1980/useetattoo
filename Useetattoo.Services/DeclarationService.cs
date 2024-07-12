@@ -44,7 +44,7 @@ namespace Useetattoo.Services
                              Name = x.Name,
                              Vorname = x.Vorname,
                              Geschlecht = x.Geschlecht,
-                             Geburtsdatum = x.Geburtsdatum.ToAngularString(),
+                             Geburtsdatum = x.Geburtsdatum,
                              GeborenIn = x.GeborenIn,
                              Strasse = x.Strasse,
                              Hausnummer = x.Hausnummer,

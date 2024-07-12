@@ -139,14 +139,14 @@ namespace Useetattoo.Db
                 var entity = ((ChangeStateEntity)entityEntry.Entity);
 
                 entity.GeaendertAm = DateTime.Now;
-                //entity.GeaendertVon = aenderungsBenutzer != null ? aenderungsBenutzer.Name + ", " + aenderungsBenutzer.Vorname : "System";
-                entity.GeaendertVon = aenderungsBenutzer != null ? aenderungsBenutzer.Benutzername : "System";
+                entity.GeaendertVon = aenderungsBenutzer != null ? aenderungsBenutzer.Name + ", " + aenderungsBenutzer.Vorname : "System";
+                //entity.GeaendertVon = aenderungsBenutzer != null ? aenderungsBenutzer.Vorname + " " + aenderungsBenutzer.Name : "System";
 
                 if (entityEntry.State == EntityState.Added)
                 {
                     entity.ErstelltAm = DateTime.Now;
-                    //entity.ErstelltVon = aenderungsBenutzer != null ? aenderungsBenutzer.Name + ", " + aenderungsBenutzer.Vorname : "System";
-                    entity.ErstelltVon = aenderungsBenutzer != null ? aenderungsBenutzer.Benutzername : "System";
+                    entity.ErstelltVon = aenderungsBenutzer != null ? aenderungsBenutzer.Name + ", " + aenderungsBenutzer.Vorname : "System";
+                    //entity.ErstelltVon = aenderungsBenutzer != null ? aenderungsBenutzer.Vorname + " " + aenderungsBenutzer.Name : "System";
                 }
             }
         }

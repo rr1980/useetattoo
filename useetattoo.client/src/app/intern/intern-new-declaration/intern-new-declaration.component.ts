@@ -4,6 +4,7 @@ import { RouteKeys } from '../../share/helper/route-keys.helper';
 import { SignatureComponent } from '../../share/components/signature/signature.component';
 import { DxFormComponent } from 'devextreme-angular/ui/form';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ConfirmHelper } from 'src/app/share/helper/confirm.helper';
 
 @Component({
   selector: 'app-intern-new-declaration',
@@ -50,10 +51,7 @@ export class InternNewDeclarationComponent implements OnInit {
     'divers',
   ];
 
-  protected _datasource_jaNein: string[] = [
-    'Ja',
-    'Nein',
-  ];
+  protected _datasource_jaNein: string[] = ['Ja', 'Nein'];
 
   protected _colCountByScreen: any = {
     md: 4,
@@ -63,7 +61,6 @@ export class InternNewDeclarationComponent implements OnInit {
   protected _screen = (width: number): string => (width < 720 ? 'sm' : 'md');
 
   protected _imageData?: string;
-
 
   constructor(
     private _apiService: ApiService,
@@ -142,7 +139,9 @@ export class InternNewDeclarationComponent implements OnInit {
             next: (response: any) => {
               console.debug('Response', response);
               this._submitted = false;
-              this._router.navigate(['intern/home']);
+              ConfirmHelper.notification('Erfolgreich!', (): void => {
+                this._router.navigate(['intern/home']);
+              });
             },
             error: (err: any) => {
               this._submitted = false;

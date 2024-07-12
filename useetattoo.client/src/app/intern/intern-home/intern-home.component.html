@@ -1,51 +1,61 @@
 <!-- <div class="d-flex flex-column align-items-center w-100 h-100 min-h-100 max-h-100 h-100 align-self-stretch p-5 f-1"> -->
-  <dx-data-grid #dxDataGrid [dataSource]="_dataSource" [remoteOperations]="true" keyExpr="id"
-    class="dg-declarations dg-dark" (onRowDblClick)="_onEditClick($event)" [columnAutoWidth]="true">
-
-    <dxo-sorting mode="multiple"></dxo-sorting>
-    <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
-
-    <dxo-load-panel [enabled]="true"></dxo-load-panel>
-    <dxo-selection mode="none" [deferred]="false"> </dxo-selection>
-
-    <dxo-editing mode="row" [allowUpdating]="false" [allowDeleting]="false" [useIcons]="true"></dxo-editing>
-
-    <dxo-search-panel [visible]="true"></dxo-search-panel>
+<dx-data-grid #dxDataGrid [dataSource]="_dataSource" [remoteOperations]="true" keyExpr="id"
+  class="dg-declarations dg-dark" (onRowDblClick)="_onEditClick($event)" [columnAutoWidth]="true">
 
 
-    <dxo-toolbar>
-      <dxi-item name="searchPanel" location="before" width="250"></dxi-item>
-      <dxi-item location="after" widget="dxButton"
-        [options]="{ text: 'Neu', icon: 'add', type: 'default', stylingMode: 'outlined', onClick: _onNewClick }">
-      </dxi-item>
-      <dxi-item name="columnChooserButton"></dxi-item>
-    </dxo-toolbar>
+  <dxo-state-storing [enabled]="true" type="custom" [customLoad]="_loadStateSource" [customSave]="_saveStateSource">
+  </dxo-state-storing>
+
+  <dxo-sorting mode="multiple"></dxo-sorting>
+  <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+
+  <dxo-load-panel [enabled]="true"></dxo-load-panel>
+  <dxo-selection mode="none" [deferred]="false"> </dxo-selection>
+
+  <dxo-editing mode="row" [allowUpdating]="false" [allowDeleting]="false" [useIcons]="true"></dxo-editing>
+
+  <dxo-search-panel [visible]="true"></dxo-search-panel>
+  <dxo-filter-row [visible]="_advancedSearch"></dxo-filter-row>
+
+  <dxo-toolbar>
+    <dxi-item name="searchPanel" location="before" width="250"></dxi-item>
+    <dxi-item location="before" widget="dxButton" [options]="_filterBtnOptions"> </dxi-item>
+
+    <dxi-item location="center" widget="dxCheckBox"
+      [options]="{ value: _advancedSearch, text: 'Erweiterte Suche', onValueChanged: _onadvancedSearchValueChanged }">
+    </dxi-item>
+
+    <dxi-item location="after" widget="dxButton"
+      [options]="{ text: 'Neu', icon: 'add', type: 'default', stylingMode: 'outlined', onClick: _onNewClick }">
+    </dxi-item>
+    <dxi-item name="columnChooserButton"></dxi-item>
+  </dxo-toolbar>
 
 
-    <dxi-column type="buttons" fixedPosition="left" [allowResizing]="false" [showInColumnChooser]="false">
-      <dxi-button name="bearbeiten" hint="Anzeigen" icon="search" [onClick]="_onEditClick"></dxi-button>
-      <dxi-button name="loeschen" hint="Löschen" icon="trash" [onClick]="_onRemoveClick"></dxi-button>
-    </dxi-column>
+  <dxi-column type="buttons" fixedPosition="left" [allowResizing]="false" [showInColumnChooser]="false">
+    <dxi-button name="bearbeiten" hint="Anzeigen" icon="search" [onClick]="_onEditClick"></dxi-button>
+    <dxi-button name="loeschen" hint="Löschen" icon="trash" [onClick]="_onRemoveClick"></dxi-button>
+  </dxi-column>
 
-    <!-- <dxi-column dataField="id" caption="Id"></dxi-column> -->
-    <dxi-column dataField="geschlecht" caption="Geschlecht" width="150px"></dxi-column>
-    <dxi-column dataField="name" caption="Name"></dxi-column>
-    <dxi-column dataField="vorname" caption="Vorname"></dxi-column>
-    <dxi-column dataField="geburtsdatum" dataType="date" format="dd.MM.yyyy" caption="Geburtsdatum"
-      width="120px"></dxi-column>
-    <dxi-column dataField="plz" caption="Plz" width="100px"></dxi-column>
-    <dxi-column dataField="ort" caption="Ort"></dxi-column>
-    <dxi-column dataField="strasse" caption="Straße"></dxi-column>
-    <dxi-column dataField="erstelltAm" dataType="date" format="dd.MM.yyyy HH:mm:ss" caption="Erstellt am"
-      width="150px"></dxi-column>
-    <dxi-column dataField="erstelltVon" caption="Erstellt von"></dxi-column>
+  <!-- <dxi-column dataField="id" caption="Id"></dxi-column> -->
+  <dxi-column dataField="geschlecht" caption="Geschlecht" width="150px"></dxi-column>
+  <dxi-column dataField="name" caption="Name"></dxi-column>
+  <dxi-column dataField="vorname" caption="Vorname"></dxi-column>
+  <dxi-column dataField="geburtsdatum" dataType="date" format="dd.MM.yyyy" caption="Geburtsdatum"
+    width="120px"></dxi-column>
+  <dxi-column dataField="plz" caption="Plz" width="100px"></dxi-column>
+  <dxi-column dataField="ort" caption="Ort"></dxi-column>
+  <dxi-column dataField="strasse" caption="Straße"></dxi-column>
+  <dxi-column dataField="erstelltAm" dataType="date" format="dd.MM.yyyy HH:mm:ss" caption="Erstellt am"
+    width="150px"></dxi-column>
+  <dxi-column dataField="erstelltVon" caption="Erstellt von"></dxi-column>
 
-    <dxi-column dataField="geaendertAm" dataType="date" format="dd.MM.yyyy HH:mm:ss" caption="Geändert am"
-      width="150px"></dxi-column>
-    <dxi-column dataField="geaendertVon" caption="Geändert von"></dxi-column>
+  <!-- <dxi-column dataField="geaendertAm" dataType="date" format="dd.MM.yyyy HH:mm:ss" caption="Geändert am"
+    width="150px"></dxi-column>
+  <dxi-column dataField="geaendertVon" caption="Geändert von"></dxi-column> -->
 
-    <!-- <dxi-column dataField="v_datum" dataType="date" format="dd.MM.yyyy" caption="U-Datum" width="100px"></dxi-column> -->
+  <!-- <dxi-column dataField="v_datum" dataType="date" format="dd.MM.yyyy" caption="U-Datum" width="100px"></dxi-column> -->
 
 
-  </dx-data-grid>
+</dx-data-grid>
 <!-- </div> -->

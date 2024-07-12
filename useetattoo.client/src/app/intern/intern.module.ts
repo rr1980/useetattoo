@@ -10,6 +10,7 @@ import { DxFormModule } from 'devextreme-angular/ui/form';
 import { DxCheckBoxModule } from 'devextreme-angular/ui/check-box';
 import { DxRadioGroupModule } from 'devextreme-angular/ui/radio-group';
 import { DxButtonModule } from 'devextreme-angular/ui/button';
+import { DxLoadIndicatorModule } from 'devextreme-angular/ui/load-indicator';
 
 @NgModule({
   imports: [
@@ -19,6 +20,9 @@ import { DxButtonModule } from 'devextreme-angular/ui/button';
     DxDataGridModule,
     DxRadioGroupModule,
     DxButtonModule,
+    DxFormModule,
+    DxLoadIndicatorModule,
+    DxCheckBoxModule,
     InternRoutingModule,
   ],
   declarations: [

@@ -117,7 +117,7 @@ namespace Useetattoo.ViewModels
 
         public string? Geschlecht { get; set; }
 
-        public string? Geburtsdatum { get; set; }
+        public DateTime? Geburtsdatum { get; set; }
 
         public string? GeborenIn { get; set; }
 
