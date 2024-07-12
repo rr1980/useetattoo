@@ -1,11 +1,12 @@
-﻿<div class="d-block w-100 h-100 bg1-dark" >
+﻿<div class="d-flex flex-column h-100vh w-100vw bg1-dark">
 
-  <div class="section-header">
+  <header class="section-header">
     <app-header></app-header>
-  </div>
+  </header>
   <div class="section-body">
     <router-outlet></router-outlet>
   </div>
+
 </div>
 
 <ng-template #errorModal let-modal>

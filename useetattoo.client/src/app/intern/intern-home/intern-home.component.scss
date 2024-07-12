@@ -5,7 +5,10 @@
   padding: 20px;
 }
 
-.dg-declarations{
+::ng-deep .dg-declarations {
   height: 100%;
   width: 100%;
+  .declaratio-search-panel {
+    width: 300px;
+  }
 }

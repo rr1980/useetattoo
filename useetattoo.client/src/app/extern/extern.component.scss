@@ -1,5 +1,12 @@
 :host {
   display: block;
   height: 100%;
-  width: 100%;
+  width: 100vw;
+  padding: 20px;
+}
+
+@media screen and (max-width: 400px) {
+  :host {
+    padding: 5px;
+  }
 }

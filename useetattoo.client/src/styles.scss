@@ -20,8 +20,8 @@
 
 html,
 body {
-  height: 100% !important;
-  width: 100% !important;
+  height: 100%;
+  width: 100%;
 
   font-family: "MuktaMahee", "Rubik", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #f3f3f3;
@@ -92,6 +92,14 @@ body {
   flex: 1;
 }
 
+.h-100vh{
+  height: 100vh;
+}
+
+.w-100vw{
+  width: 100vw;
+}
+
 .w-100 {
   width: 100%;
 }
@@ -135,10 +143,6 @@ body {
 .px-4 {
   padding-left: 16px;
   padding-right: 16px;
-}
-
-p.p-xl {
-  font-size: 20px;
 }
 
 .p-5 {
@@ -211,7 +215,7 @@ h1.h1-title-xl {
 
 .dx-datagrid-search-panel {
   margin-left: 0;
-  width: 350px !important;
+  width: calc(100% - 20px) !important;
 }
 
 dx-data-grid {
@@ -258,3 +262,42 @@ dx-data-grid {
 }
 
 
+//------------------------
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "MuktaMahee", "Rubik", sans-serif !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.75px !important;
+  line-height: 1.2 !important;
+}
+
+h1.h1-title-xl {
+  font-size: 5.3125rem !important;
+}
+
+.p-xl {
+  font-size: 1.3rem;
+}
+
+
+@media screen and (max-width: 800px) {
+  h1.h1-title-xl {
+    font-size: 3.3125rem !important;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  h1.h1-title-xl {
+    font-size: 2.3125rem !important;
+  }
+
+  .p-xl {
+    font-size: 1.2rem;
+  }
+}

@@ -1,4 +1,3 @@
-<!-- <div class="d-flex flex-column align-items-center w-100 h-100 min-h-100 max-h-100 h-100 align-self-stretch p-5 f-1"> -->
 <dx-data-grid #dxDataGrid [dataSource]="_dataSource" [remoteOperations]="true" keyExpr="id"
   class="dg-declarations dg-dark" (onRowDblClick)="_onEditClick($event)" [columnAutoWidth]="true">
 
@@ -18,15 +17,17 @@
   <dxo-filter-row [visible]="_advancedSearch"></dxo-filter-row>
 
   <dxo-toolbar>
-    <dxi-item name="searchPanel" location="before" width="250"></dxi-item>
-    <dxi-item location="before" widget="dxButton" [options]="_filterBtnOptions"> </dxi-item>
+    <dxi-item name="searchPanel" location="before" width="300px" cssClass="declaratio-search-panel"></dxi-item>
+    <dxi-item location="before" widget="dxButton" [options]="_filterBtnOptions" locateInMenu="auto"> </dxi-item>
 
     <dxi-item location="center" widget="dxCheckBox"
-      [options]="{ value: _advancedSearch, text: 'Erweiterte Suche', onValueChanged: _onadvancedSearchValueChanged }">
+      [options]="{ value: _advancedSearch, text: 'Erweiterte Suche', onValueChanged: _onadvancedSearchValueChanged }"
+      locateInMenu="auto">
     </dxi-item>
 
     <dxi-item location="after" widget="dxButton"
-      [options]="{ text: 'Neu', icon: 'add', type: 'default', stylingMode: 'outlined', onClick: _onNewClick }">
+      [options]="{ text: 'Neu', icon: 'add', type: 'default', stylingMode: 'outlined', onClick: _onNewClick }"
+      locateInMenu="auto">
     </dxi-item>
     <dxi-item name="columnChooserButton"></dxi-item>
   </dxo-toolbar>
@@ -58,4 +59,3 @@
 
 
 </dx-data-grid>
-<!-- </div> -->
