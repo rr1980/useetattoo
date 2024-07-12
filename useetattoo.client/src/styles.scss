@@ -1,10 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
-
-
-:root{
+:root {
   --scrollbar-color: #4b4848;
-  --scrollbar-background-color: #2a2a2a;;
+  --scrollbar-background-color: #2a2a2a;
   --scrollbar-color-hover: #858484;
 }
 
@@ -40,8 +38,7 @@ body {
   touch-action: pan-x pan-y;
 }
 
-  /* Präfixe für alle gängigen Browser */
-
+/* Präfixe für alle gängigen Browser */
 
 /* Scrollbar */
 ::-webkit-scrollbar {
@@ -92,11 +89,11 @@ body {
   flex: 1;
 }
 
-.h-100vh{
+.h-100vh {
   height: 100vh;
 }
 
-.w-100vw{
+.w-100vw {
   width: 100vw;
 }
 
@@ -181,9 +178,8 @@ body {
   margin-bottom: 1rem;
 }
 
-.overflow-y-a{
+.overflow-y-a {
   overflow-y: auto;
-
 }
 
 /* Importing Bootstrap SCSS file. */
@@ -213,17 +209,6 @@ h1.h1-title-xl {
 //   font-size: 1.25rem;
 // }
 
-.dx-datagrid-search-panel {
-  margin-left: 0;
-  width: calc(100% - 20px) !important;
-}
-
-dx-data-grid {
-  .dx-gridbase-container {
-    padding: 5px;
-  }
-}
-
 .dg-light {
   .dx-datagrid {
     // background-color: #2a2a2a8e;
@@ -252,18 +237,16 @@ dx-data-grid {
   }
 }
 
-.nav-link{
+.nav-link {
   text-decoration: none;
   min-width: 50px;
 }
 
-.dx-datebox{
-  max-width: 150px!important;
+.dx-datebox {
+  max-width: 150px !important;
 }
 
-
 //------------------------
-
 
 h1,
 h2,
@@ -285,6 +268,16 @@ h1.h1-title-xl {
   font-size: 1.3rem;
 }
 
+.dx-datagrid-search-panel {
+  margin-left: 0;
+  width: 100% !important;
+}
+
+dx-data-grid {
+  .dx-gridbase-container {
+    padding: 5px;
+  }
+}
 
 @media screen and (max-width: 800px) {
   h1.h1-title-xl {
@@ -299,5 +292,10 @@ h1.h1-title-xl {
 
   .p-xl {
     font-size: 1.2rem;
+  }
+
+  .dx-datagrid-search-panel {
+    margin-left: 0;
+    width: calc(100% - 20px) !important;
   }
 }
